@@ -1,7 +1,7 @@
 # Odontocapi
 
 <p align="center">
- ![Logo]<img width="100" height="100" src="https://github.com/Narayana-Brahmajyoti/Checkpoint-Integrador-Backend-CTD/blob/Narayana_Brahmajyoti/logo_odonto.png">
+ <img width="150" height="150" src="https://github.com/Narayana-Brahmajyoti/Checkpoint-Integrador-Backend-CTD/blob/Narayana_Brahmajyoti/logo_odonto.png">
 </p>
 
 

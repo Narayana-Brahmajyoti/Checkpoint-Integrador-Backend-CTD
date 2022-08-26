@@ -1,4 +1,6 @@
-# Odontobara
+# Odontocapi
+
+[Odonto-url]
 
 ### Checkpoint-Integrador-Backend-CTD
 
@@ -137,5 +139,6 @@ A aplicação será desenvolvida em camadas:
 [Java.com]: https://img.shields.io/badge/Java-00000F?style=for-the-badge&logo=java&logoColor=white
 [Java-url]: https://www.java.com/pt-BR/
 
+[Odonto-url]: https://github.com/Narayana-Brahmajyoti/Checkpoint-Integrador-Backend-CTD/blob/Narayana_Brahmajyoti/logo_odonto.png
 
 

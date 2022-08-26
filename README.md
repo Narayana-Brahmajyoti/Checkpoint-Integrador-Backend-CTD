@@ -1,6 +1,6 @@
 # Odontocapi
 
-[![Odonto][Odonto]][Odonto-url]
+![Logo](https://github.com/Narayana-Brahmajyoti/Checkpoint-Integrador-Backend-CTD/blob/Narayana_Brahmajyoti/logo_odonto.png)
 
 ### Checkpoint-Integrador-Backend-CTD
 

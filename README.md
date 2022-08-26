@@ -12,13 +12,13 @@ Esse sistema será criado com o uso de Java, SpringBoot e com o banco de dados H
 
 ## :heavy_check_mark: Tasks and Requirements:
 
-- [] Banco de dados H2
-- [] Administração de dados odontológicos
-- [] Administração de Pacientes
-- [] Login
-- [] Registrar Consultas
-- [] Criação de testes unitários
-- [] Integração com APIs
+- [x] Banco de dados H2
+- [x] Administração de dados odontológicos
+- [x] Administração de Pacientes
+- [x] Login
+- [x] Registrar Consultas
+- [x] Criação de testes unitários
+- [x] Integração com APIs
 
 ## :heavy_check_mark: Technical Requirements:
 

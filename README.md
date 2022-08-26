@@ -4,8 +4,30 @@
 [![Java][Java.com]][Java-url]
 [![H2][H2.com]][H2-url]
 
+## :newspaper: Business project
+
+Implementar um sistema que permita administrar a reserva/marcação de consultas para uma clínica odontológica.
+
+Esse sistema será criado com o uso de Java, SpringBoot e com o banco de dados H2.
+
 ## :heavy_check_mark: Tasks and Requirements:
 
+- [x] Banco de dados H2
+- [x] Administração de dados odontológicos
+- [x] Administração de Pacientes
+- [x] Login
+- [x] Registrar Consultas
+- [x] Criação de testes unitários
+- [x] Integração com APIs
+
+## :heavy_check_mark: Technical Requirements:
+
+A aplicação será desenvolvida em camadas:
+- Camada de entidade de negócios;
+- Camada de acesso a dados;
+- Camada de dados;
+- Camada de negócio;
+- Camada de apresentação.
 
 ## :rocket: Squad Members - Alphabetically
 

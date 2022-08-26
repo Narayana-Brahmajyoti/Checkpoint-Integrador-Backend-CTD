@@ -86,8 +86,8 @@ A aplicação será desenvolvida em camadas:
   </tr>
   <tr>           
     <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt="Iraildes Vieira"/><br>
+      <a href="https://github.com/iravieira">
+        <img src="https://github.com/iravieira.png" width="100px;" alt="Iraildes Vieira"/><br>
         <sub>
           <b>Iraildes Vieira</b>
         </sub>

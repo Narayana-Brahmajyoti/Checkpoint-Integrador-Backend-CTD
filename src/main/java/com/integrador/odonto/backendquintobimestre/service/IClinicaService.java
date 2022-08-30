@@ -1,4 +1,4 @@
-package main.java.com.integrador.odonto.backendquintobimestre.service;
+package com.integrador.odonto.backendquintobimestre.service;
 
 public interface IClinicaService<T> {
     T create(T t);

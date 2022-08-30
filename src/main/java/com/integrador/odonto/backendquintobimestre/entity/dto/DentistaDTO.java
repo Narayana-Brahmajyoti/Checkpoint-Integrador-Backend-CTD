@@ -1,6 +1,6 @@
-package main.java.com.integrador.odonto.backendquintobimestre.entity.dto;
+package com.integrador.odonto.backendquintobimestre.entity.dto;
 
-import main.java.com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
+import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 
 public class DentistaDTO {
     private String nome;

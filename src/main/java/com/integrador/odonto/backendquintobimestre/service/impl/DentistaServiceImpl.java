@@ -1,7 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
-import main.java.com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
-import main.java.com.integrador.odonto.backendquintobimestre.service.IClinicaService;
+import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.stereotype.Service;
 
 
@@ -18,5 +18,4 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     public DentistaDTO getById(int id) {
         return null;
     }
-
 }

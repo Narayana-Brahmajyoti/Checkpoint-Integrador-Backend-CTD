@@ -1,6 +1,6 @@
-package main.java.com.integrador.odonto.backendquintobimestre.entity.dto;
+package com.integrador.odonto.backendquintobimestre.entity.dto;
 
-import main.java.com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
+import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 
 public class EnderecoDTO {
     private String rua;

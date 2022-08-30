@@ -18,4 +18,5 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     public DentistaDTO getById(int id) {
         return null;
     }
+
 }

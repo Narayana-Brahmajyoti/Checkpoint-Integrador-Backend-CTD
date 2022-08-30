@@ -117,8 +117,8 @@ A aplicação será desenvolvida em camadas:
   </tr>
   <tr>
     <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt="Paula Furlan"/><br>
+      <a href="https://github.com/paulabfurlan">
+        <img src="https://github.com/paulabfurlan.png" width="100px;" alt="Paula Furlan"/><br>
         <sub>
           <b>Paula Furlan</b>
         </sub>

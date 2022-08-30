@@ -110,7 +110,7 @@ A aplicação será desenvolvida em camadas:
     </td>
     <td>
       <ul>
-        <li>Facilitador titular</li>
+        <li>Facilitadora titular</li>
         <li>Back-end</li>
       </ul>
     </td>

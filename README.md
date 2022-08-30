@@ -41,8 +41,8 @@ A aplicação será desenvolvida em camadas:
 <table>
   <tr>
     <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt="Ana Paula"/><br>
+      <a href="https://github.com/anagessi">
+        <img src="https://github.com/anagessi.png" width="100px;" alt="Ana Paula"/><br>
         <sub>
           <b>Ana Paula Gessi Pacheco</b>
         </sub>

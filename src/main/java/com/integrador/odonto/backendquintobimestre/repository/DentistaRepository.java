@@ -24,7 +24,9 @@ public class DentistaRepository {
         return dentistaMap.get(id);
     }
 
-
-
+    public DentistaEntity update(DentistaEntity dentistaEntity){
+        dentistaMap.put(dentistaEntity.getId(), dentistaEntity);
+        return dentistaEntity;
+    }
 
 }

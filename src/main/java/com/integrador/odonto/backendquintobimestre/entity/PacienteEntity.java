@@ -1,69 +1,80 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
-import java.time.LocalDate;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
 public class PacienteEntity {
-    private int id;
+    private Integer id;
     private String nome;
     private String sobreNome;
-    private EnderecoEntity enderecoEntity;
+    private Integer endereco;
     private String rg;
-    private LocalDate dataDeAlta;
+    private String dataDeAlta;
 
-    public PacienteEntity(int id, String nome, String sobreNome, EnderecoEntity enderecoEntity, String rg, LocalDate dataDeAlta) {
+    public PacienteEntity(Integer id, String nome, String sobreNome, Integer endereco, String rg, String dataDeAlta) {
         this.id = id;
         this.nome = nome;
         this.sobreNome = sobreNome;
-        this.enderecoEntity = enderecoEntity;
+        this.endereco = endereco;
         this.rg = rg;
         this.dataDeAlta = dataDeAlta;
     }
-
-    public int getId() {
-        return id;
+    
+    public PacienteEntity(PacienteDTO paciente) {
+        this.nome = paciente.getNome();
+        this.sobreNome = paciente.getSobreNome();
+        this.endereco = paciente.getEnderecoEntity().getId();
+        this.rg = paciente.getRg();
+        this.dataDeAlta = paciente.getDataDeAlta();
+    }
+    
+    public PacienteEntity() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getSobreNome() {
-        return sobreNome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
-    }
+	public String getSobreNome() {
+		return sobreNome;
+	}
 
-    public EnderecoEntity getEndereco() {
-        return enderecoEntity;
-    }
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
+	}
 
-    public void setEndereco(EnderecoEntity enderecoEntity) {
-        this.enderecoEntity = enderecoEntity;
-    }
+	public Integer getEndereco() {
+		return endereco;
+	}
 
-    public String getRg() {
-        return rg;
-    }
+	public void setEndereco(Integer endereco) {
+		this.endereco = endereco;
+	}
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
+	public String getRg() {
+		return rg;
+	}
 
-    public LocalDate getDataDeAlta() {
-        return dataDeAlta;
-    }
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
 
-    public void setDataDeAlta(LocalDate dataDeAlta) {
-        this.dataDeAlta = dataDeAlta;
-    }
+	public String getDataDeAlta() {
+		return dataDeAlta;
+	}
+
+	public void setDataDeAlta(String dataDeAlta) {
+		this.dataDeAlta = dataDeAlta;
+	}
 }

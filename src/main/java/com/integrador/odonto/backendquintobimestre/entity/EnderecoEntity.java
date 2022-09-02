@@ -1,7 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
 public class EnderecoEntity {
-    private int id;
+    private Integer id;
     private String rua;
     private String numero;
     private String complemento;

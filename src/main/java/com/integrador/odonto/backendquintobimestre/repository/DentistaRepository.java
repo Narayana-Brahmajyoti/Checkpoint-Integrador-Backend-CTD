@@ -24,6 +24,7 @@ public class DentistaRepository {
         return dentistaMap.get(id);
     }
 
+
     public int getByName(String nome){
         for (DentistaEntity dentistaEntity : dentistaMap.values()) {
             if (dentistaEntity.getNome().equalsIgnoreCase(nome))
@@ -37,7 +38,5 @@ public class DentistaRepository {
         dentistaMap.put(dentistaEntity.getId(), dentistaEntity);
         return dentistaEntity;
     }
-
-
 
 }

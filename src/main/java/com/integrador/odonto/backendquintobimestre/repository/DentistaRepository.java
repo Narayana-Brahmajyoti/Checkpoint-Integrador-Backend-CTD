@@ -24,7 +24,17 @@ public class DentistaRepository {
         return dentistaMap.get(id);
     }
 
-    public DentistaEntity update(DentistaEntity dentistaEntity){
+
+    public int getByName(String nome){
+        for (DentistaEntity dentistaEntity : dentistaMap.values()) {
+            if (dentistaEntity.getNome().equalsIgnoreCase(nome))
+                return dentistaEntity.getId();
+        }
+
+        return 0;
+    }
+
+    public DentistaEntity update(DentistaEntity dentistaEntity) {
         dentistaMap.put(dentistaEntity.getId(), dentistaEntity);
         return dentistaEntity;
     }

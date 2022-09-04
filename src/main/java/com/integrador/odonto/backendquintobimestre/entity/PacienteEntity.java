@@ -1,5 +1,8 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
+import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+
 import java.time.LocalDate;
 
 public class PacienteEntity {
@@ -17,6 +20,10 @@ public class PacienteEntity {
         this.enderecoEntity = enderecoEntity;
         this.rg = rg;
         this.dataDeAlta = dataDeAlta;
+    }
+
+    public PacienteEntity(PacienteDTO pacienteDTO) {
+
     }
 
     public int getId() {

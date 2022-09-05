@@ -1,6 +1,5 @@
 package com.integrador.odonto.backendquintobimestre.repository;
 
-import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +14,13 @@ public class PacienteRepository {
 
     private static int idPaciente = 1;
 
-    public PacienteEntity getById(int id){
+    public PacienteEntity create(PacienteEntity pacienteEntity) {
+        pacienteEntity.setId(idPaciente++);
+        pacienteMap.put(pacienteEntity.getId(), pacienteEntity);
+        return pacienteEntity;
+    }
+
+    public PacienteEntity getById(int id) {
         return pacienteMap.get(id);
     }
 
@@ -25,12 +30,6 @@ public class PacienteRepository {
     }
 
     public PacienteEntity update(PacienteEntity pacienteEntity) {
-        pacienteMap.put(pacienteEntity.getId(), pacienteEntity);
-        return pacienteEntity;
-    }
-
-    public PacienteEntity create(PacienteEntity pacienteEntity) {
-        pacienteEntity.setId(idPaciente++);
         pacienteMap.put(pacienteEntity.getId(), pacienteEntity);
         return pacienteEntity;
     }

@@ -7,21 +7,50 @@ import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO> {
+import java.util.ArrayList;
+import java.util.List;
 
+@Service
+public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    @Override
-    public EnderecoDTO create(EnderecoDTO enderecoDTO) {
+	@Override
+	public EnderecoDTO create(EnderecoDTO enderecoDTO) {
         EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
         enderecoRepository.create(enderecoEntity);
         return enderecoDTO;
-    }
+	}
 
-    @Override
-    public EnderecoDTO getById(int id) {
-        return null;
-    }
+	@Override
+	public EnderecoDTO getById(int id) {
+        return new EnderecoDTO(enderecoRepository.getById(id));
+	}
+
+	@Override
+	public List<EnderecoDTO> getAll() {
+        List<EnderecoEntity> enderecoEntities = enderecoRepository.getAll();
+        List<EnderecoDTO> enderecoDTOs = new ArrayList<>();
+
+        for (EnderecoEntity endereco : enderecoEntities) {
+            EnderecoDTO enderecoDTO = new EnderecoDTO(endereco);
+            enderecoDTOs.add(enderecoDTO);
+        }
+
+        return enderecoDTOs;
+	}
+
+	@Override
+	public String delete(int id) {
+        return enderecoRepository.delete(id);
+	}
+
+	@Override
+	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
+		EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
+		enderecoRepository.update(enderecoEntity);
+
+        return enderecoDTO;
+	}
+
 }

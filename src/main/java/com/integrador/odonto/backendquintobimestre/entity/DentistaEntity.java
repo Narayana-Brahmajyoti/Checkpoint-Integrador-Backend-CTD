@@ -1,8 +1,12 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
-import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 
+import javax.persistence.Entity;
+
+
+@Entity
+//@Table(name = "DENTISTA")
 public class DentistaEntity {
     private int id;
     private String nome;

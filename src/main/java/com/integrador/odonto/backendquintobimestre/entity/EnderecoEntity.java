@@ -1,5 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
+
 public class EnderecoEntity {
     private int id;
     private String rua;
@@ -14,6 +16,11 @@ public class EnderecoEntity {
         this.complemento = complemento;
         this.bairro = bairro;
     }
+
+    public EnderecoEntity(EnderecoDTO enderecoDTO) {
+
+    }
+
 
     public int getId() {
         return id;

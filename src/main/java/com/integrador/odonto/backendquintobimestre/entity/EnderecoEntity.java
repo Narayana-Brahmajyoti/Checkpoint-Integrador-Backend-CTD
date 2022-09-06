@@ -3,7 +3,7 @@ package com.integrador.odonto.backendquintobimestre.entity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 
 public class EnderecoEntity {
-    private int id;
+    private Integer id;
     private String rua;
     private String numero;
     private String complemento;
@@ -16,11 +16,14 @@ public class EnderecoEntity {
         this.complemento = complemento;
         this.bairro = bairro;
     }
-
+    
     public EnderecoEntity(EnderecoDTO enderecoDTO) {
-
+    	this.id = enderecoDTO.getId();
+        this.rua = enderecoDTO.getRua();
+        this.numero = enderecoDTO.getNumero();
+        this.complemento = enderecoDTO.getComplemento();
+        this.bairro = enderecoDTO.getBairro();
     }
-
 
     public int getId() {
         return id;

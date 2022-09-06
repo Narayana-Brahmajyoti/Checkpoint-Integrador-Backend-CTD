@@ -2,12 +2,13 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 
 
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
-import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
-import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.repository.DentistaRepository;
-import com.integrador.odonto.backendquintobimestre.repository.PacienteRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
+
+import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,22 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     public DentistaDTO getById(int id) {
         return null;
     }
+
+	@Override
+	public List<DentistaDTO> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String delete(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DentistaDTO update(DentistaDTO t, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

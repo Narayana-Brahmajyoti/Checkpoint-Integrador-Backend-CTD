@@ -3,18 +3,19 @@ package com.integrador.odonto.backendquintobimestre.entity.dto;
 import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 
 public class EnderecoDTO {
+    private Integer id;
     private String rua;
     private String numero;
     private String complemento;
     private String bairro;
 
-    public EnderecoDTO(EnderecoEntity enderecoEntity) {
-        this.rua = enderecoEntity.getRua();
-        this.numero = enderecoEntity.getNumero();
-        this.complemento = enderecoEntity.getComplemento();
-        this.bairro = enderecoEntity.getBairro();
+    public EnderecoDTO(EnderecoEntity endereco) {
+    	this.id = endereco.getId();
+        this.rua = endereco.getRua();
+        this.numero = endereco.getNumero();
+        this.complemento = endereco.getComplemento();
+        this.bairro = endereco.getBairro();
     }
-
 
     public EnderecoDTO() {
     }
@@ -50,4 +51,14 @@ public class EnderecoDTO {
     public void setBairro(String bairro) {
         this.bairro = bairro;
     }
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+    
+    
 }

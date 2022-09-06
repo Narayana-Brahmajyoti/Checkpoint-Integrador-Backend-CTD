@@ -1,20 +1,18 @@
 package com.integrador.odonto.backendquintobimestre.entity.dto;
 
-
-import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
 public class PacienteDTO {
     private String nome;
     private String sobreNome;
-    private EnderecoEntity enderecoEntity;
+    private Integer endereco;
     private String rg;
     private String dataDeAlta;
 
     public PacienteDTO(PacienteEntity paciente) {
         this.nome = paciente.getNome();
         this.sobreNome = paciente.getSobreNome();
-        this.enderecoEntity.setId(paciente.getEndereco());
+        this.endereco = paciente.getEndereco();
         this.rg = paciente.getRg();
         this.dataDeAlta = paciente.getDataDeAlta();
     }
@@ -38,12 +36,12 @@ public class PacienteDTO {
 		this.sobreNome = sobreNome;
 	}
 
-	public EnderecoEntity getEnderecoEntity() {
-		return enderecoEntity;
+	public Integer getEndereco() {
+		return endereco;
 	}
 
-	public void setEnderecoEntity(EnderecoEntity enderecoEntity) {
-		this.enderecoEntity = enderecoEntity;
+	public void setEndereco(Integer endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getRg() {

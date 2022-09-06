@@ -14,49 +14,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
-import com.integrador.odonto.backendquintobimestre.service.impl.EnderecoServiceImpl;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.service.impl.PacienteServiceImpl;
 
 @RestController
-@RequestMapping("/endereco")
-public class EnderecoController {
+@RequestMapping("/paciente")
+public class PacienteController {
     @Autowired
-    private EnderecoServiceImpl enderecoService;
+    private PacienteServiceImpl pacienteService;
 
     @PostMapping
-    public ResponseEntity<EnderecoDTO> create(@RequestBody EnderecoDTO enderecoDTO) {
+    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) {
         ResponseEntity responseEntity = null;
         
-    	if(enderecoDTO.getRua() != null){
-    		EnderecoDTO enderecoDTO2 = enderecoService.create(enderecoDTO);
+    	if(pacienteDTO.getNome() != null){
+    		PacienteDTO enderecoDTO2 = pacienteService.create(pacienteDTO);
             responseEntity = new ResponseEntity<>(enderecoDTO2, HttpStatus.OK);
     	}
     	else
     	{
-            responseEntity = new ResponseEntity<>("Rua não preenchida", HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<>("Nome não preenchido", HttpStatus.BAD_REQUEST);
     	}
     	
     	return responseEntity;
     }
 
     @GetMapping("/{id}")
-    public EnderecoDTO getById(@PathVariable int id) {
-        return enderecoService.getById(id);
+    public PacienteDTO getById(@PathVariable int id) {
+        return pacienteService.getById(id);
     }
     
     @GetMapping
-    public List<EnderecoDTO> getAll() {
-        return enderecoService.getAll();
+    public List<PacienteDTO> getAll() {
+        return pacienteService.getAll();
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-
-        return enderecoService.delete(id);
+        return pacienteService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) {
-        return enderecoService.update(enderecoDTO, id);
+    public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) {
+        return pacienteService.update(pacienteDTO, id);
     }
 }

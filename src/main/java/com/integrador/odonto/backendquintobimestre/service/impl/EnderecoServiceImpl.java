@@ -20,6 +20,7 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 	public EnderecoDTO create(EnderecoDTO enderecoDTO) {
         EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
         enderecoRepository.create(enderecoEntity);
+        enderecoDTO.setId(enderecoEntity.getId());
         return enderecoDTO;
 	}
 
@@ -48,6 +49,7 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 
 	@Override
 	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
+		enderecoDTO.setId(id);
 		EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
 		enderecoRepository.update(enderecoEntity);
 

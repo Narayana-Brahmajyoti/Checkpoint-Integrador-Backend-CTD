@@ -22,7 +22,7 @@ public class PacienteEntity {
     public PacienteEntity(PacienteDTO paciente) {
         this.nome = paciente.getNome();
         this.sobreNome = paciente.getSobreNome();
-        this.endereco = paciente.getEnderecoEntity().getId();
+        this.endereco = paciente.getEndereco();
         this.rg = paciente.getRg();
         this.dataDeAlta = paciente.getDataDeAlta();
     }

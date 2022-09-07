@@ -1,16 +1,26 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
+import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
+
 public class DentistaEntity {
     private int id;
     private String nome;
-    private String SobreNome;
+    private String sobreNome;
     private String matricula;
 
     public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
         this.id = id;
         this.nome = nome;
-        SobreNome = sobreNome;
+        this.sobreNome = sobreNome;
         this.matricula = matricula;
+    }
+
+    public DentistaEntity(DentistaDTO dentistaDTO) {
+        this.nome = dentistaDTO.getNome();
+        this.sobreNome = dentistaDTO.getSobreNome();;
+        this.matricula = dentistaDTO.getMatricula();;
+
     }
 
     public int getId() {
@@ -30,11 +40,11 @@ public class DentistaEntity {
     }
 
     public String getSobreNome() {
-        return SobreNome;
+        return sobreNome;
     }
 
     public void setSobreNome(String sobreNome) {
-        SobreNome = sobreNome;
+        sobreNome = sobreNome;
     }
 
     public String getMatricula() {

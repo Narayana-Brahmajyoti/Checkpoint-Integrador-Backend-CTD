@@ -9,5 +9,4 @@ public class BackendQuintoBimestreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackendQuintoBimestreApplication.class, args);
 	}
-
 }

@@ -2,18 +2,20 @@ package com.integrador.odonto.backendquintobimestre.entity.dto;
 
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class DentistaDTO {
     private String nome;
     private String SobreNome;
     private String matricula;
 
-    public DentistaDTO(DentistaEntity dentista) {
-        this.nome = dentista.getNome();
-        SobreNome = dentista.getSobreNome();
-        this.matricula = dentista.getMatricula();
+    public DentistaDTO(DentistaEntity dentistaEntity) {
+        this.nome = dentistaEntity.getNome();
+        this.SobreNome = dentistaEntity.getSobreNome();
+        this.matricula = dentistaEntity.getMatricula();
     }
 
     public DentistaDTO() {
+
     }
 
     public String getNome() {

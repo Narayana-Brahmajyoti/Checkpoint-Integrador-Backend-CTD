@@ -29,7 +29,7 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 
     @Override
     public DentistaDTO getById(int id) {
-        return null;
+        return new DentistaDTO(dentistaRepository.getById(id));
     }
 
 	@Override

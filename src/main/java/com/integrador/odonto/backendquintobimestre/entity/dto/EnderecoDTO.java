@@ -9,12 +9,12 @@ public class EnderecoDTO {
     private String complemento;
     private String bairro;
 
-    public EnderecoDTO(EnderecoEntity endereco) {
-    	this.id = endereco.getId();
-        this.rua = endereco.getRua();
-        this.numero = endereco.getNumero();
-        this.complemento = endereco.getComplemento();
-        this.bairro = endereco.getBairro();
+    public EnderecoDTO(EnderecoEntity enderecoEntity) {
+    	this.id = enderecoEntity.getId();
+        this.rua = enderecoEntity.getRua();
+        this.numero = enderecoEntity.getNumero();
+        this.complemento = enderecoEntity.getComplemento();
+        this.bairro = enderecoEntity.getBairro();
     }
 
     public EnderecoDTO() {
@@ -56,9 +56,7 @@ public class EnderecoDTO {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
     
     
 }

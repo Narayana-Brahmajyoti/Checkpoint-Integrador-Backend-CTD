@@ -1,22 +1,30 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 
 @Entity
-//@Table(name = "DENTISTA")
+@Table(name = "DENTISTA")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DentistaEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String nome;
-    private String SobreNome;
+    @Column(nullable = false)
+    private String sobreNome;
+    @Column(nullable = false)
     private String matricula;
+
 
     public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
         this.id = id;
         this.nome = nome;
-        this.SobreNome = sobreNome;
+        this.sobreNome = sobreNome;
         this.matricula = matricula;
     }
 
@@ -41,11 +49,11 @@ public class DentistaEntity {
     }
 
     public String getSobreNome() {
-        return SobreNome;
+        return sobreNome;
     }
 
     public void setSobreNome(String sobreNome) {
-        SobreNome = sobreNome;
+        sobreNome = sobreNome;
     }
 
     public String getMatricula() {

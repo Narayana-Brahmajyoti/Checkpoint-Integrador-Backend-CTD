@@ -23,12 +23,26 @@ public class DentistaController {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
             responseEntity = new ResponseEntity<>(dentistaDTO1, HttpStatus.OK);
         } else {
-            responseEntity = new ResponseEntity<>("Tiile não preenchido", HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<>("Dentista nao criado", HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;
     }
 
-    @GetMapping
-    public DentistaDTO getById(@PathVariable int id) { return dentistaService.getById(id); }
+    @GetMapping("/{id}")
+    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
+        ResponseEntity responseEntity = null;
+        DentistaDTO dentistaDTO = dentistaService.getById(id);
+        if(dentistaDTO != null){
+            responseEntity = new ResponseEntity<>(dentistaDTO, HttpStatus.OK);
+        }else{
+            responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
+    @PutMapping("/{id}")
+    public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
+        return dentistaService.update(dentistaDTO, id);
+    }
 }

@@ -1,16 +1,29 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
-import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+
+@Entity
+@Table(name = "PACIENTE")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PacienteEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private String sobreNome;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEndereco", referencedColumnName = "id")
     private EnderecoEntity enderecoEntity;
+    @Column(nullable = false)
     private String rg;
+    @Column(nullable = true)
     private LocalDate dataDeAlta;
 
     public PacienteEntity(int id, String nome, String sobreNome, EnderecoEntity enderecoEntity, String rg, LocalDate dataDeAlta) {

@@ -1,5 +1,11 @@
 package com.integrador.odonto.backendquintobimestre.repository;
 
+<<<<<<< HEAD
+=======
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
+import org.springframework.stereotype.Repository;
+
+>>>>>>> diego
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

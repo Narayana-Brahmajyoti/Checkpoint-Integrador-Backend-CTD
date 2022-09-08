@@ -45,8 +45,11 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 	}
 
 	@Override
-	public DentistaDTO update(DentistaDTO t, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
+		DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
+        dentistaEntity = dentistaRepository.update(dentistaEntity);
+        dentistaDTO = new DentistaDTO(dentistaEntity);
+		return dentistaDTO;
+
 	}
 }

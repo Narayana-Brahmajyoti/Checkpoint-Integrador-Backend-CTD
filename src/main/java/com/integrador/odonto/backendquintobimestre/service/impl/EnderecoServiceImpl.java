@@ -11,11 +11,21 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.repository.EnderecoRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> diego
 @Service
 public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
     @Autowired
     private EnderecoRepository enderecoRepository;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> diego
 	@Override
 	public EnderecoDTO create(EnderecoDTO enderecoDTO) {
         EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
@@ -49,7 +59,10 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 
 	@Override
 	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
+<<<<<<< HEAD
 		enderecoDTO.setId(id);
+=======
+>>>>>>> diego
 		EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
 		enderecoRepository.update(enderecoEntity);
 

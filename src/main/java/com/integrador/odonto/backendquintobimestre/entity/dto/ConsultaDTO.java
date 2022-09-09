@@ -1,5 +1,6 @@
 package com.integrador.odonto.backendquintobimestre.entity.dto;
 
+import com.integrador.odonto.backendquintobimestre.entity.ConsultaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
@@ -11,6 +12,13 @@ public class ConsultaDTO {
     private PacienteEntity paciente;
     private DentistaEntity dentista;
     private Date dataHouraConsulta;
+
+    public ConsultaDTO(ConsultaEntity consultaEntity) {
+        this.id = consultaEntity.getId();
+        this.paciente = consultaEntity.getPaciente();
+        this.dentista = consultaEntity.getDentista();
+        this.dataHouraConsulta = consultaEntity.getDataHouraConsulta();
+    }
 
     public ConsultaDTO() {
     }

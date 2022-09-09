@@ -2,7 +2,13 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Pacientes")
 public class PacienteEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String sobreNome;
@@ -18,7 +24,7 @@ public class PacienteEntity {
         this.rg = rg;
         this.dataDeAlta = dataDeAlta;
     }
-    
+
     public PacienteEntity(PacienteDTO paciente) {
         this.nome = paciente.getNome();
         this.sobreNome = paciente.getSobreNome();
@@ -26,7 +32,7 @@ public class PacienteEntity {
         this.rg = paciente.getRg();
         this.dataDeAlta = paciente.getDataDeAlta();
     }
-    
+
     public PacienteEntity() {
     }
 

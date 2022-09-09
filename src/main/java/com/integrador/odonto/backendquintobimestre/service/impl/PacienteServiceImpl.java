@@ -1,39 +1,41 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepository;
+import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
-import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
-import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
-import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-import com.integrador.odonto.backendquintobimestre.repository.PacienteRepository;
-import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private IPacienteRepository pacienteRepository;
+
+	@Autowired
+	private EnderecoServiceImpl enderecoService;
 	
 	@Override
 	public PacienteDTO create(PacienteDTO pacienteDTO) {
         PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
-        pacienteRepository.create(pacienteEntity);
+        pacienteEntity = pacienteRepository.save(pacienteEntity);
+		pacienteDTO = new PacienteDTO(pacienteEntity);
         return pacienteDTO;
 	}
 
 	@Override
 	public PacienteDTO getById(int id) {
-		return new PacienteDTO(pacienteRepository.getById(id));
+		PacienteEntity paciente = pacienteRepository.findById(id).get();
+		return new PacienteDTO(paciente);
 	}
 
 	@Override
 	public List<PacienteDTO> getAll() {
-        List<PacienteEntity> pacienteEntities = pacienteRepository.getAll();
+        List<PacienteEntity> pacienteEntities = pacienteRepository.findAll();
         List<PacienteDTO> pacienteDTOs = new ArrayList<>();
 
         for (PacienteEntity paciente : pacienteEntities) {
@@ -46,16 +48,23 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public String delete(int id) {
-		return pacienteRepository.delete(id);
+		return null;
 	}
+
+//	@Override
+//	public String delete(Integer id) {
+//		PacienteEntity paciente = pacienteRepository.delete(id);
+//
+//		return "Paciente deletado";
+//		//return pacienteRepository.delete(id);
+//	}
 
 	@Override
 	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
-		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
-		pacienteEntity.setId(id);
-		pacienteRepository.update(pacienteEntity);
+		PacienteEntity pacienteEntity = new PacienteEntity((pacienteDTO));
+		pacienteRepository.saveAndFlush (pacienteEntity);
 
-        return pacienteDTO;
+		return pacienteDTO;
 	}
 
 }

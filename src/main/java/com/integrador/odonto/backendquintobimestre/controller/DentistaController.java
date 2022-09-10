@@ -38,4 +38,9 @@ public class DentistaController {
         }
         return responseEntity;
     }
+
+    @PutMapping("/{id}")
+    public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
+        return dentistaService.update(dentistaDTO, id);
+    }
 }

@@ -2,13 +2,22 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "Consulta")
 public class ConsultaEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO.IDENTITY)
     private Integer id;
+    @OneToOne
+    @JoinColumn(name = "idPaciente", referencedColumnName = "id")
     private PacienteEntity paciente;
+    @OneToOne
+    @JoinColumn(name = "idDentista", referencedColumnName = "id")
     private DentistaEntity dentista;
-    private Date dataHouraConsulta;
+    @Column(nullable = false)
+    private Date dataHoraConsulta;
 
     public Integer getId() {
         return id;
@@ -18,7 +27,7 @@ public class ConsultaEntity {
         this.id = consultaDTO.getId();
         this.paciente = consultaDTO.getPaciente();
         this.dentista = consultaDTO.getDentista();
-        this.dataHouraConsulta = consultaDTO.getDataHouraConsulta();
+        this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
     }
 
     public ConsultaEntity() {
@@ -40,11 +49,11 @@ public class ConsultaEntity {
         this.dentista = dentista;
     }
 
-    public Date getDataHouraConsulta() {
-        return dataHouraConsulta;
+    public Date getDataHoraConsulta() {
+        return dataHoraConsulta;
     }
 
-    public void setDataHouraConsulta(Date dataHouraConsulta) {
-        this.dataHouraConsulta = dataHouraConsulta;
+    public void setDataHoraConsulta(Date dataHoraConsulta) {
+        this.dataHoraConsulta = dataHoraConsulta;
     }
 }

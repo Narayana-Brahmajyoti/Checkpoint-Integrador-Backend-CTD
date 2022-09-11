@@ -1,22 +1,30 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Pacientes")
+@Table(name = "Paciente")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PacienteEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+	@Column(nullable = false)
     private String nome;
+	@Column(nullable = false)
     private String sobreNome;
-    private Integer endereco;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idEndereco", referencedColumnName = "id")
+	private EnderecoEntity endereco;
+	@Column(nullable = false)
     private String rg;
+	@Column(nullable = true)
     private String dataDeAlta;
 
-    public PacienteEntity(Integer id, String nome, String sobreNome, Integer endereco, String rg, String dataDeAlta) {
+    public PacienteEntity(Integer id, String nome, String sobreNome, EnderecoEntity endereco, String rg, String dataDeAlta) {
         this.id = id;
         this.nome = nome;
         this.sobreNome = sobreNome;
@@ -25,16 +33,11 @@ public class PacienteEntity {
         this.dataDeAlta = dataDeAlta;
     }
 
-    public PacienteEntity(PacienteDTO paciente) {
-        this.nome = paciente.getNome();
-        this.sobreNome = paciente.getSobreNome();
-        this.endereco = paciente.getEndereco();
-        this.rg = paciente.getRg();
-        this.dataDeAlta = paciente.getDataDeAlta();
-    }
-
     public PacienteEntity() {
     }
+
+	public PacienteEntity(PacienteDTO pacienteDTO) {
+	}
 
 	public Integer getId() {
 		return id;
@@ -60,13 +63,14 @@ public class PacienteEntity {
 		this.sobreNome = sobreNome;
 	}
 
-	public Integer getEndereco() {
+	public EnderecoEntity getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Integer endereco) {
+	public void setEndereco(EnderecoEntity endereco) {
 		this.endereco = endereco;
 	}
+
 
 	public String getRg() {
 		return rg;

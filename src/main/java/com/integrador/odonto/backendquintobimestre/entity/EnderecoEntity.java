@@ -5,12 +5,12 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Enderecos")
+@Table(name = "Endereco")
 public class EnderecoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String rua;
     @Column(nullable = false, updatable = true)
     private String numero;

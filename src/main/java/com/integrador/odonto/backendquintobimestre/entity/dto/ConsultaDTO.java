@@ -11,13 +11,13 @@ public class ConsultaDTO {
     private Integer id;
     private PacienteEntity paciente;
     private DentistaEntity dentista;
-    private Date dataHouraConsulta;
+    private Date dataHoraConsulta;
 
     public ConsultaDTO(ConsultaEntity consultaEntity) {
         this.id = consultaEntity.getId();
         this.paciente = consultaEntity.getPaciente();
         this.dentista = consultaEntity.getDentista();
-        this.dataHouraConsulta = consultaEntity.getDataHouraConsulta();
+        this.dataHoraConsulta = consultaEntity.getDataHoraConsulta();
     }
 
     public ConsultaDTO() {
@@ -43,11 +43,11 @@ public class ConsultaDTO {
         this.dentista = dentista;
     }
 
-    public Date getDataHouraConsulta() {
-        return dataHouraConsulta;
+    public Date getDataHoraConsulta() {
+        return dataHoraConsulta;
     }
 
-    public void setDataHouraConsulta(Date dataHouraConsulta) {
-        this.dataHouraConsulta = dataHouraConsulta;
+    public void setDataHoraConsulta(Date dataHoraConsulta) {
+        this.dataHoraConsulta = dataHoraConsulta;
     }
 }

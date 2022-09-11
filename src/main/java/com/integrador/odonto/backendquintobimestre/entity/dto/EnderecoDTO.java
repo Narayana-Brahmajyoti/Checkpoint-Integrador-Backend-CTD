@@ -20,6 +20,10 @@ public class EnderecoDTO {
     public EnderecoDTO() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getRua() {
         return rua;
     }
@@ -52,11 +56,6 @@ public class EnderecoDTO {
         this.bairro = bairro;
     }
 
-	public Integer getId() {
-		return id;
-	}
 
-
-    
     
 }

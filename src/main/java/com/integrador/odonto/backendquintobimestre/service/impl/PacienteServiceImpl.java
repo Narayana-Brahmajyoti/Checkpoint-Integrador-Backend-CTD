@@ -48,20 +48,14 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public String delete(int id) {
-		return null;
+		return "Paciente deletado";
 	}
 
-//	@Override
-//	public String delete(Integer id) {
-//		PacienteEntity paciente = pacienteRepository.delete(id);
-//
-//		return "Paciente deletado";
-//		//return pacienteRepository.delete(id);
-//	}
+
 
 	@Override
 	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
-		PacienteEntity pacienteEntity = new PacienteEntity((pacienteDTO));
+		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
 		pacienteRepository.saveAndFlush (pacienteEntity);
 
 		return pacienteDTO;

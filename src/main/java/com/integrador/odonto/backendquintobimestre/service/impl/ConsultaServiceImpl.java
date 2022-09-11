@@ -7,6 +7,7 @@ import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,17 +32,28 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
     @Override
     public List<ConsultaDTO> getAll() {
-        return null;
+        List<ConsultaEntity> consultaEntities = consultaRepository.findAll();
+        List<ConsultaDTO> consultaDTOs = new ArrayList<>();
+
+        for (ConsultaEntity consulta : consultaEntities) {
+            ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
+            consultaDTOs.add(consultaDTO);
+        }
+
+        return consultaDTOs;
     }
 
     @Override
     public String delete(int id) {
-        return null;
+        return  "Consulta deletada";
     }
 
     @Override
     public ConsultaDTO update(ConsultaDTO consultaDTO, int id) {
-        return null;
+        ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO);
+        consultaRepository.saveAndFlush(consultaEntity);
+
+        return consultaDTO;
     }
 
     public boolean ifConsultaExists(int id) {

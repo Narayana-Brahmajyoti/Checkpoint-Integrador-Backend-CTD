@@ -45,8 +45,7 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 
 	@Override
 	public String delete(int id) {
-        return null;
-		//return enderecoRepository.delete(id);
+		return "Endereço deletado";
 	}
 
 	@Override

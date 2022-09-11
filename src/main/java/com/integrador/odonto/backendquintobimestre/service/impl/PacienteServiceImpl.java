@@ -1,5 +1,6 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
+
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepository;
@@ -29,7 +30,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public PacienteDTO getById(int id) {
-		PacienteEntity paciente = pacienteRepository.findById(id).get();
+		PacienteEntity paciente = pacienteRepository.findById(id);
 		return new PacienteDTO(paciente);
 	}
 
@@ -51,13 +52,17 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		return "Paciente deletado";
 	}
 
-
-
 	@Override
 	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
 		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
 		pacienteRepository.saveAndFlush (pacienteEntity);
 
+		return pacienteDTO;
+	}
+
+	public PacienteDTO getByName(String name){
+		PacienteEntity paciente = pacienteRepository.findByName(name);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
 		return pacienteDTO;
 	}
 

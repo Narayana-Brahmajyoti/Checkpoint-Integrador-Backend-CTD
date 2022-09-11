@@ -1,7 +1,9 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
 import com.integrador.odonto.backendquintobimestre.entity.ConsultaEntity;
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.IConsultaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,13 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
     public boolean ifConsultaExists(int id) {
         return consultaRepository.existsById(id);
     }
+
+    public ConsultaDTO getByPaciente(String name){
+        ConsultaEntity consulta = consultaRepository.findByPaciente(name);
+        ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
+        return consultaDTO;
+    }
+
 
 
 }

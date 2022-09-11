@@ -47,5 +47,10 @@ public class ConsultaController {
         return consultaService.update(consultaDTO, id);
     }
 
+    @GetMapping("/getByPaciente")
+    public ConsultaDTO getByPaciente(@RequestParam(value = "name") String name){
+        return consultaService.getByPaciente(name);
+    }
+
 
 }

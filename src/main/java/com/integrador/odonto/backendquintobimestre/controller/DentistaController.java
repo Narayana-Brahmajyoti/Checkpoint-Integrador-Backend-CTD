@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/dentista")
 public class DentistaController {
@@ -27,6 +29,12 @@ public class DentistaController {
         }
 
         return responseEntity;
+    }
+
+
+    @GetMapping
+    public List<DentistaDTO> getAll(){
+        return dentistaService.getAll();
     }
 
     @GetMapping("/{id}")

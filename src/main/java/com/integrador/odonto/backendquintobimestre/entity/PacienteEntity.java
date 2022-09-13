@@ -2,7 +2,6 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 

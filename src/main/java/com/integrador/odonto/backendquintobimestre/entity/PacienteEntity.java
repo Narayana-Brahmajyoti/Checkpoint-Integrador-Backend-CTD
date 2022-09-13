@@ -1,5 +1,11 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
+<<<<<<< HEAD
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+
+public class PacienteEntity {
+    private Integer id;
+=======
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import javax.persistence.*;
@@ -14,9 +20,15 @@ public class PacienteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
+>>>>>>> diego
     private String nome;
     @Column(nullable = false)
     private String sobreNome;
+<<<<<<< HEAD
+    private Integer endereco;
+    private String rg;
+    private String dataDeAlta;
+=======
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idEndereco", referencedColumnName = "id")
     private EnderecoEntity enderecoEntity;
@@ -24,65 +36,73 @@ public class PacienteEntity {
     private String rg;
     @Column(nullable = true)
     private LocalDate dataDeAlta;
+>>>>>>> diego
 
-    public PacienteEntity(int id, String nome, String sobreNome, EnderecoEntity enderecoEntity, String rg, LocalDate dataDeAlta) {
+    public PacienteEntity(Integer id, String nome, String sobreNome, Integer endereco, String rg, String dataDeAlta) {
         this.id = id;
         this.nome = nome;
         this.sobreNome = sobreNome;
-        this.enderecoEntity = enderecoEntity;
+        this.endereco = endereco;
         this.rg = rg;
         this.dataDeAlta = dataDeAlta;
     }
-
-    public PacienteEntity(PacienteDTO pacienteDTO) {
-
+    
+    public PacienteEntity(PacienteDTO paciente) {
+        this.nome = paciente.getNome();
+        this.sobreNome = paciente.getSobreNome();
+        this.endereco = paciente.getEndereco();
+        this.rg = paciente.getRg();
+        this.dataDeAlta = paciente.getDataDeAlta();
+    }
+    
+    public PacienteEntity() {
     }
 
-    public int getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getSobreNome() {
-        return sobreNome;
-    }
+	public String getSobreNome() {
+		return sobreNome;
+	}
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
-    }
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
+	}
 
-    public EnderecoEntity getEndereco() {
-        return enderecoEntity;
-    }
+	public Integer getEndereco() {
+		return endereco;
+	}
 
-    public void setEndereco(EnderecoEntity enderecoEntity) {
-        this.enderecoEntity = enderecoEntity;
-    }
+	public void setEndereco(Integer endereco) {
+		this.endereco = endereco;
+	}
 
-    public String getRg() {
-        return rg;
-    }
+	public String getRg() {
+		return rg;
+	}
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
 
-    public LocalDate getDataDeAlta() {
-        return dataDeAlta;
-    }
+	public String getDataDeAlta() {
+		return dataDeAlta;
+	}
 
-    public void setDataDeAlta(LocalDate dataDeAlta) {
-        this.dataDeAlta = dataDeAlta;
-    }
+	public void setDataDeAlta(String dataDeAlta) {
+		this.dataDeAlta = dataDeAlta;
+	}
 }

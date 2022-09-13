@@ -15,6 +15,7 @@ public class DentistaDTO {
     }
 
     public DentistaDTO() {
+
     }
 
     public String getNome() {

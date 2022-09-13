@@ -1,12 +1,20 @@
 package com.integrador.odonto.backendquintobimestre.repository;
 
-import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+<<<<<<< HEAD
+import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
+=======
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+>>>>>>> diego
 
 @Repository
 public class EnderecoRepository {

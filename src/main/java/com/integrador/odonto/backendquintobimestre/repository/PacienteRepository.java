@@ -1,12 +1,19 @@
 package com.integrador.odonto.backendquintobimestre.repository;
 
+<<<<<<< HEAD
+=======
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import org.springframework.stereotype.Repository;
 
+>>>>>>> diego
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
 @Repository
 public class PacienteRepository {
@@ -35,8 +42,7 @@ public class PacienteRepository {
     }
 
     public List<PacienteEntity> getAll() {
-        List<PacienteEntity> pacienteEntities = new ArrayList<>();
+        List<PacienteEntity> pacienteEntities = new ArrayList<>(pacienteMap.values());
         return pacienteEntities;
     }
-
 }

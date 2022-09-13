@@ -28,6 +28,9 @@ public class DentistaEntity {
     }
 
     public DentistaEntity(DentistaDTO dentistaDTO) {
+        this.nome = dentistaDTO.getNome();
+        this.sobreNome = dentistaDTO.getSobreNome();;
+        this.matricula = dentistaDTO.getMatricula();;
 
     }
 

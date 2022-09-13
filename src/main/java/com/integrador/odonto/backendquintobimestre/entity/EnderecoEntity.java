@@ -7,10 +7,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ENDERECO")
 public class EnderecoEntity {
+<<<<<<< HEAD
+    private Integer id;
+=======
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
+>>>>>>> diego
     private String rua;
     @Column(nullable = false)
     private String numero;
@@ -26,6 +30,17 @@ public class EnderecoEntity {
         this.complemento = complemento;
         this.bairro = bairro;
     }
+<<<<<<< HEAD
+    
+    public EnderecoEntity(EnderecoDTO enderecoDTO) {
+    	this.id = enderecoDTO.getId();
+        this.rua = enderecoDTO.getRua();
+        this.numero = enderecoDTO.getNumero();
+        this.complemento = enderecoDTO.getComplemento();
+        this.bairro = enderecoDTO.getBairro();
+    }
+
+=======
 
     public EnderecoEntity() {
 
@@ -36,6 +51,7 @@ public class EnderecoEntity {
         BeanUtils.copyProperties(enderecoEntity, enderecoDTO);
     }
 
+>>>>>>> diego
     public int getId() {
         return id;
     }

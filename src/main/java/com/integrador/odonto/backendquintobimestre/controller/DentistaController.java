@@ -20,14 +20,12 @@ public class DentistaController {
     @PostMapping
     public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) {
         ResponseEntity responseEntity = null;
-
         if (dentistaDTO.getNome() != null) {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
             responseEntity = new ResponseEntity<>(dentistaDTO1, HttpStatus.OK);
         } else {
             responseEntity = new ResponseEntity<>("Dentista nao criado", HttpStatus.BAD_REQUEST);
         }
-
         return responseEntity;
     }
 

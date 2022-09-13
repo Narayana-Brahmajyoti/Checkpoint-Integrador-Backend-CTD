@@ -2,23 +2,25 @@ package com.integrador.odonto.backendquintobimestre.entity.dto;
 
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
-public class PacienteDTO {
-    private String nome;
-    private String sobreNome;
-    private Integer endereco;
-    private String rg;
-    private String dataDeAlta;
+import java.time.LocalDate;
 
-    public PacienteDTO(PacienteEntity paciente) {
-        this.nome = paciente.getNome();
-        this.sobreNome = paciente.getSobreNome();
-        this.endereco = paciente.getEndereco();
-        this.rg = paciente.getRg();
-        this.dataDeAlta = paciente.getDataDeAlta();
-    }
-    
-    public PacienteDTO() {
-    }
+public class PacienteDTO {
+	private String nome;
+	private String sobreNome;
+	private Integer endereco;
+	private String rg;
+	private LocalDate dataDeAlta;
+
+	public PacienteDTO(PacienteEntity paciente) {
+		this.nome = paciente.getNome();
+		this.sobreNome = paciente.getSobreNome();
+		this.endereco = paciente.getEndereco();
+		this.rg = paciente.getRg();
+		this.dataDeAlta = paciente.getDataDeAlta();
+	}
+
+	public PacienteDTO() {
+	}
 
 	public String getNome() {
 		return nome;
@@ -52,11 +54,11 @@ public class PacienteDTO {
 		this.rg = rg;
 	}
 
-	public String getDataDeAlta() {
+	public LocalDate  getDataDeAlta() {
 		return dataDeAlta;
 	}
 
-	public void setDataDeAlta(String dataDeAlta) {
+	public void setDataDeAlta(LocalDate  dataDeAlta) {
 		this.dataDeAlta = dataDeAlta;
 	}
 }

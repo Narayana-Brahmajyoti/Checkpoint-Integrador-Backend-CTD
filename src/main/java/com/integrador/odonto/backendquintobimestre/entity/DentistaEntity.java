@@ -15,13 +15,12 @@ public class DentistaEntity {
     private int id;
     @Column(nullable = false)
     private String nome;
-<<<<<<< HEAD
-    private String sobreNome;
-=======
+
+    //private String sobreNome;
+
     @Column(nullable = false)
     private String sobreNome;
     @Column(nullable = false)
->>>>>>> diego
     private String matricula;
 
 
@@ -37,6 +36,9 @@ public class DentistaEntity {
         this.sobreNome = dentistaDTO.getSobreNome();;
         this.matricula = dentistaDTO.getMatricula();;
 
+    }
+
+    public DentistaEntity() {
     }
 
     public int getId() {

@@ -2,10 +2,13 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 
 
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.DentistaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +24,6 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     @Autowired
     private DentistaRepository dentistaRepository;
 
-
     @Override
     public DentistaDTO create(DentistaDTO dentistaDTO) {
         DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
@@ -34,16 +36,10 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         return new DentistaDTO(dentistaRepository.getById(id));
     }
 
-	@Override
-	public List<DentistaDTO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public String delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+        return dentistaRepository.delete(id);
 	}
 
 	@Override
@@ -54,4 +50,19 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 		return dentistaDTO;
 
 	}
+
+    @Override
+    public List<DentistaDTO> getAll() {
+
+        List<DentistaEntity> dentistaEntities = dentistaRepository.getAll();
+        List<DentistaDTO> dentistaDTOS = new ArrayList<>();
+
+        for (DentistaEntity dentista : dentistaEntities) {
+            DentistaDTO dentistaDTO = new DentistaDTO(dentista);
+            dentistaDTOS.add(dentistaDTO);
+        }
+
+        return dentistaDTOS;
+
+    }
 }

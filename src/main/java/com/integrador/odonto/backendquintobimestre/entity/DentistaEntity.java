@@ -15,13 +15,9 @@ public class DentistaEntity {
     private int id;
     @Column(nullable = false)
     private String nome;
-<<<<<<< HEAD
-    private String sobreNome;
-=======
     @Column(nullable = false)
     private String sobreNome;
     @Column(nullable = false)
->>>>>>> diego
     private String matricula;
 
 

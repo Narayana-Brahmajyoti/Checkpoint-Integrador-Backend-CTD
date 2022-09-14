@@ -1,18 +1,12 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
-
-
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-import com.integrador.odonto.backendquintobimestre.repository.DentistaRepository;
 import com.integrador.odonto.backendquintobimestre.repository.IDentistaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

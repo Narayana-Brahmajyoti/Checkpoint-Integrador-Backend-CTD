@@ -14,7 +14,7 @@
 	<name>backend-quinto-bimestre</name>
 	<description>Projeto Final 5º Bimestre CTD</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -30,7 +30,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public PacienteDTO getById(int id) {
-		PacienteEntity paciente = pacienteRepository.findById(id);
+		PacienteEntity paciente = pacienteRepository.findById(id).get();
 		return new PacienteDTO(paciente);
 	}
 
@@ -61,7 +61,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	}
 
 	public PacienteDTO getByName(String name){
-		PacienteEntity paciente = pacienteRepository.findByName(name);
+		PacienteEntity paciente = pacienteRepository.findByNome(name);
 		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
 		return pacienteDTO;
 	}

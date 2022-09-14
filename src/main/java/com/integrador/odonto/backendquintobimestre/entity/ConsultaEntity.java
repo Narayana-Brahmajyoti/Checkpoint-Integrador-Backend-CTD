@@ -8,7 +8,7 @@ import java.util.Date;
 @Table(name = "Consulta")
 public class ConsultaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne
     @JoinColumn(name = "idPaciente", referencedColumnName = "id")

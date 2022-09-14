@@ -7,11 +7,8 @@ import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
-import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-import com.integrador.odonto.backendquintobimestre.repository.PacienteRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
 @Service
@@ -30,7 +27,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public PacienteDTO getById(int id) {
-		PacienteEntity paciente = pacienteRepository.findById(id);
+		PacienteEntity paciente = pacienteRepository.findById(id).get();
 		return new PacienteDTO(paciente);
 	}
 

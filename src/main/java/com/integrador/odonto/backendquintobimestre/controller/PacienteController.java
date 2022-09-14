@@ -56,4 +56,6 @@ public class PacienteController {
     public PacienteDTO getByName(@RequestParam(value = "name") String name ) {
         return pacienteService.getByName(name);
     }
+
+
 }

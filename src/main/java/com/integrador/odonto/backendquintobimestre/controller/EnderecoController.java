@@ -58,4 +58,6 @@ public class EnderecoController {
     public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) {
         return enderecoService.update(enderecoDTO, id);
     }
+
+
 }

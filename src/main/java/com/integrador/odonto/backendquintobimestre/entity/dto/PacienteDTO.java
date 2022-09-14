@@ -66,4 +66,5 @@ public class PacienteDTO {
 	public void setDataDeAlta(String dataDeAlta) {
 		this.dataDeAlta = dataDeAlta;
 	}
+
 }

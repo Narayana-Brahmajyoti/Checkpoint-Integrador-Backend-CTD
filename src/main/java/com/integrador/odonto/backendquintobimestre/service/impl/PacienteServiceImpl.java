@@ -1,6 +1,5 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,46 +13,26 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.PacienteRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
-import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-
 @Service
 public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
-
 
     @Autowired
     private PacienteRepository pacienteRepository;
 	
 	@Override
 	public PacienteDTO create(PacienteDTO pacienteDTO) {
-		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
-		pacienteRepository.create(pacienteEntity);
-		return pacienteDTO;
-
+        PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
+        pacienteRepository.create(pacienteEntity);
+        return pacienteDTO;
 	}
-
-	//@Override
-	/*public PacienteDTO create(PacienteDTO t) {
-		// TODO Auto-generated method stub
-		return null;
-
-	}*/
 
 	@Override
 	public PacienteDTO getById(int id) {
-
 		return new PacienteDTO(pacienteRepository.getById(id));
-
-
 	}
 
 	@Override
 	public List<PacienteDTO> getAll() {
-
         List<PacienteEntity> pacienteEntities = pacienteRepository.getAll();
         List<PacienteDTO> pacienteDTOs = new ArrayList<>();
 
@@ -63,13 +42,10 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
         }
 
         return pacienteDTOs;
-
-
 	}
 
 	@Override
 	public String delete(int id) {
-
 		return pacienteRepository.delete(id);
 	}
 
@@ -80,9 +56,6 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		pacienteRepository.update(pacienteEntity);
 
         return pacienteDTO;
-
-
 	}
-
 
 }

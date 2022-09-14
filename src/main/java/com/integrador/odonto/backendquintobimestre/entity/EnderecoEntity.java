@@ -1,26 +1,12 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
-import org.springframework.beans.BeanUtils;
-import javax.persistence.*;
 
-@Entity
-@Table(name = "ENDERECO")
 public class EnderecoEntity {
-
-    //private Integer id;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(nullable = false)
-
+    private Integer id;
     private String rua;
-    @Column(nullable = false)
     private String numero;
-    @Column(nullable = false)
     private String complemento;
-    @Column(nullable = false)
     private String bairro;
 
     public EnderecoEntity(int id, String rua, String numero, String complemento, String bairro) {
@@ -30,27 +16,14 @@ public class EnderecoEntity {
         this.complemento = complemento;
         this.bairro = bairro;
     }
-
     
-    /*public EnderecoEntity(EnderecoDTO enderecoDTO) {
+    public EnderecoEntity(EnderecoDTO enderecoDTO) {
     	this.id = enderecoDTO.getId();
         this.rua = enderecoDTO.getRua();
         this.numero = enderecoDTO.getNumero();
         this.complemento = enderecoDTO.getComplemento();
         this.bairro = enderecoDTO.getBairro();
-    }*/
-
-
-
-    public EnderecoEntity() {
-
     }
-
-    public EnderecoEntity(EnderecoDTO enderecoDTO) {
-        EnderecoEntity enderecoEntity = null;
-        BeanUtils.copyProperties(enderecoEntity, enderecoDTO);
-    }
-
 
     public int getId() {
         return id;

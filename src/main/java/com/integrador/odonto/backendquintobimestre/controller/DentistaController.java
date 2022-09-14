@@ -53,10 +53,6 @@ public class DentistaController {
         return dentistaService.update(dentistaDTO, id);
     }
 
-    @GetMapping
-    public List<DentistaDTO> getAll() {
-        return dentistaService.getAll();
-    }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {

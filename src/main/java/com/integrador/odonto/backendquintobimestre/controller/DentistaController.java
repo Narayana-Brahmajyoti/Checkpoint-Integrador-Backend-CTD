@@ -4,6 +4,7 @@ package com.integrador.odonto.backendquintobimestre.controller;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.service.impl.DentistaServiceImpl;
+import com.integrador.odonto.backendquintobimestre.validation.ValidationDentista;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,23 +19,23 @@ public class DentistaController {
     @Autowired
     private DentistaServiceImpl dentistaService;
 
+    private ValidationDentista validationDentista = new ValidationDentista();
+
     @PostMapping
     public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) {
         ResponseEntity responseEntity = null;
-        if (dentistaDTO.getNome() != null) {
+
+        String error = validationDentista.validationDentistaVariables(dentistaDTO);
+
+        if (error == null) {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
             responseEntity = new ResponseEntity<>(dentistaDTO1, HttpStatus.OK);
         } else {
-            responseEntity = new ResponseEntity<>("Dentista nao criado", HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
 
-
-    @GetMapping
-    public List<DentistaDTO> getAll(){
-        return dentistaService.getAll();
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
@@ -61,5 +62,10 @@ public class DentistaController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
         return dentistaService.delete(id);
+    }
+
+    @GetMapping("/getByName")
+    public DentistaDTO getByName(@RequestParam(value = "nome") String nome) {
+        return dentistaService.getByName(nome);
     }
 }

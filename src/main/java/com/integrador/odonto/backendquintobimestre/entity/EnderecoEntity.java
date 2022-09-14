@@ -2,38 +2,36 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "Endereco")
 public class EnderecoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
     private String rua;
-    @Column(nullable = false, updatable = true)
     private String numero;
-    @Column(updatable = true)
     private String complemento;
-    @Column(updatable = true)
     private String bairro;
 
+    public EnderecoEntity(int id, String rua, String numero, String complemento, String bairro) {
+        this.id = id;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+    }
+    
     public EnderecoEntity(EnderecoDTO enderecoDTO) {
-        this.id = enderecoDTO.getId();
+    	this.id = enderecoDTO.getId();
         this.rua = enderecoDTO.getRua();
         this.numero = enderecoDTO.getNumero();
         this.complemento = enderecoDTO.getComplemento();
         this.bairro = enderecoDTO.getBairro();
     }
 
-    public EnderecoEntity() {
-    }
-
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getRua() {
         return rua;

@@ -2,7 +2,6 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
-
 import javax.persistence.*;
 
 
@@ -15,9 +14,6 @@ public class DentistaEntity {
     private int id;
     @Column(nullable = false)
     private String nome;
-
-    //private String sobreNome;
-
     @Column(nullable = false)
     private String sobreNome;
     @Column(nullable = false)

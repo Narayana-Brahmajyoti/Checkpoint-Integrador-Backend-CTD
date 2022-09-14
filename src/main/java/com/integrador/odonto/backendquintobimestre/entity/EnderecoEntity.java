@@ -2,7 +2,6 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import org.springframework.beans.BeanUtils;
-
 import javax.persistence.*;
 
 @Entity

@@ -58,5 +58,4 @@ public class PacienteController {
     public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) {
         return pacienteService.update(pacienteDTO, id);
     }
-
 }

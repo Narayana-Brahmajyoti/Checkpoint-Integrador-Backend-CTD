@@ -51,7 +51,6 @@ public class EnderecoController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-
         return enderecoService.delete(id);
     }
 

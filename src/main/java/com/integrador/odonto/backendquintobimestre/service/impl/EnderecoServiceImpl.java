@@ -3,6 +3,7 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.repository.IEnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +15,25 @@ import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 @Service
 public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private IEnderecoRepository enderecoRepository;
 	
 	@Override
 	public EnderecoDTO create(EnderecoDTO enderecoDTO) {
-        EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
-        enderecoRepository.create(enderecoEntity);
-        enderecoDTO.setId(enderecoEntity.getId());
-        return enderecoDTO;
+		EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
+		enderecoEntity = enderecoRepository.save(enderecoEntity);
+		enderecoDTO = new EnderecoDTO(enderecoEntity);
+		return enderecoDTO;
 	}
 
 	@Override
 	public EnderecoDTO getById(int id) {
-        return new EnderecoDTO(enderecoRepository.getById(id));
+		EnderecoEntity endereco = enderecoRepository.findById(id).get();
+		return new EnderecoDTO(endereco);
 	}
 
 	@Override
 	public List<EnderecoDTO> getAll() {
-        List<EnderecoEntity> enderecoEntities = enderecoRepository.getAll();
+        List<EnderecoEntity> enderecoEntities = enderecoRepository.findAll();
         List<EnderecoDTO> enderecoDTOs = new ArrayList<>();
 
         for (EnderecoEntity endereco : enderecoEntities) {
@@ -44,14 +46,14 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 
 	@Override
 	public String delete(int id) {
-        return enderecoRepository.delete(id);
+        enderecoRepository.deleteById(id);
+		return "Endereço deletado";
 	}
 
 	@Override
 	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
-		enderecoDTO.setId(id);
 		EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
-		enderecoRepository.update(enderecoEntity);
+		enderecoRepository.saveAndFlush(enderecoEntity);
 
         return enderecoDTO;
 	}

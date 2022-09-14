@@ -2,13 +2,22 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 
-public class EnderecoEntity {
-    private Integer id;
-    private String rua;
-    private String numero;
-    private String complemento;
-    private String bairro;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Endereco")
+public class EnderecoEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(nullable = false)
+    private String rua;
+    @Column(nullable = false, updatable = true)
+    private String numero;
+    @Column(updatable = true)
+    private String complemento;
+    @Column(updatable = true)
+    private String bairro;
     public EnderecoEntity(int id, String rua, String numero, String complemento, String bairro) {
         this.id = id;
         this.rua = rua;
@@ -23,6 +32,9 @@ public class EnderecoEntity {
         this.numero = enderecoDTO.getNumero();
         this.complemento = enderecoDTO.getComplemento();
         this.bairro = enderecoDTO.getBairro();
+    }
+
+    public EnderecoEntity() {
     }
 
     public int getId() {

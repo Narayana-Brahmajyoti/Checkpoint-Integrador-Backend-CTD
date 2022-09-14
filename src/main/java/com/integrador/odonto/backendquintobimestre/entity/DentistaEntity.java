@@ -34,6 +34,9 @@ public class DentistaEntity {
 
     }
 
+    public DentistaEntity() {
+    }
+
     public int getId() {
         return id;
     }

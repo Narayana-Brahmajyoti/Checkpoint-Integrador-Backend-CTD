@@ -1,6 +1,6 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,47 +13,47 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.PacienteRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
-=======
+
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
->>>>>>> diego
+
 
 @Service
 public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
-<<<<<<< HEAD
+
     @Autowired
     private PacienteRepository pacienteRepository;
 	
 	@Override
 	public PacienteDTO create(PacienteDTO pacienteDTO) {
-        PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
-        pacienteRepository.create(pacienteEntity);
-        return pacienteDTO;
-=======
-	@Override
-	public PacienteDTO create(PacienteDTO t) {
+		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
+		pacienteRepository.create(pacienteEntity);
+		return pacienteDTO;
+
+	}
+
+	//@Override
+	/*public PacienteDTO create(PacienteDTO t) {
 		// TODO Auto-generated method stub
 		return null;
->>>>>>> diego
-	}
+
+	}*/
 
 	@Override
 	public PacienteDTO getById(int id) {
-<<<<<<< HEAD
+
 		return new PacienteDTO(pacienteRepository.getById(id));
-=======
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> diego
+
+
 	}
 
 	@Override
 	public List<PacienteDTO> getAll() {
-<<<<<<< HEAD
+
         List<PacienteEntity> pacienteEntities = pacienteRepository.getAll();
         List<PacienteDTO> pacienteDTOs = new ArrayList<>();
 
@@ -63,15 +63,13 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
         }
 
         return pacienteDTOs;
-=======
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> diego
+
+
 	}
 
 	@Override
 	public String delete(int id) {
-<<<<<<< HEAD
+
 		return pacienteRepository.delete(id);
 	}
 
@@ -82,16 +80,9 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		pacienteRepository.update(pacienteEntity);
 
         return pacienteDTO;
-=======
-		// TODO Auto-generated method stub
-		return null;
+
+
 	}
 
-	@Override
-	public PacienteDTO update(PacienteDTO t, int id) {
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> diego
-	}
 
 }

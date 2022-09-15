@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Repository
+//@Repository
 public class EnderecoRepository {
     private static Map<Integer, EnderecoEntity> enderecoMap = new HashMap<>();
 

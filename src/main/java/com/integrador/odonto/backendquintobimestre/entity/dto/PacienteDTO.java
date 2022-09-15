@@ -2,26 +2,33 @@ package com.integrador.odonto.backendquintobimestre.entity.dto;
 
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
-import java.time.LocalDate;
-
 public class PacienteDTO {
+	private int id;
 	private String nome;
 	private String sobreNome;
-	private Integer endereco;
+	private EnderecoDTO endereco;
 	private String rg;
-	private LocalDate dataDeAlta;
+	private String dataDeAlta;
 
+	public PacienteDTO() {
+	}
+	
 	public PacienteDTO(PacienteEntity paciente) {
+		this.id = paciente.getId();
 		this.nome = paciente.getNome();
 		this.sobreNome = paciente.getSobreNome();
-		this.endereco = paciente.getEndereco();
+		this.endereco = new EnderecoDTO(paciente.getEnderecoEntity());
 		this.rg = paciente.getRg();
 		this.dataDeAlta = paciente.getDataDeAlta();
 	}
 
-	public PacienteDTO() {
+	public int getId() {
+		return id;
 	}
-
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -38,11 +45,11 @@ public class PacienteDTO {
 		this.sobreNome = sobreNome;
 	}
 
-	public Integer getEndereco() {
+	public EnderecoDTO getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Integer endereco) {
+	public void setEndereco(EnderecoDTO endereco) {
 		this.endereco = endereco;
 	}
 
@@ -54,11 +61,10 @@ public class PacienteDTO {
 		this.rg = rg;
 	}
 
-	public LocalDate  getDataDeAlta() {
+	public String getDataDeAlta() {
 		return dataDeAlta;
 	}
-
-	public void setDataDeAlta(LocalDate  dataDeAlta) {
+	public void setDataDeAlta(String dataDeAlta) {
 		this.dataDeAlta = dataDeAlta;
 	}
 }

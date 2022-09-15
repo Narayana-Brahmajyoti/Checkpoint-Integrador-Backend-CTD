@@ -10,12 +10,10 @@ import org.springframework.stereotype.Repository;
 public interface IPacienteRepository extends JpaRepository<PacienteEntity, Integer> {
 
     //Hibernate
-//    PacienteEntity findById(int id);
-//    //PacienteEntity findAll();
-//    PacienteEntity delete(int id);
-//    PacienteEntity update(PacienteDTO pacienteDTO, int id);
-    PacienteEntity findByNome(String nome);
+     PacienteEntity findByNome(String nome);
 
     //HQL
     //@Query("From PacienteEntity p Where p.")
+
+
 }

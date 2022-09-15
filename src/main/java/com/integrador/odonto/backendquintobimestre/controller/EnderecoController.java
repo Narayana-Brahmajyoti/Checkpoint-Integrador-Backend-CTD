@@ -51,7 +51,6 @@ public class EnderecoController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-
         return enderecoService.delete(id);
     }
 
@@ -59,4 +58,6 @@ public class EnderecoController {
     public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) {
         return enderecoService.update(enderecoDTO, id);
     }
+
+
 }

@@ -68,6 +68,4 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         return consultaDTO;
     }
 
-
-
 }

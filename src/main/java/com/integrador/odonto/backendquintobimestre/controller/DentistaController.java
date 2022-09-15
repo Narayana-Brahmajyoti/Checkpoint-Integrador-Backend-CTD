@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/dentista")
 public class DentistaController {
@@ -43,4 +45,17 @@ public class DentistaController {
     public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
         return dentistaService.update(dentistaDTO, id);
     }
+
+    @GetMapping
+    public List<DentistaDTO> getAll(){
+        return dentistaService.getAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id){
+        return dentistaService.delete(id);
+    }
+
+
+
 }

@@ -14,9 +14,9 @@ import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 @Service
 public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
-    @Autowired
-    private IPacienteRepository pacienteRepository;
-	
+	@Autowired
+	private IPacienteRepository pacienteRepository;
+
 	@Override
 	public PacienteDTO create(PacienteDTO pacienteDTO) {
 		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
@@ -33,15 +33,15 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public List<PacienteDTO> getAll() {
-        List<PacienteEntity> pacienteEntities = pacienteRepository.findAll();
-        List<PacienteDTO> pacienteDTOs = new ArrayList<>();
+		List<PacienteEntity> pacienteEntities = pacienteRepository.findAll();
+		List<PacienteDTO> pacienteDTOs = new ArrayList<>();
 
-        for (PacienteEntity paciente : pacienteEntities) {
-            PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-            pacienteDTOs.add(pacienteDTO);
-        }
+		for (PacienteEntity paciente : pacienteEntities) {
+			PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+			pacienteDTOs.add(pacienteDTO);
+		}
 
-        return pacienteDTOs;
+		return pacienteDTOs;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
 		pacienteRepository.saveAndFlush(pacienteEntity);
 
-        return pacienteDTO;
+		return pacienteDTO;
 	}
 
 	public PacienteDTO getByName(String nome){

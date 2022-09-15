@@ -31,11 +31,6 @@ public class DentistaController {
     }
 
 
-    @GetMapping
-    public List<DentistaDTO> getAll(){
-        return dentistaService.getAll();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
         ResponseEntity responseEntity = null;

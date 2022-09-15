@@ -19,6 +19,10 @@ public class DentistaEntity {
     private String sobreNome;
     @Column(unique = true, nullable = false)
     private String matricula;
+
+    public DentistaEntity() {
+    }
+
     public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
         this.id = id;
         this.nome = nome;

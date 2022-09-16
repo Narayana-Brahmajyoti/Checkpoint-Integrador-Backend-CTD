@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Table(name = "Dentista")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DentistaEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //@Column (name="id", nullable = false)
     private int id;
     @Column(nullable = false)
     private String nome;
@@ -19,6 +20,10 @@ public class DentistaEntity {
     private String sobreNome;
     @Column(unique = true, nullable = false)
     private String matricula;
+
+    public DentistaEntity() {
+    }
+
     public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
         this.id = id;
         this.nome = nome;
@@ -27,6 +32,7 @@ public class DentistaEntity {
     }
 
     public DentistaEntity(DentistaDTO dentistaDTO) {
+        this.id = dentistaDTO.getId();
         this.nome = dentistaDTO.getNome();
         this.sobreNome = dentistaDTO.getSobreNome();;
         this.matricula = dentistaDTO.getMatricula();;
@@ -35,10 +41,6 @@ public class DentistaEntity {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

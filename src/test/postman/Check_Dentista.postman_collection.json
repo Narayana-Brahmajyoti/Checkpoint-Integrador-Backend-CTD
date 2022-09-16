@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\":\"teste\",\r\n    \"sobreNome\":\"abc\",\r\n    \"matricula\":\"123\"\r\n}",
+					"raw": "{\r\n    \"nome\":\"dentista2\",\r\n    \"sobreNome\":\"dentista2\",\r\n    \"matricula\":\"2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,7 +70,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\":\"teste\",\r\n    \"sobreNome\":\"abc\",\r\n    \"matricula\":\"58741\"\r\n}",
+					"raw": "{\r\n    \"nome\":\"x\",\r\n    \"sobreNome\":\"abc\",\r\n    \"matricula\":\"1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,7 +78,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/dentista/2",
+					"raw": "http://localhost:8080/dentista/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -86,7 +86,7 @@
 					"port": "8080",
 					"path": [
 						"dentista",
-						"2"
+						"1"
 					]
 				}
 			},

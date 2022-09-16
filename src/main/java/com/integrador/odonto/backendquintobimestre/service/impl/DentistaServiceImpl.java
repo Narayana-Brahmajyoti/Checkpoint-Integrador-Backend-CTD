@@ -2,7 +2,9 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 
 
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.IDentistaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
@@ -31,15 +33,14 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 
     @Override
     public DentistaDTO getById(int id) {
-        DentistaEntity dentista = dentistaRepository.findById(id).get();
-        return new DentistaDTO(dentista);
+        return new DentistaDTO(dentistaRepository.findById(id).get());
     }
 
 
 	@Override
 	public String delete(int id) {
-        dentistaRepository.deleteById(id);
-        return "Dentista deletado";
+         dentistaRepository.deleteById(id);
+         return "Dentista deletado com sucesso";
 	}
 
 	@Override
@@ -55,7 +56,6 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 
         List<DentistaEntity> dentistaEntities = dentistaRepository.findAll();
         List<DentistaDTO> dentistaDTOS = new ArrayList<>();
-
         for (DentistaEntity dentista : dentistaEntities) {
             DentistaDTO dentistaDTO = new DentistaDTO(dentista);
             dentistaDTOS.add(dentistaDTO);
@@ -64,6 +64,4 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         return dentistaDTOS;
 
     }
-
-
 }

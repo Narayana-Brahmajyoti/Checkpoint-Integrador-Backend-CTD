@@ -5,13 +5,13 @@ import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class DentistaDTO {
 
-    private Integer id;
+    private int id;
     private String nome;
     private String sobreNome;
     private String matricula;
 
     public DentistaDTO(DentistaEntity dentistaEntity) {
-        this.id =  dentistaEntity.getId();
+        this.id = dentistaEntity.getId();
         this.nome = dentistaEntity.getNome();
         this.sobreNome = dentistaEntity.getSobreNome();
         this.matricula = dentistaEntity.getMatricula();
@@ -19,6 +19,10 @@ public class DentistaDTO {
 
     public DentistaDTO() {
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome() {

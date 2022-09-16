@@ -2,6 +2,7 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.service.impl.DentistaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class DentistaController {
         return responseEntity;
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
         ResponseEntity responseEntity = null;
@@ -36,7 +38,8 @@ public class DentistaController {
         if(dentistaDTO != null){
             responseEntity = new ResponseEntity<>(dentistaDTO, HttpStatus.OK);
         }else{
-            responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
+            //responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dentista não encontrado");
         }
         return responseEntity;
     }
@@ -47,15 +50,12 @@ public class DentistaController {
     }
 
     @GetMapping
-    public List<DentistaDTO> getAll(){
+    public List<DentistaDTO> getAll() {
         return dentistaService.getAll();
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id){
+    public String delete(@PathVariable int id) {
         return dentistaService.delete(id);
     }
-
-
-
 }

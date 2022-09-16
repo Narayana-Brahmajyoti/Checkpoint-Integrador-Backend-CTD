@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Table(name = "Dentista")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DentistaEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //@Column (name="id", nullable = false)
     private int id;
     @Column(nullable = false)
     private String nome;

@@ -38,7 +38,8 @@ public class DentistaController {
         if(dentistaDTO != null){
             responseEntity = new ResponseEntity<>(dentistaDTO, HttpStatus.OK);
         }else{
-            responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
+            //responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dentista não encontrado");
         }
         return responseEntity;
     }

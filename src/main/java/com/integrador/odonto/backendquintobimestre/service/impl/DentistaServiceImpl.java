@@ -56,7 +56,6 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 
         List<DentistaEntity> dentistaEntities = dentistaRepository.findAll();
         List<DentistaDTO> dentistaDTOS = new ArrayList<>();
-
         for (DentistaEntity dentista : dentistaEntities) {
             DentistaDTO dentistaDTO = new DentistaDTO(dentista);
             dentistaDTOS.add(dentistaDTO);

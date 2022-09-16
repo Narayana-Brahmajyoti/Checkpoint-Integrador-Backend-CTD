@@ -15,7 +15,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 
 @Service
@@ -46,7 +46,11 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 	@Override
 	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
 		DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-        dentistaRepository.saveAndFlush(dentistaEntity);
+
+        if(dentistaRepository.findById(id).get() != null){
+            dentistaEntity.setId(id);
+            dentistaRepository.saveAndFlush(dentistaEntity);
+        }
 		return dentistaDTO;
 
 	}

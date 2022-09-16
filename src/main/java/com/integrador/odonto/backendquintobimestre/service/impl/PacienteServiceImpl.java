@@ -47,7 +47,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	@Override
 	public String delete(int id) {
 		pacienteRepository.deleteById(id);
-		return "Paciente deletado";
+		return "Paciente deletado com sucesso";
 	}
 
 	@Override

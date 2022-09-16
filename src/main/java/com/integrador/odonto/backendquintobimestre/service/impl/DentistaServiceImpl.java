@@ -40,14 +40,13 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 	@Override
 	public String delete(int id) {
          dentistaRepository.deleteById(id);
-         return "deletado";
+         return "Dentista deletado com sucesso";
 	}
 
 	@Override
 	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
 		DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-        //dentistaEntity = dentistaRepository.update(dentistaEntity);
-        dentistaDTO = new DentistaDTO(dentistaEntity);
+        dentistaRepository.saveAndFlush(dentistaEntity);
 		return dentistaDTO;
 
 	}

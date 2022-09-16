@@ -18,7 +18,7 @@ public class DentistaEntity {
     private String nome;
     @Column(nullable = false)
     private String sobreNome;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String matricula;
 
     public DentistaEntity() {

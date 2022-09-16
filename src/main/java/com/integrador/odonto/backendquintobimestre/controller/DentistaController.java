@@ -18,7 +18,7 @@ public class DentistaController {
     @Autowired
     private DentistaServiceImpl dentistaService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) {
         ResponseEntity responseEntity = null;
         if (dentistaDTO.getNome() != null) {
@@ -44,7 +44,7 @@ public class DentistaController {
         return responseEntity;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
         return dentistaService.update(dentistaDTO, id);
     }

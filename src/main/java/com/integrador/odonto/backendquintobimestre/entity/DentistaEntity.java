@@ -18,7 +18,7 @@ public class DentistaEntity {
     private String nome;
     @Column(nullable = false)
     private String sobreNome;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String matricula;
 
     public DentistaEntity() {
@@ -41,6 +41,10 @@ public class DentistaEntity {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

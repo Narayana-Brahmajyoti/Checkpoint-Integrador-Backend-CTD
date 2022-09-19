@@ -8,8 +8,7 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.IDentistaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +44,16 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 
 	@Override
 	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
-		DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-        dentistaRepository.saveAndFlush(dentistaEntity);
-		return dentistaDTO;
 
+        DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
+        dentistaEntity = dentistaRepository.findById(id).get();
+
+        dentistaEntity.setNome(dentistaDTO.getNome());
+        dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
+        dentistaEntity.setMatricula(dentistaDTO.getMatricula());
+        dentistaRepository.saveAndFlush(dentistaEntity);
+
+        return dentistaDTO;
 	}
 
     @Override

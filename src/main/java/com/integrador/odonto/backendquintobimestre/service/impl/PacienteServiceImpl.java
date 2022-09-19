@@ -1,6 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,17 +51,44 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public List<PacienteDTO> getAll() {
-        return null;
+		List<PacienteEntity> pacientesDB = pacienteRepository.findAll();
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		
+		for(PacienteEntity paciente : pacientesDB)
+		{
+			PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+			pacientesDTO.add(pacienteDTO);
+		}
+		
+        return pacientesDTO;
 	}
 
 	@Override
 	public String delete(int id) {
-		return "";
+		pacienteRepository.deleteById(id);
+		return "O paciente de id " + id + " foi deletado";
 	}
 
 	@Override
 	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
-		return null;
+		PacienteEntity pacienteEntity = pacienteRepository.findById(id).get();
+		EnderecoDTO enderecoDTO;
+        int idEndereco = pacienteDTO.getEndereco().getId();
+		
+		if(enderecoService.ifEnderecoExists(idEndereco)) {
+			pacienteEntity.setNome(pacienteDTO.getNome());
+			pacienteEntity.setSobreNome(pacienteDTO.getSobreNome());
+			pacienteEntity.setRg(pacienteDTO.getRg());
+			pacienteEntity.setDataDeAlta(pacienteDTO.getDataDeAlta());
+			
+			pacienteEntity.setEnderecoEntity(new EnderecoEntity(pacienteDTO.getEndereco()));			
+			pacienteRepository.saveAndFlush(pacienteEntity);
+
+        	enderecoDTO = enderecoService.getById(idEndereco);
+        	enderecoService.update(enderecoDTO, idEndereco);
+		}
+		
+		return pacienteDTO;
 	}
 
 

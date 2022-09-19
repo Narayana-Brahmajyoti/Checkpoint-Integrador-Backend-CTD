@@ -1,5 +1,6 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +33,36 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 
 	@Override
 	public List<EnderecoDTO> getAll() {
-        return null;
+		List<EnderecoEntity> enderecosDB = enderecoRepository.findAll();
+		List<EnderecoDTO> enderecosDTO = new ArrayList<>();
+		
+		for(EnderecoEntity endereco : enderecosDB)
+		{
+			EnderecoDTO enderecoDTO = new EnderecoDTO(endereco);
+			enderecosDTO.add(enderecoDTO);
+		}
+		
+        return enderecosDTO;
 	}
 
 	@Override
 	public String delete(int id) {
-        return null;
+		enderecoRepository.deleteById(id);
+        return "O endereco de id " + id + " foi deletado";
 	}
 
 	@Override
 	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
-        return null;
+		EnderecoEntity enderecoEntity = enderecoRepository.findById(id).get();
+
+		enderecoEntity.setRua(enderecoDTO.getRua());
+		enderecoEntity.setNumero(enderecoDTO.getNumero());
+		enderecoEntity.setComplemento(enderecoDTO.getComplemento());
+		enderecoEntity.setBairro(enderecoDTO.getBairro());
+		
+		enderecoRepository.saveAndFlush(enderecoEntity);
+		
+        return enderecoDTO;
 	}
 	
     public boolean ifEnderecoExists(int id) {

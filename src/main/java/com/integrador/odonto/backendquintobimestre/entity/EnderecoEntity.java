@@ -23,7 +23,6 @@ public class EnderecoEntity {
     }
 
     public EnderecoEntity(EnderecoDTO enderecoDTO) {
-        this.id = enderecoDTO.getId();
         this.rua = enderecoDTO.getRua();
         this.numero = enderecoDTO.getNumero();
         this.complemento = enderecoDTO.getComplemento();

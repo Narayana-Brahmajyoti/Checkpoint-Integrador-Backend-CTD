@@ -3,6 +3,8 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +33,8 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 
 	@Override
 	public EnderecoDTO getById(int id) {
-        return new EnderecoDTO(enderecoRepository.findById(id).get());
+		EnderecoEntity endereco = enderecoRepository.findById(id).get();
+        return new EnderecoDTO(endereco);
 	}
 
 	@Override
@@ -50,18 +53,18 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 	@Override
 	public String delete(int id) {
          enderecoRepository.deleteById(id);
-		 return "deletado";
+		 return "Endereço deletado";
 	}
 
 	@Override
 	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
-
-		//enderecoDTO.setId(id);
-
 		EnderecoEntity enderecoEntity = new EnderecoEntity(enderecoDTO);
-		//enderecoRepository.update(enderecoEntity);
-
+		if(enderecoRepository.findById(id).get() != null){
+			enderecoEntity.setId(id);
+			enderecoRepository.saveAndFlush(enderecoEntity);
+		}
         return enderecoDTO;
 	}
+
 
 }

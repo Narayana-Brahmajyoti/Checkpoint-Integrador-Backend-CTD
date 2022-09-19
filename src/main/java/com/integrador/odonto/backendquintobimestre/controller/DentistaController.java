@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class DentistaController {
     private DentistaServiceImpl dentistaService;
 
     @PostMapping("/create")
+    @Transactional
     public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) {
         ResponseEntity responseEntity = null;
         if (dentistaDTO.getNome() != null) {
@@ -31,7 +33,7 @@ public class DentistaController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
         ResponseEntity responseEntity = null;
         DentistaDTO dentistaDTO = dentistaService.getById(id);
@@ -45,16 +47,17 @@ public class DentistaController {
     }
 
     @PutMapping("/update/{id}")
+    @Transactional
     public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
         return dentistaService.update(dentistaDTO, id);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<DentistaDTO> getAll() {
         return dentistaService.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         return dentistaService.delete(id);
     }

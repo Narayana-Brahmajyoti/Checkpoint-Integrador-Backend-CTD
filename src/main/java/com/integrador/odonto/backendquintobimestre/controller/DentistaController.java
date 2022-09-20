@@ -27,7 +27,7 @@ public class DentistaController {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
             responseEntity = new ResponseEntity<>(dentistaDTO1, HttpStatus.OK);
         } else {
-            responseEntity = new ResponseEntity<>("Dentista nao criado", HttpStatus.BAD_REQUEST);
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dentista nao criado");
         }
         return responseEntity;
     }
@@ -38,9 +38,8 @@ public class DentistaController {
         ResponseEntity responseEntity = null;
         DentistaDTO dentistaDTO = dentistaService.getById(id);
         if(dentistaDTO != null){
-            responseEntity = new ResponseEntity<>(dentistaDTO, HttpStatus.OK);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(dentistaDTO);
         }else{
-            //responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
             responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dentista não encontrado");
         }
         return responseEntity;

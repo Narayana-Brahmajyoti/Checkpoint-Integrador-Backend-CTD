@@ -12,24 +12,24 @@ import javax.persistence.*;
 public class DentistaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //@Column (name="id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
     private String sobreNome;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String matricula;
 
     public DentistaEntity() {
     }
 
-    public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
+    /*public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
         this.id = id;
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.matricula = matricula;
-    }
+    }*/
 
     public DentistaEntity(DentistaDTO dentistaDTO) {
         this.id = dentistaDTO.getId();
@@ -43,9 +43,9 @@ public class DentistaEntity {
         return id;
     }
 
-    public void setId(int id) {
+    /*public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public String getNome() {
         return nome;

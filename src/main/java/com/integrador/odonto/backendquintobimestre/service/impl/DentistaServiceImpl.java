@@ -45,7 +45,7 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 	@Override
 	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
 
-        DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
+        DentistaEntity dentistaEntity; //= new DentistaEntity(dentistaDTO);
         dentistaEntity = dentistaRepository.findById(id).get();
 
         dentistaEntity.setNome(dentistaDTO.getNome());

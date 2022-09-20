@@ -16,7 +16,7 @@ public class PacienteController {
     @Autowired
     private PacienteServiceImpl pacienteService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) {
         ResponseEntity responseEntity = null;
         
@@ -32,22 +32,22 @@ public class PacienteController {
     	return responseEntity;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public PacienteDTO getById(@PathVariable int id) {
         return pacienteService.getById(id);
     }
-    
-    @GetMapping
+
+    @GetMapping("/getAll")
     public List<PacienteDTO> getAll() {
         return pacienteService.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         return pacienteService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) {
         return pacienteService.update(pacienteDTO, id);
     }

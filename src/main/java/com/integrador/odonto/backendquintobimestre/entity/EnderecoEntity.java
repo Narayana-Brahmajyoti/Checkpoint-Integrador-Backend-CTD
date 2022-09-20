@@ -33,9 +33,9 @@ public class EnderecoEntity {
     public int getId() {
         return id;
     }
-    /*public void setId(int id) {
+    public void setId(int id) {
         this.id = id;
-    }*/
+    }
 
     public String getRua() {
         return rua;

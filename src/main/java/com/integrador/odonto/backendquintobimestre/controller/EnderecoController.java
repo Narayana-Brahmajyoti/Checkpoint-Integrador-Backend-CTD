@@ -23,7 +23,7 @@ public class EnderecoController {
     @Autowired
     private EnderecoServiceImpl enderecoService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<EnderecoDTO> create(@RequestBody EnderecoDTO enderecoDTO) {
         ResponseEntity responseEntity = null;
         
@@ -39,22 +39,22 @@ public class EnderecoController {
     	return responseEntity;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public EnderecoDTO getById(@PathVariable int id) {
         return enderecoService.getById(id);
     }
     
-    @GetMapping
+    @GetMapping("/getAll")
     public List<EnderecoDTO> getAll() {
         return enderecoService.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         return enderecoService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) {
         return enderecoService.update(enderecoDTO, id);
     }

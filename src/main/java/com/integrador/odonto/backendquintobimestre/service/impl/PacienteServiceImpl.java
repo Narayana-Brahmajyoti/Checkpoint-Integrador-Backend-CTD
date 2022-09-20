@@ -1,9 +1,9 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,6 @@ import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
 @Service
@@ -30,9 +29,8 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
         if (enderecoService.ifEnderecoExists(idEndereco)) 
             enderecoService.update(enderecoDTO, idEndereco);
-        else 
-        	enderecoDTO = enderecoService.create(enderecoDTO);
-        
+        /*else 
+        	enderecoService.create(enderecoDTO);*/
         
     	pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
     	
@@ -92,5 +90,9 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		return pacienteDTO;
 	}
 
-
+	public PacienteDTO getByName(String nome){
+		PacienteEntity paciente = pacienteRepository.findByNome(nome);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
 }

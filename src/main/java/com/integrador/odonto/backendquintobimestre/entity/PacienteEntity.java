@@ -6,7 +6,6 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
 import javax.persistence.*;
 
-
 	@Entity
 	@Table(name = "PACIENTE")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

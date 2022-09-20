@@ -9,7 +9,7 @@ public class PacienteDTO {
 	private EnderecoDTO endereco;
 	private String rg;
 	private String dataDeAlta;
-
+	
 	public PacienteDTO() {
 	}
 	
@@ -25,10 +25,7 @@ public class PacienteDTO {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	public String getNome() {
 		return nome;
 	}

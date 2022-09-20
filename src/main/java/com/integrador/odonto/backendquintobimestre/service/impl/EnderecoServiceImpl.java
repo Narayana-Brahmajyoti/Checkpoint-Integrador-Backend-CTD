@@ -11,6 +11,7 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.repository.IEnderecoRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
+
 @Service
 public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
     @Autowired

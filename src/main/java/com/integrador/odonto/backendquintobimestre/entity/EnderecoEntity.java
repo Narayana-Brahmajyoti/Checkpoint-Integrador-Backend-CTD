@@ -30,9 +30,9 @@ public class EnderecoEntity {
         this.bairro = enderecoDTO.getBairro();
     }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
     public String getRua() {
         return rua;

@@ -5,14 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.service.impl.PacienteServiceImpl;
@@ -23,7 +16,7 @@ public class PacienteController {
     @Autowired
     private PacienteServiceImpl pacienteService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) {
         ResponseEntity responseEntity = null;
         
@@ -39,24 +32,30 @@ public class PacienteController {
     	return responseEntity;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public PacienteDTO getById(@PathVariable int id) {
         return pacienteService.getById(id);
     }
-    
-    @GetMapping
+
+    @GetMapping("/getAll")
     public List<PacienteDTO> getAll() {
         return pacienteService.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         return pacienteService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) {
         return pacienteService.update(pacienteDTO, id);
     }
+
+    @GetMapping("/getByName")
+    public PacienteDTO getByName(@RequestParam(value = "nome") String nome ) {
+        return pacienteService.getByName(nome);
+    }
+
 
 }

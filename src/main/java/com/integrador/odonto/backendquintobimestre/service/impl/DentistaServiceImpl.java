@@ -48,26 +48,27 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 
         DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
         dentistaEntity = dentistaRepository.findById(id).get();
-
         dentistaEntity.setNome(dentistaDTO.getNome());
         dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
         dentistaEntity.setMatricula(dentistaDTO.getMatricula());
         dentistaRepository.saveAndFlush(dentistaEntity);
-
         return dentistaDTO;
 	}
 
     @Override
     public List<DentistaDTO> getAll() {
-
         List<DentistaEntity> dentistaEntities = dentistaRepository.findAll();
         List<DentistaDTO> dentistaDTOS = new ArrayList<>();
         for (DentistaEntity dentista : dentistaEntities) {
             DentistaDTO dentistaDTO = new DentistaDTO(dentista);
             dentistaDTOS.add(dentistaDTO);
         }
-
         return dentistaDTOS;
+    }
 
+    public DentistaDTO getByName(String nome){
+        DentistaEntity dentista = dentistaRepository.findByNome(nome);
+        DentistaDTO dentistaDTO = new DentistaDTO(dentista);
+        return dentistaDTO;
     }
 }

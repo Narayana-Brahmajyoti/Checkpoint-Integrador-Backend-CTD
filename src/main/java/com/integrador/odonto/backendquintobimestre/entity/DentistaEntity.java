@@ -1,29 +1,13 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 
-import javax.persistence.*;
-
-
-@Entity
-@Table(name = "DENTISTA")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DentistaEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false)
     private String nome;
-<<<<<<< HEAD
     private String sobreNome;
-=======
-    @Column(nullable = false)
-    private String sobreNome;
-    @Column(nullable = false)
->>>>>>> diego
     private String matricula;
-
 
     public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
         this.id = id;

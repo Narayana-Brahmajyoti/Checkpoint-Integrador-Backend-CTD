@@ -95,4 +95,22 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
 		return pacienteDTO;
 	}
+
+	public PacienteDTO getBySurname(String sobrenome){
+		PacienteEntity paciente = pacienteRepository.findBySobrenome(sobrenome);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
+
+	public PacienteDTO getByRg(String rg){
+		PacienteEntity paciente = pacienteRepository.findByRg(rg);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
+
+	public PacienteDTO getByDataDeAlta(String dataDeAlta){
+		PacienteEntity paciente = pacienteRepository.findByDataDeAlta(dataDeAlta);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
 }

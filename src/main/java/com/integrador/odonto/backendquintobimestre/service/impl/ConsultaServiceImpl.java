@@ -1,9 +1,12 @@
 package com.integrador.odonto.backendquintobimestre.service.impl;
 
 import com.integrador.odonto.backendquintobimestre.entity.ConsultaEntity;
+import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.repository.IConsultaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +21,42 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
     @Autowired
     private IConsultaRepository consultaRepository;
 
+    @Autowired
+    private PacienteServiceImpl pacienteService;
+
+    @Autowired
+    private DentistaServiceImpl dentistaService;
+
     @Override
-    public ConsultaDTO create(ConsultaDTO consultaDTO) {
+    public ConsultaDTO create(ConsultaDTO consultaDTO) throws NotFoundException {
         ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO);
-        consultaEntity = consultaRepository.save(consultaEntity);
+        PacienteDTO pacienteDTO;
+        DentistaDTO dentistaDTO;
+
+        int idPaciente = consultaEntity.getPaciente().getId();
+        int idDentista = consultaEntity.getDentista().getId();
+
+        if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista)) {
+            pacienteDTO = pacienteService.getById(idPaciente);
+            dentistaDTO = dentistaService.getById(idDentista);
+            PacienteEntity paciente = new PacienteEntity(pacienteDTO);
+            DentistaEntity dentista = new DentistaEntity(dentistaDTO);
+            consultaEntity.setPaciente(paciente);
+            consultaEntity.setDentista(dentista);
+            consultaEntity = consultaRepository.save(consultaEntity);
+
+        }
         consultaDTO = new ConsultaDTO(consultaEntity);
         return consultaDTO;
     }
 
     @Override
-    public ConsultaDTO getById(int id) {
-        ConsultaEntity consulta = consultaRepository.findById(id).get();
-        return new ConsultaDTO(consulta);
+    public ConsultaDTO getById(int id) throws NotFoundException {
+        ConsultaEntity consultaEntity = consultaRepository.findById(id).orElseThrow(() -> new NotFoundException("Consulta não encontrada com o id: " + id));
+        ConsultaDTO consultaDTO = new ConsultaDTO(consultaEntity);
+        return consultaDTO;
+
+        //return new ConsultaDTO(consultaRepository.findById(id).orElseThrow(() -> new NotFoundException("Consulta não encontrada com o id: " + id)));
     }
 
     @Override

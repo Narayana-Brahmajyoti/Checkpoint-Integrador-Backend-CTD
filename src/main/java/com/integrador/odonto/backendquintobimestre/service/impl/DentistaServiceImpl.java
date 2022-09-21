@@ -71,4 +71,8 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         DentistaDTO dentistaDTO = new DentistaDTO(dentista);
         return dentistaDTO;
     }
+
+    public boolean ifDentistaExists(int id){
+        return dentistaRepository.existsById(id);
+    }
 }

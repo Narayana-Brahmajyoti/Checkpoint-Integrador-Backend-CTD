@@ -2,9 +2,9 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 
 
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
+import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
-import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
-import com.integrador.odonto.backendquintobimestre.exception.UniqueIndexException;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.repository.IDentistaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
@@ -24,50 +24,37 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     private IDentistaRepository dentistaRepository;
 
     @Override
-    public DentistaDTO create(DentistaDTO dentistaDTO) throws UniqueIndexException {
+    public DentistaDTO create(DentistaDTO dentistaDTO) {
         DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-        String matricula = dentistaDTO.getMatricula();
-        String matriculaBD = String.valueOf(dentistaRepository.findByMatricula(matricula));
-        if(!matricula.equalsIgnoreCase(matriculaBD))
-            try {
-                dentistaEntity = dentistaRepository.save(dentistaEntity);
-            } catch (Exception ex){
-                throw new UniqueIndexException("Matricula " + matricula + " já cadastrada no sistema");
-            }
-
+        dentistaEntity = dentistaRepository.save(dentistaEntity);
         dentistaDTO = new DentistaDTO(dentistaEntity);
         return dentistaDTO;
     }
 
     @Override
-    public DentistaDTO getById(int id) throws NotFoundException {
-        return new DentistaDTO(dentistaRepository.findById(id).orElseThrow(() -> new NotFoundException("Dentista não encontrado com o id: " + id)));
+    public DentistaDTO getById(int id) {
+        return new DentistaDTO(dentistaRepository.findById(id).get());
     }
 
 
 	@Override
-	public String delete(int id) throws NotFoundException {
-        try{
-            dentistaRepository.deleteById(id);
-            return "Dentista de id " + id + " foi deletado";
-        } catch (Exception ex){
-            throw new NotFoundException("Não foi possível deletar dentista de id: " + id + ", id inexistente");
-        }
+	public String delete(int id) {
+         dentistaRepository.deleteById(id);
+         return "Dentista deletado com sucesso";
 	}
 
 	@Override
-	public DentistaDTO update(DentistaDTO dentistaDTO, int id) throws NotFoundException {
+	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
 
-            DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-            dentistaEntity = dentistaRepository.findById(id).orElseThrow(() -> new NotFoundException("Dentista não encontrado com o id: " + id));
+        DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
+        dentistaEntity = dentistaRepository.findById(id).get();
 
-            dentistaEntity.setNome(dentistaDTO.getNome());
-            dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
-            dentistaEntity.setMatricula(dentistaDTO.getMatricula());
-            dentistaEntity = dentistaRepository.saveAndFlush(dentistaEntity);
+        dentistaEntity.setNome(dentistaDTO.getNome());
+        dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
+        dentistaEntity.setMatricula(dentistaDTO.getMatricula());
+        dentistaRepository.saveAndFlush(dentistaEntity);
 
-        DentistaDTO dentistaDTO1 = new DentistaDTO(dentistaEntity);
-        return dentistaDTO1;
+        return dentistaDTO;
 	}
 
     @Override
@@ -83,9 +70,4 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         return dentistaDTOS;
 
     }
-
-    public boolean ifDentistaExists(int id){
-        return dentistaRepository.existsById(id);
-    }
 }
-

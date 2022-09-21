@@ -26,7 +26,8 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     @Override
     public DentistaDTO create(DentistaDTO dentistaDTO) {
         DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-        dentistaRepository.save(dentistaEntity);
+        dentistaEntity = dentistaRepository.save(dentistaEntity);
+        dentistaDTO = new DentistaDTO(dentistaEntity);
         return dentistaDTO;
     }
 

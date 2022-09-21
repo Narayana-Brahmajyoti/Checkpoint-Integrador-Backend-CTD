@@ -7,34 +7,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
 import com.integrador.odonto.backendquintobimestre.service.impl.PacienteServiceImpl;
+import com.integrador.odonto.backendquintobimestre.validation.ValidationPaciente;
 
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
     @Autowired
     private PacienteServiceImpl pacienteService;
+    
+    ValidationPaciente validationPaciente = new ValidationPaciente();
 
     @PostMapping("/create")
-    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) {
+    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) throws VariableNullException {
         ResponseEntity responseEntity = null;
+
+        Boolean erro = validationPaciente.validationPacienteVariables(pacienteDTO);
         
-    	if(pacienteDTO.getNome() != null){
-    		PacienteDTO enderecoDTO2 = pacienteService.create(pacienteDTO);
-            responseEntity = new ResponseEntity<>(enderecoDTO2, HttpStatus.OK);
-    	}
-    	else
-    	{
-            responseEntity = new ResponseEntity<>("Nome não preenchido", HttpStatus.BAD_REQUEST);
-    	}
-    	
-    	return responseEntity;
+        if (erro) {
+        	PacienteDTO pacienteDTO1 = pacienteService.create(pacienteDTO);
+            responseEntity = new ResponseEntity<>(pacienteDTO1, HttpStatus.OK);
+        }
+
+        return responseEntity;
     }
 
     @GetMapping("/getById/{id}")
-    public PacienteDTO getById(@PathVariable int id) {
-        return pacienteService.getById(id);
+    public ResponseEntity<PacienteDTO> getById(@PathVariable int id) throws NotFoundException {
+    	return new ResponseEntity<>(pacienteService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping("/getAll")

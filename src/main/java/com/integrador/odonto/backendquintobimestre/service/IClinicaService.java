@@ -2,9 +2,11 @@ package com.integrador.odonto.backendquintobimestre.service;
 
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+
 public interface IClinicaService<T> {
     T create(T t);
-    T getById(int id);
+    T getById(int id) throws NotFoundException;
     List<T> getAll();
     String delete(int id);
 

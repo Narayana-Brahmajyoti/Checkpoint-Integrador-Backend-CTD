@@ -57,5 +57,19 @@ public class PacienteController {
         return pacienteService.getByName(nome);
     }
 
+    @GetMapping("/getBySurname")
+    public PacienteDTO getBySurname(@RequestParam(value = "sobrenome") String sobrenome ) {
+        return pacienteService.getBySurname(sobrenome);
+    }
+
+    @GetMapping("/getByRg")
+    public PacienteDTO getByRg(@RequestParam(value = "rg") String rg ) {
+        return pacienteService.getByRg(rg);
+    }
+
+    @GetMapping("/getByDataDeAlta")
+    public PacienteDTO getByDataDeAlta(@RequestParam(value = "dataDeAlta") String dataDeAlta ) {
+        return pacienteService.getByDataDeAlta(dataDeAlta);
+    }
 
 }

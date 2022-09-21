@@ -31,15 +31,15 @@ import javax.persistence.*;
 			
 		}
 		
-		public PacienteEntity(PacienteDTO paciente) {
-			this.id = paciente.getId();
-			this.nome = paciente.getNome();
-			this.sobreNome = paciente.getSobreNome();
-			this.enderecoEntity = new EnderecoEntity(paciente.getEndereco());
-			this.rg = paciente.getRg();
-			this.dataDeAlta = paciente.getDataDeAlta();
+		public PacienteEntity(PacienteDTO pacienteDTO) {
+			this.id = pacienteDTO.getId();
+			this.nome = pacienteDTO.getNome();
+			this.sobreNome = pacienteDTO.getSobreNome();
+			this.enderecoEntity = new EnderecoEntity(pacienteDTO.getEndereco());
+			this.rg = pacienteDTO.getRg();
+			this.dataDeAlta = pacienteDTO.getDataDeAlta();
 		}
-		
+
 		public int getId() {
 			return id;
 		}

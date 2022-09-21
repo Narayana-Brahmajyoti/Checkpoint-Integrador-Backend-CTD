@@ -114,4 +114,8 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
 		return pacienteDTO;
 	}
+
+	public boolean ifPacienteExists(int id){
+		return pacienteRepository.existsById(id);
+	}
 }

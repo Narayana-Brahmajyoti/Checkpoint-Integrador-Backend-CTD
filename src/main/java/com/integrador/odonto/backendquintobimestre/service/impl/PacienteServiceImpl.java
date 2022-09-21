@@ -7,6 +7,7 @@ import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
@@ -42,8 +43,8 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	}
 
 	@Override
-	public PacienteDTO getById(int id) {
-        PacienteEntity pacienteEntity = pacienteRepository.findById(id).get();
+	public PacienteDTO getById(int id) throws NotFoundException {
+        PacienteEntity pacienteEntity = pacienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Paciente não encontrado com o id: " + id));;
         PacienteDTO pacienteDTO = new PacienteDTO(pacienteEntity);
         return pacienteDTO;
 	}
@@ -92,6 +93,24 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	public PacienteDTO getByName(String nome){
 		PacienteEntity paciente = pacienteRepository.findByNome(nome);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
+
+	public PacienteDTO getBySurname(String sobrenome){
+		PacienteEntity paciente = pacienteRepository.findBySobrenome(sobrenome);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
+
+	public PacienteDTO getByRg(String rg){
+		PacienteEntity paciente = pacienteRepository.findByRg(rg);
+		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
+		return pacienteDTO;
+	}
+
+	public PacienteDTO getByDataDeAlta(String dataDeAlta){
+		PacienteEntity paciente = pacienteRepository.findByDataDeAlta(dataDeAlta);
 		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
 		return pacienteDTO;
 	}

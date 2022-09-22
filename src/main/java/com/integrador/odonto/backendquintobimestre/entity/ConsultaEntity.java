@@ -30,10 +30,10 @@ public class ConsultaEntity {
     @Column(nullable = false, unique = true)
     private Calendar dataHoraConsulta;
 
-    public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO) {
+    public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO) {
         this.id = consultaDTO.getId();
-        this.paciente = new PacienteEntity(consultaDTO.getPaciente(), enderecoDTO);
-        this.dentista = new DentistaEntity(consultaDTO.getDentista());
+        this.paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
+        this.dentista = new DentistaEntity(dentistaDTO);
         this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
     }
 

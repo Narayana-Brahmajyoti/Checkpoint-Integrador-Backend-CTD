@@ -49,7 +49,7 @@ public class ConsultaController {
     }
 
     @PutMapping("/update/{id}")
-    public ConsultaDTO update(@RequestBody ConsultaDTO consultaDTO, @PathVariable Integer id) {
+    public ConsultaDTO update(@RequestBody ConsultaDTO consultaDTO, @PathVariable Integer id) throws NotFoundException {
         return consultaService.update(consultaDTO, id);
     }
 

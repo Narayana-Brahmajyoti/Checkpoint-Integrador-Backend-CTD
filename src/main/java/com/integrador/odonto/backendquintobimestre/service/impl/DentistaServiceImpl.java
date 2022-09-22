@@ -5,6 +5,7 @@ import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.repository.IDentistaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 
@@ -24,7 +25,7 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     private IDentistaRepository dentistaRepository;
 
     @Override
-    public DentistaDTO create(DentistaDTO dentistaDTO) {
+    public DentistaDTO create(DentistaDTO dentistaDTO) throws NotFoundException {
         DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
         dentistaEntity = dentistaRepository.save(dentistaEntity);
         dentistaDTO = new DentistaDTO(dentistaEntity);
@@ -32,7 +33,7 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     }
 
     @Override
-    public DentistaDTO getById(int id) {
+    public DentistaDTO getById(int id) throws NotFoundException {
         return new DentistaDTO(dentistaRepository.findById(id).get());
     }
 
@@ -46,14 +47,18 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
 	@Override
 	public DentistaDTO update(DentistaDTO dentistaDTO, int id) {
 
-        DentistaEntity dentistaEntity; //= new DentistaEntity(dentistaDTO);
-        dentistaEntity = dentistaRepository.findById(id).get();
-        dentistaEntity.setNome(dentistaDTO.getNome());
-        dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
-        dentistaEntity.setMatricula(dentistaDTO.getMatricula());
-        dentistaRepository.saveAndFlush(dentistaEntity);
+        DentistaEntity dentistaEntity = null;
+
+        if(ifDentistaExists(id)){
+            dentistaEntity = dentistaRepository.findById(id).get();
+            dentistaEntity.setNome(dentistaDTO.getNome());
+            dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
+            dentistaEntity.setMatricula(dentistaDTO.getMatricula());
+            dentistaRepository.saveAndFlush(dentistaEntity);
+            return dentistaDTO;
+        }
         return dentistaDTO;
-	}
+    }
 
     @Override
     public List<DentistaDTO> getAll() {

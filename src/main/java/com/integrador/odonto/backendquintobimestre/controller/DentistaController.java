@@ -3,6 +3,7 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.service.impl.DentistaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class DentistaController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) {
+    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) throws NotFoundException {
         ResponseEntity responseEntity = null;
         if (dentistaDTO.getNome() != null) {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
@@ -34,7 +35,7 @@ public class DentistaController {
 
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
+    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) throws NotFoundException {
         ResponseEntity responseEntity = null;
         DentistaDTO dentistaDTO = dentistaService.getById(id);
         if(dentistaDTO != null){

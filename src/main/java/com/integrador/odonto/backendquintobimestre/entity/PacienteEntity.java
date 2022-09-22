@@ -2,6 +2,7 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
 import javax.persistence.*;
@@ -31,11 +32,12 @@ import javax.persistence.*;
 			
 		}
 		
-		public PacienteEntity(PacienteDTO pacienteDTO) {
+		public PacienteEntity(PacienteDTO pacienteDTO, EnderecoDTO endereco) {
 			this.id = pacienteDTO.getId();
 			this.nome = pacienteDTO.getNome();
 			this.sobreNome = pacienteDTO.getSobreNome();
-			this.enderecoEntity = new EnderecoEntity(pacienteDTO.getEndereco());
+			//this.enderecoEntity = new EnderecoEntity(pacienteDTO.getEndereco());
+			this.enderecoEntity = new EnderecoEntity(endereco);
 			this.rg = pacienteDTO.getRg();
 			this.dataDeAlta = pacienteDTO.getDataDeAlta();
 		}

@@ -3,8 +3,6 @@ package com.integrador.odonto.backendquintobimestre.controller;
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.service.impl.ConsultaServiceImpl;
-import com.integrador.odonto.backendquintobimestre.validation.ValidationDentista;
-import com.integrador.odonto.backendquintobimestre.validation.ValidationPaciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +35,7 @@ public class ConsultaController {
     @GetMapping("/getById/{id}")
     public ResponseEntity<ConsultaDTO> getById(@PathVariable int id) throws NotFoundException {
         return new ResponseEntity<>(consultaService.getById(id), HttpStatus.OK);
+
     }
 
     @GetMapping("/getAll")

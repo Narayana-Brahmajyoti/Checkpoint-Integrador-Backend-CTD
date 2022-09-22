@@ -24,16 +24,16 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	
 	@Override
 	public PacienteDTO create(PacienteDTO pacienteDTO) {
-        PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO);
-        int idEndereco = pacienteEntity.getEnderecoEntity().getId();
-        EnderecoDTO enderecoDTO = pacienteDTO.getEndereco();
+		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
+        PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO, enderecoDTO);
+        int idEndereco = pacienteDTO.getIdEndereco();
 
-        if (enderecoService.ifEnderecoExists(idEndereco)) 
+        /*if (enderecoService.ifEnderecoExists(idEndereco)) 
             enderecoService.update(enderecoDTO, idEndereco);
-        /*else 
+        else 
         	enderecoService.create(enderecoDTO);*/
         
-    	pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
+    	//pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
     	
         pacienteEntity = pacienteRepository.save(pacienteEntity);
 
@@ -72,8 +72,8 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	@Override
 	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
 		PacienteEntity pacienteEntity = pacienteRepository.findById(id).get();
-		EnderecoDTO enderecoDTO;
-        int idEndereco = pacienteDTO.getEndereco().getId();
+		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
+        int idEndereco = pacienteDTO.getIdEndereco();
 		
 		if(enderecoService.ifEnderecoExists(idEndereco)) {
 			pacienteEntity.setNome(pacienteDTO.getNome());
@@ -81,11 +81,11 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 			pacienteEntity.setRg(pacienteDTO.getRg());
 			pacienteEntity.setDataDeAlta(pacienteDTO.getDataDeAlta());
 			
-			pacienteEntity.setEnderecoEntity(new EnderecoEntity(pacienteDTO.getEndereco()));			
+			pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));			
 			pacienteRepository.saveAndFlush(pacienteEntity);
 
-        	enderecoDTO = enderecoService.getById(idEndereco);
-        	enderecoService.update(enderecoDTO, idEndereco);
+        	//enderecoDTO = enderecoService.getById(idEndereco);
+        	//enderecoService.update(enderecoDTO, idEndereco);
 		}
 		
 		return pacienteDTO;

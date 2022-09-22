@@ -2,6 +2,7 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,9 +30,9 @@ public class ConsultaEntity {
     @Column(nullable = false, unique = true)
     private Calendar dataHoraConsulta;
 
-    public ConsultaEntity(ConsultaDTO consultaDTO) {
+    public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO) {
         this.id = consultaDTO.getId();
-        this.paciente = new PacienteEntity(consultaDTO.getPaciente());
+        this.paciente = new PacienteEntity(consultaDTO.getPaciente(), enderecoDTO);
         this.dentista = new DentistaEntity(consultaDTO.getDentista());
         this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
     }

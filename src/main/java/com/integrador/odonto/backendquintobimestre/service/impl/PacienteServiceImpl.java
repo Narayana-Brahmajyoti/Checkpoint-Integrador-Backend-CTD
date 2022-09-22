@@ -44,7 +44,7 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public PacienteDTO getById(int id) throws NotFoundException {
-        PacienteEntity pacienteEntity = pacienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Paciente não encontrado com o id: " + id));;
+        PacienteEntity pacienteEntity = pacienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Paciente não encontrado com o id: " + id));
         PacienteDTO pacienteDTO = new PacienteDTO(pacienteEntity);
         return pacienteDTO;
 	}

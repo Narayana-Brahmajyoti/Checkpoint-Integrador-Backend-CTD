@@ -17,7 +17,7 @@ public class ConsultaEntity {
     private Integer id;
 
     //@OneToOne
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPaciente")
     private PacienteEntity paciente;
 
@@ -34,6 +34,9 @@ public class ConsultaEntity {
         this.paciente = new PacienteEntity(consultaDTO.getPaciente());
         this.dentista = new DentistaEntity(consultaDTO.getDentista());
         this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
+    }
+
+    public ConsultaEntity() {
     }
 
     public Integer getId() {

@@ -51,14 +51,15 @@ public class UserEntity implements UserDetails {
         return Collections.singleton(grantedAuthority);
     }
 
+
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override

@@ -56,22 +56,22 @@ public class PacienteController {
     }
 
     @GetMapping("/getByName")
-    public PacienteDTO getByName(@RequestParam(value = "nome") String nome ) {
+    public List<PacienteDTO> getByName(@RequestParam(value = "nome") String nome ) {
         return pacienteService.getByName(nome);
     }
 
     @GetMapping("/getBySurname")
-    public PacienteDTO getBySurname(@RequestParam(value = "sobrenome") String sobrenome ) {
+    public List<PacienteDTO> getBySurname(@RequestParam(value = "sobrenome") String sobrenome ) {
         return pacienteService.getBySurname(sobrenome);
     }
 
     @GetMapping("/getByRg")
-    public PacienteDTO getByRg(@RequestParam(value = "rg") String rg ) {
+    public List<PacienteDTO> getByRg(@RequestParam(value = "rg") String rg ) {
         return pacienteService.getByRg(rg);
     }
 
     @GetMapping("/getByDataDeAlta")
-    public PacienteDTO getByDataDeAlta(@RequestParam(value = "dataDeAlta") String dataDeAlta ) {
+    public List<PacienteDTO> getByDataDeAlta(@RequestParam(value = "dataDeAlta") String dataDeAlta ) {
         return pacienteService.getByDataDeAlta(dataDeAlta);
     }
 

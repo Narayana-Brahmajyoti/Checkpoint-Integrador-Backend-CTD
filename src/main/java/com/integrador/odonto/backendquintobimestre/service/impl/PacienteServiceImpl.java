@@ -91,28 +91,40 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 		return pacienteDTO;
 	}
 
-	public PacienteDTO getByName(String nome){
-		PacienteEntity paciente = pacienteRepository.findByNome(nome);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getByName(String nome){
+		List<PacienteEntity> pacientes = pacienteRepository.findByNome(nome);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
-	public PacienteDTO getBySurname(String sobrenome){
-		PacienteEntity paciente = pacienteRepository.findBySobrenome(sobrenome);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getBySurname(String sobrenome){
+		List<PacienteEntity> pacientes = pacienteRepository.findBySobrenome(sobrenome);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
-	public PacienteDTO getByRg(String rg){
-		PacienteEntity paciente = pacienteRepository.findByRg(rg);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getByRg(String rg){
+		List<PacienteEntity> pacientes = pacienteRepository.findByRg(rg);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
-	public PacienteDTO getByDataDeAlta(String dataDeAlta){
-		PacienteEntity paciente = pacienteRepository.findByDataDeAlta(dataDeAlta);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getByDataDeAlta(String dataDeAlta){
+		List<PacienteEntity> pacientes = pacienteRepository.findByDataDeAlta(dataDeAlta);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
 	public boolean ifPacienteExists(int id){

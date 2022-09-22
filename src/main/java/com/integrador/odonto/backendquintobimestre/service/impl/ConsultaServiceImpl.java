@@ -52,29 +52,25 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
     @Override
     public ConsultaDTO getById(int id) throws NotFoundException {
-        ConsultaEntity consultaEntity = consultaRepository.findById(id).orElseThrow(() -> new NotFoundException("Consulta não encontrada com o id: " + id));
-        ConsultaDTO consultaDTO = new ConsultaDTO(consultaEntity);
-        return consultaDTO;
-
-        //return new ConsultaDTO(consultaRepository.findById(id).orElseThrow(() -> new NotFoundException("Consulta não encontrada com o id: " + id)));
+        return new ConsultaDTO(consultaRepository.findById(id).orElseThrow(() -> new NotFoundException("Consulta não encontrada com o id: " + id)));
     }
 
     @Override
     public List<ConsultaDTO> getAll() {
-        List<ConsultaEntity> consultaEntities = consultaRepository.findAll();
-        List<ConsultaDTO> consultaDTOs = new ArrayList<>();
+        List<ConsultaDTO> consultaDTOS = new ArrayList<>();
 
-        for (ConsultaEntity consulta : consultaEntities) {
+        for (ConsultaEntity consulta : consultaRepository.findAll()) {
             ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
-            consultaDTOs.add(consultaDTO);
+            consultaDTOS.add(consultaDTO);
         }
 
-        return consultaDTOs;
+        return consultaDTOS;
     }
 
     @Override
     public String delete(int id) {
-        return  "Consulta deletada";
+        consultaRepository.deleteById(id);
+        return   "A consulta de id " + id + " foi deletada com sucesso";
     }
 
     @Override

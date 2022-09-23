@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "f7a8994b-bc9f-4bd4-8d7e-f43ba3714076",
+		"name": "Check_Dentista",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20400495"
+	},
+	"item": [
+		{
+			"name": "Create Dentist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"dentista2\",\r\n    \"sobreNome\":\"dentista2\",\r\n    \"matricula\":\"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dentista",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dentista"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Dentist",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"teste\",\r\n    \"sobreNome\":\"abc\",\r\n    \"matricula\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dentista/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dentista",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Dentist",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"x\",\r\n    \"sobreNome\":\"abc\",\r\n    \"matricula\":\"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dentista/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dentista",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Dentist By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/dentista/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dentista",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Dentist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/dentista",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dentista"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

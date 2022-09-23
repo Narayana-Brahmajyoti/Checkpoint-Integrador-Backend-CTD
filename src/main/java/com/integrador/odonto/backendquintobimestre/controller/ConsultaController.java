@@ -1,6 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.service.impl.ConsultaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,35 +16,40 @@ public class ConsultaController {
 
     @Autowired
     private ConsultaServiceImpl consultaService;
-    @PostMapping
-    public ResponseEntity<ConsultaDTO> create (@RequestBody ConsultaDTO consultaDTO) {
+
+
+    @PostMapping("/create")
+    public ResponseEntity<ConsultaDTO> create (@RequestBody ConsultaDTO consultaDTO) throws NotFoundException{
         ResponseEntity responseEntity = null;
-        if (consultaDTO.getPaciente() != null && consultaDTO.getDentista() != null) {
+
+
+        if (consultaDTO.getDataHoraConsulta() != null){
             ConsultaDTO consultaDTO1 = consultaService.create(consultaDTO);
             responseEntity = new ResponseEntity<>(consultaDTO1, HttpStatus.OK);
-        } else {
-            responseEntity = new ResponseEntity<>("Consulta não criada", HttpStatus.BAD_REQUEST);
         }
+
         return responseEntity;
+
     }
 
-    @GetMapping("/{id}")
-    public ConsultaDTO getById(@PathVariable int id) {
-        return consultaService.getById(id);
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<ConsultaDTO> getById(@PathVariable int id) throws NotFoundException {
+        return new ResponseEntity<>(consultaService.getById(id), HttpStatus.OK);
+
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<ConsultaDTO> getAll() {
         return consultaService.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         return consultaService.delete(id);
     }
 
-    @PutMapping("/{id}")
-    public ConsultaDTO update(@RequestBody ConsultaDTO consultaDTO, @PathVariable Integer id) {
+    @PutMapping("/update/{id}")
+    public ConsultaDTO update(@RequestBody ConsultaDTO consultaDTO, @PathVariable Integer id) throws NotFoundException {
         return consultaService.update(consultaDTO, id);
     }
 
@@ -51,6 +57,8 @@ public class ConsultaController {
     public ConsultaDTO getByPaciente(@RequestParam(value = "name") String name){
         return consultaService.getByPaciente(name);
     }
+
+
 
 
 }

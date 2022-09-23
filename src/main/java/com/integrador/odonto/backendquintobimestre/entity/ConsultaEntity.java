@@ -1,37 +1,49 @@
 package com.integrador.odonto.backendquintobimestre.entity;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
+
 @Entity
 @Table(name = "Consulta")
 public class ConsultaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToOne
-    @JoinColumn(name = "idPaciente", referencedColumnName = "id")
+
+    //@OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idPaciente")
     private PacienteEntity paciente;
-    @OneToOne
-    @JoinColumn(name = "idDentista", referencedColumnName = "id")
+
+    //@OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idDentista")
     private DentistaEntity dentista;
-    @Column(nullable = false)
-    private Date dataHoraConsulta;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, unique = true)
+    private Calendar dataHoraConsulta;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public ConsultaEntity(ConsultaDTO consultaDTO) {
+    public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO) {
         this.id = consultaDTO.getId();
-        this.paciente = consultaDTO.getPaciente();
-        this.dentista = consultaDTO.getDentista();
+        this.paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
+        this.dentista = new DentistaEntity(dentistaDTO);
         this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
     }
 
     public ConsultaEntity() {
     }
+
+    public Integer getId() {
+        return id;
+    }
+
 
     public PacienteEntity getPaciente() {
         return paciente;
@@ -49,11 +61,11 @@ public class ConsultaEntity {
         this.dentista = dentista;
     }
 
-    public Date getDataHoraConsulta() {
+    public Calendar getDataHoraConsulta() {
         return dataHoraConsulta;
     }
 
-    public void setDataHoraConsulta(Date dataHoraConsulta) {
+    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
         this.dataHoraConsulta = dataHoraConsulta;
     }
 }

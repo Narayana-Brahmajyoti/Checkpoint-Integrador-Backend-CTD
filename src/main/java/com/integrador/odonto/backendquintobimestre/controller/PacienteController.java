@@ -22,7 +22,7 @@ public class PacienteController {
     ValidationPaciente validationPaciente = new ValidationPaciente();
 
     @PostMapping("/create")
-    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) throws VariableNullException {
+    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) throws VariableNullException, NotFoundException {
         ResponseEntity responseEntity = null;
 
         Boolean erro = validationPaciente.validationPacienteVariables(pacienteDTO);
@@ -46,12 +46,12 @@ public class PacienteController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return pacienteService.delete(id);
     }
 
     @PutMapping("/update/{id}")
-    public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) {
+    public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) throws NotFoundException {
         return pacienteService.update(pacienteDTO, id);
     }
 

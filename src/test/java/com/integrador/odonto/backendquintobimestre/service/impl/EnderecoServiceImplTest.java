@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class EnderecoServiceImplTest {
 
 	@Test
 	@Order(2)
-	void testGetById() {
+	void testGetById() throws NotFoundException {
 		EnderecoDTO enderecoDTO = new EnderecoDTO();
 		enderecoDTO.setRua(rua);
 		enderecoDTO.setNumero(numero);
@@ -80,7 +81,7 @@ class EnderecoServiceImplTest {
 
 	@Test
 	@Order(4)
-	void testUpdate() {
+	void testUpdate() throws NotFoundException {
 		EnderecoDTO enderecoDTO = new EnderecoDTO();
 		enderecoDTO.setRua(rua);
 		enderecoDTO.setNumero(numero);

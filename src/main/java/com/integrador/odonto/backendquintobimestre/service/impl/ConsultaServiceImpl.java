@@ -40,7 +40,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
         int idPaciente = consultaDTO.getIdPaciente();
         pacienteDTO = pacienteService.getById(idPaciente);
-        int idEndereco = pacienteDTO.getIdEndereco();
+        int idEndereco = pacienteDTO.getEndereco().getId();
     	enderecoDTO = enderecoService.getById(idEndereco);
         int idDentista = consultaDTO.getIdDentista();
         dentistaDTO = dentistaService.getById(idDentista);
@@ -86,7 +86,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
     @Override
     public ConsultaDTO update(ConsultaDTO consultaDTO, int id) throws NotFoundException {
     	PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getIdPaciente());
-    	EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
+    	EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
     	DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getIdDentista());
         ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
         consultaRepository.saveAndFlush(consultaEntity);

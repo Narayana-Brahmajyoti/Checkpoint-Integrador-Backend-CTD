@@ -10,13 +10,16 @@ public class ValidationDentista {
 
     public Boolean validationDentistaVariables(DentistaDTO dentistaDTO) throws VariableNullException {
         List<String> variables = new ArrayList<>();
-        if (dentistaDTO.getNome() == null || dentistaDTO.getNome().isEmpty()) {
-            variables.add("nome");
-        } if (dentistaDTO.getSobreNome() == null || dentistaDTO.getSobreNome().isEmpty()) {
-            variables.add("sobreNome");
-        } if (dentistaDTO.getMatricula() == null || dentistaDTO.getMatricula().isEmpty()){
-            variables.add("matrícula");
-        } if(!variables.isEmpty())
+        if (dentistaDTO.getNome() == null || dentistaDTO.getNome().trim().isEmpty()) {
+            variables.add("Nome");
+        }
+        if (dentistaDTO.getSobreNome() == null || dentistaDTO.getSobreNome().trim().isEmpty()) {
+            variables.add("SobreNome");
+        }
+        if (dentistaDTO.getMatricula() == null || dentistaDTO.getMatricula().trim().isEmpty()){
+            variables.add("Matrícula");
+        }
+        if(!variables.isEmpty())
             throw new VariableNullException("Verifique as variáveis listadas", variables);
 
         return true;

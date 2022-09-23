@@ -23,22 +23,23 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
     private EnderecoServiceImpl enderecoService;
 	
 	@Override
-	public PacienteDTO create(PacienteDTO pacienteDTO) {
-		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
+	public PacienteDTO create(PacienteDTO pacienteDTO) throws NotFoundException {
+		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
         PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO, enderecoDTO);
-        int idEndereco = pacienteDTO.getIdEndereco();
+        int idEndereco = pacienteDTO.getEndereco().getId();
 
-        /*if (enderecoService.ifEnderecoExists(idEndereco)) 
-            enderecoService.update(enderecoDTO, idEndereco);
-        else 
-        	enderecoService.create(enderecoDTO);*/
-        
-    	//pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
-    	
-        pacienteEntity = pacienteRepository.save(pacienteEntity);
+        if (enderecoService.ifEnderecoExists(idEndereco))
+			pacienteEntity = pacienteRepository.save(pacienteEntity);
+//            enderecoService.update(enderecoDTO, idEndereco);
+//        else
+//        	enderecoService.create(enderecoDTO);
 
-        pacienteDTO = new PacienteDTO(pacienteEntity);
-        
+			//pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
+
+			//pacienteEntity = pacienteRepository.save(pacienteEntity);
+
+			pacienteDTO = new PacienteDTO(pacienteEntity);
+
         return pacienteDTO;
 	}
 
@@ -64,16 +65,16 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	}
 
 	@Override
-	public String delete(int id) {
+	public String delete(int id) throws NotFoundException{
 		pacienteRepository.deleteById(id);
 		return "O paciente de id " + id + " foi deletado";
 	}
 
 	@Override
-	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
+	public PacienteDTO update(PacienteDTO pacienteDTO, int id) throws NotFoundException {
 		PacienteEntity pacienteEntity = pacienteRepository.findById(id).get();
-		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
-        int idEndereco = pacienteDTO.getIdEndereco();
+		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
+        int idEndereco = pacienteDTO.getEndereco().getId();
 		
 		if(enderecoService.ifEnderecoExists(idEndereco)) {
 			pacienteEntity.setNome(pacienteDTO.getNome());
@@ -84,11 +85,12 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 			pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));			
 			pacienteRepository.saveAndFlush(pacienteEntity);
 
+
         	//enderecoDTO = enderecoService.getById(idEndereco);
         	//enderecoService.update(enderecoDTO, idEndereco);
 		}
-		
-		return pacienteDTO;
+		PacienteDTO pacienteDTO1 = new PacienteDTO(pacienteEntity);
+		return pacienteDTO1;
 	}
 
 	public List<PacienteDTO> getByName(String nome){

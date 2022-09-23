@@ -8,7 +8,7 @@ public interface IClinicaService<T> {
     T create(T t) throws NotFoundException;
     T getById(int id) throws NotFoundException;
     List<T> getAll();
-    String delete(int id);
+    String delete(int id) throws NotFoundException;
 
     T update(T t, int id) throws NotFoundException;
 }

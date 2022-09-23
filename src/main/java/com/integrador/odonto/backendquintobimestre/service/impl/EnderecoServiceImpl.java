@@ -3,6 +3,7 @@ package com.integrador.odonto.backendquintobimestre.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,8 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 	}
 
 	@Override
-	public EnderecoDTO getById(int id) {
-		EnderecoEntity endereco = enderecoRepository.findById(id).get();
+	public EnderecoDTO getById(int id) throws NotFoundException {
+		EnderecoEntity endereco = enderecoRepository.findById(id).orElseThrow(() -> new NotFoundException("Endereço não encontrado com o id: " + id));
         return new EnderecoDTO(endereco);
 	}
 

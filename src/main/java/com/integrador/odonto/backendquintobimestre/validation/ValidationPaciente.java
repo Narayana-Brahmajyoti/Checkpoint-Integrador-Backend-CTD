@@ -11,14 +11,20 @@ public class ValidationPaciente {
     public Boolean validationPacienteVariables(PacienteDTO pacienteDTO) throws VariableNullException {
         List<String> variables = new ArrayList<>();
 
-        if (pacienteDTO.getNome()== null || pacienteDTO.getNome().isEmpty()) {
-            variables.add("nome");
+        if (pacienteDTO.getNome() == null || pacienteDTO.getNome().trim().isEmpty()) {
+            variables.add("Nome");
         }
-        if (pacienteDTO.getSobreNome()== null || pacienteDTO.getSobreNome().isEmpty()) {
-            variables.add("sobreNome");
+        if (pacienteDTO.getSobreNome() == null || pacienteDTO.getSobreNome().trim().isEmpty()) {
+            variables.add("SobreNome");
         }
-        if (pacienteDTO.getRg()== null || pacienteDTO.getRg().isEmpty()) {
-            variables.add("rg");
+        if (pacienteDTO.getEndereco() == null || pacienteDTO.getEndereco().getId() <= 0) {
+            variables.add("Endereço");
+        }
+        if (pacienteDTO.getRg() == null || pacienteDTO.getRg().trim().isEmpty()) {
+            variables.add("RG");
+        }
+        if (pacienteDTO.getDataDeAlta() == null || pacienteDTO.getDataDeAlta().trim().isEmpty()) {
+            variables.add("Data de alta");
         }
     	
         if(!variables.isEmpty())

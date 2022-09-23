@@ -3,22 +3,30 @@ package com.integrador.odonto.backendquintobimestre.entity.dto;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
 public class PacienteDTO {
-    private String nome;
-    private String sobreNome;
-    private Integer endereco;
-    private String rg;
-    private String dataDeAlta;
+	private int id;
+	private String nome;
+	private String sobreNome;
+	//private EnderecoDTO endereco;
+	private int idEndereco;
+	private String rg;
+	private String dataDeAlta;
+	
+	public PacienteDTO() {
+	}
+	
+	public PacienteDTO(PacienteEntity paciente) {
+		this.id = paciente.getId();
+		this.nome = paciente.getNome();
+		this.sobreNome = paciente.getSobreNome();
+		//this.endereco = new EnderecoDTO(paciente.getEnderecoEntity());
+		this.idEndereco = paciente.getEnderecoEntity().getId();
+		this.rg = paciente.getRg();
+		this.dataDeAlta = paciente.getDataDeAlta();
+	}
 
-    public PacienteDTO(PacienteEntity paciente) {
-        this.nome = paciente.getNome();
-        this.sobreNome = paciente.getSobreNome();
-        this.endereco = paciente.getEndereco();
-        this.rg = paciente.getRg();
-        this.dataDeAlta = paciente.getDataDeAlta();
-    }
-    
-    public PacienteDTO() {
-    }
+	public int getId() {
+		return id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -36,13 +44,13 @@ public class PacienteDTO {
 		this.sobreNome = sobreNome;
 	}
 
-	public Integer getEndereco() {
+	/*public EnderecoDTO getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Integer endereco) {
+	public void setEndereco(EnderecoDTO endereco) {
 		this.endereco = endereco;
-	}
+	}*/
 
 	public String getRg() {
 		return rg;
@@ -52,11 +60,20 @@ public class PacienteDTO {
 		this.rg = rg;
 	}
 
-	public String getDataDeAlta() {
+	public String  getDataDeAlta() {
 		return dataDeAlta;
 	}
-
+	
 	public void setDataDeAlta(String dataDeAlta) {
 		this.dataDeAlta = dataDeAlta;
 	}
+
+	public int getIdEndereco() {
+		return idEndereco;
+	}
+
+	public void setIdEndereco(int idEndereco) {
+		this.idEndereco = idEndereco;
+	}
+	
 }

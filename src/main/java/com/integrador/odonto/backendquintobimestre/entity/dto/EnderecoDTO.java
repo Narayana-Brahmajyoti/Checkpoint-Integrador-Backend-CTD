@@ -3,22 +3,29 @@ package com.integrador.odonto.backendquintobimestre.entity.dto;
 import com.integrador.odonto.backendquintobimestre.entity.EnderecoEntity;
 
 public class EnderecoDTO {
-    private Integer id;
+    private int id;
     private String rua;
     private String numero;
     private String complemento;
     private String bairro;
 
-    public EnderecoDTO(EnderecoEntity endereco) {
-    	this.id = endereco.getId();
-        this.rua = endereco.getRua();
-        this.numero = endereco.getNumero();
-        this.complemento = endereco.getComplemento();
-        this.bairro = endereco.getBairro();
+    public EnderecoDTO(EnderecoEntity enderecoEntity) {
+    	this.id = enderecoEntity.getId();
+        this.rua = enderecoEntity.getRua();
+        this.numero = enderecoEntity.getNumero();
+        this.complemento = enderecoEntity.getComplemento();
+        this.bairro = enderecoEntity.getBairro();
     }
 
     public EnderecoDTO() {
     }
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 
     public String getRua() {
         return rua;
@@ -28,37 +35,27 @@ public class EnderecoDTO {
         this.rua = rua;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-	public Integer getId() {
-		return id;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
-    
-    
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 }

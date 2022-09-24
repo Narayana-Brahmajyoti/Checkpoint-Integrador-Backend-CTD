@@ -52,12 +52,12 @@ public class EnderecoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return enderecoService.delete(id);
     }
 
     @PutMapping("/update/{id}")
-    public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) {
+    public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) throws NotFoundException {
         return enderecoService.update(enderecoDTO, id);
     }
 

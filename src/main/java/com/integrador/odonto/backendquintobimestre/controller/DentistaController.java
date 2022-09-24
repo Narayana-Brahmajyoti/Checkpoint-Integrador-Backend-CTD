@@ -3,6 +3,8 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+import com.integrador.odonto.backendquintobimestre.exception.UniqueIndexException;
 import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
 import com.integrador.odonto.backendquintobimestre.service.impl.DentistaServiceImpl;
 import com.integrador.odonto.backendquintobimestre.validation.ValidationDentista;
@@ -23,8 +25,7 @@ public class DentistaController {
 
     ValidationDentista validationDentista = new ValidationDentista();
     @PostMapping("/create")
-    @Transactional
-    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) throws VariableNullException {
+    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) throws VariableNullException, UniqueIndexException {
         ResponseEntity responseEntity = null;
 
         Boolean erro = validationDentista.validationDentistaVariables(dentistaDTO);
@@ -39,7 +40,7 @@ public class DentistaController {
 
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
+    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) throws NotFoundException {
         ResponseEntity responseEntity = null;
         DentistaDTO dentistaDTO = dentistaService.getById(id);
         if(dentistaDTO != null){
@@ -52,8 +53,7 @@ public class DentistaController {
     }
 
     @PutMapping("/update/{id}")
-    @Transactional
-    public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
+    public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) throws NotFoundException {
         return dentistaService.update(dentistaDTO, id);
     }
 
@@ -63,7 +63,7 @@ public class DentistaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return dentistaService.delete(id);
     }
 }

@@ -40,6 +40,9 @@ public class ConsultaEntity {
     public ConsultaEntity() {
     }
 
+    public ConsultaEntity(ConsultaDTO consultaDTO) {
+    }
+
     public Integer getId() {
         return id;
     }

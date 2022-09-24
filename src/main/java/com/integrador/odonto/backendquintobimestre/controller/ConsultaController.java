@@ -44,7 +44,7 @@ public class ConsultaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return consultaService.delete(id);
     }
 

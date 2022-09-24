@@ -47,23 +47,28 @@ public class EnderecoServiceImpl implements IClinicaService<EnderecoDTO>{
 	}
 
 	@Override
-	public String delete(int id) {
-		enderecoRepository.deleteById(id);
-        return "O endereco de id " + id + " foi deletado";
+	public String delete(int id) throws NotFoundException {
+		try{
+			enderecoRepository.deleteById(id);
+			return "Endereço de id " + id + " foi deletado";
+		} catch (Exception ex){
+			throw new NotFoundException("Não foi possível deletar endereço de id: " + id + ", id inexistente");
+		}
+
 	}
 
 	@Override
-	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) {
-		EnderecoEntity enderecoEntity = enderecoRepository.findById(id).get();
+	public EnderecoDTO update(EnderecoDTO enderecoDTO, int id) throws NotFoundException {
+		EnderecoEntity enderecoEntity = enderecoRepository.findById(id).orElseThrow(() -> new NotFoundException("Endereço não encontrado com o id: " + id));
 
 		enderecoEntity.setRua(enderecoDTO.getRua());
 		enderecoEntity.setNumero(enderecoDTO.getNumero());
 		enderecoEntity.setComplemento(enderecoDTO.getComplemento());
 		enderecoEntity.setBairro(enderecoDTO.getBairro());
 		
-		enderecoRepository.saveAndFlush(enderecoEntity);
-		
-        return enderecoDTO;
+		enderecoEntity = enderecoRepository.saveAndFlush(enderecoEntity);
+		EnderecoDTO enderecoDTO1 = new EnderecoDTO(enderecoEntity);
+        return enderecoDTO1;
 	}
 	
     public boolean ifEnderecoExists(int id) {

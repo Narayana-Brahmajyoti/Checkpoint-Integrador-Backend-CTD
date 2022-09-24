@@ -33,16 +33,17 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
     @Override
     public ConsultaDTO create(ConsultaDTO consultaDTO) throws NotFoundException {
+        ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO);
         PacienteDTO pacienteDTO;
         EnderecoDTO enderecoDTO;
         DentistaDTO dentistaDTO;
-        ConsultaEntity consultaEntity;
 
-        int idPaciente = consultaDTO.getIdPaciente();
+
+        int idPaciente = consultaDTO.getPaciente().getId();
         pacienteDTO = pacienteService.getById(idPaciente);
         int idEndereco = pacienteDTO.getEndereco().getId();
     	enderecoDTO = enderecoService.getById(idEndereco);
-        int idDentista = consultaDTO.getIdDentista();
+        int idDentista = consultaDTO.getDentista().getId();
         dentistaDTO = dentistaService.getById(idDentista);
 
         if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista) 
@@ -78,16 +79,20 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
     }
 
     @Override
-    public String delete(int id) {
-        consultaRepository.deleteById(id);
-        return   "A consulta de id " + id + " foi deletada com sucesso";
+    public String delete(int id) throws NotFoundException {
+        try{
+            consultaRepository.deleteById(id);
+            return "Consulta de id " + id + " foi deletada";
+        } catch (Exception ex){
+            throw new NotFoundException("Não foi possível deletar consulta de id: " + id + ", id inexistente");
+        }
     }
 
     @Override
     public ConsultaDTO update(ConsultaDTO consultaDTO, int id) throws NotFoundException {
-    	PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getIdPaciente());
+    	PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getPaciente().getId());
     	EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
-    	DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getIdDentista());
+    	DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getDentista().getId());
         ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
         consultaRepository.saveAndFlush(consultaEntity);
 
@@ -98,8 +103,8 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         return consultaRepository.existsById(id);
     }
 
-    public ConsultaDTO getByPaciente(String name){
-        ConsultaEntity consulta = consultaRepository.findByPaciente(name);
+    public ConsultaDTO getByPaciente(String nome){
+        ConsultaEntity consulta = consultaRepository.findByPaciente(nome);
         ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
         return consultaDTO;
     }

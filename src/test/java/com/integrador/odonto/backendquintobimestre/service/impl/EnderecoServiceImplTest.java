@@ -125,7 +125,7 @@ class EnderecoServiceImplTest {
 
 	@Test
 	@Order(6)
-	void testDelete() {
+	void testDelete() throws NotFoundException {
 		EnderecoDTO enderecoDTO = new EnderecoDTO();
 		enderecoDTO.setRua(rua);
 		enderecoDTO.setNumero(numero);

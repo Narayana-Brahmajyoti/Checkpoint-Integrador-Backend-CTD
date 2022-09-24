@@ -66,13 +66,17 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 
 	@Override
 	public String delete(int id) throws NotFoundException{
-		pacienteRepository.deleteById(id);
-		return "O paciente de id " + id + " foi deletado";
+		try{
+			pacienteRepository.deleteById(id);
+			return "Paciente de id " + id + " foi deletado";
+		} catch (Exception ex){
+			throw new NotFoundException("Não foi possível deletar paciente de id: " + id + ", id inexistente");
+		}
 	}
 
 	@Override
 	public PacienteDTO update(PacienteDTO pacienteDTO, int id) throws NotFoundException {
-		PacienteEntity pacienteEntity = pacienteRepository.findById(id).get();
+		PacienteEntity pacienteEntity = pacienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Paciente não encontrado com o id: " + id));
 		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
         int idEndereco = pacienteDTO.getEndereco().getId();
 		

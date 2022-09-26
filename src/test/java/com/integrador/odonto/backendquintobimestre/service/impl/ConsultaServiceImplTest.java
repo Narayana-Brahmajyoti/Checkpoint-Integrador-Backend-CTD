@@ -36,108 +36,61 @@ class ConsultaServiceImplTest {
             EnderecoServiceImpl enderecoService;
 
 
-
-    int idEndereco;
-    String rua = "Rua Rio Negro";
-    String numero = "1234";
-    String complemento = "apto 1104";
-    String bairro = "Vera Cruz";
-
-    int idPaciente;
-    String nomePaciente = "Gabriela";
-    String sobreNomePaciente = "Carvalho";
-    String rg = "MG-15678";
-    String dataDeAlta = "25/10/2022";
-
-
-    int idDentista;
-    String nomeDentista = "Raquel";
-    String sobreNomeDentista = "Fernandes";
-    String matriculaDentista = "CD-15498";
-
+    EnderecoDTO endereco = new EnderecoDTO();
+    PacienteDTO paciente = new PacienteDTO();
+    DentistaDTO dentista = new DentistaDTO();
+    ConsultaDTO consulta = new ConsultaDTO();
     LocalDateTime dataHoraConsulta = LocalDateTime.of(2022,3,11,10, 25, 30);
 
-//    @BeforeEach
-//    public void doBefore() {
-//
-//        int idConsulta;
-//
-//        EnderecoDTO endereco = new EnderecoDTO();
-//            int idEndereco;
-//            String rua = "Rua Rio Negro";
-//            String numero = "1234";
-//            String complemento = "apto 1104";
-//            String bairro = "Vera Cruz";
-//
-//            endereco.setRua(rua);
-//            endereco.setNumero(numero);
-//            endereco.setComplemento(complemento);
-//            endereco.setBairro(bairro);
-//
-//        PacienteDTO paciente = new PacienteDTO();
-//            int idPaciente;
-//            String nomePaciente = "Gabriela";
-//            String sobreNomePaciente = "Carvalho";
-//            String rg = "MG-15678";
-//            String dataDeAlta = "25/10/2022";
-//
-//            paciente.setNome(nomePaciente);
-//            paciente.setSobreNome(sobreNomePaciente);
-//            paciente.setEndereco(endereco);
-//            paciente.setRg(rg);
-//            paciente.setDataDeAlta(dataDeAlta);
-//
-//        DentistaDTO dentista = new DentistaDTO();
-//            int idDentista;
-//            String nomeDentista = "Raquel";
-//            String sobreNomeDentista = "Fernandes";
-//            String matriculaDentista = "CD-15498";
-//
-//            dentista.setNome(nomeDentista);
-//            dentista.setSobreNome(sobreNomeDentista);
-//            dentista.setMatricula(matriculaDentista);
-//
-//        LocalDateTime dataHoraConsulta = LocalDateTime.of(2022,3,11,10, 25, 30);
-//
-////        LocalDate dataConsulta = LocalDate.of(2022,6,23);
-////        LocalTime horaConsulta = LocalTime.of(10,25,40);
-//        //Calendar dateHoraConsulta = Calendar.getInstance(2022,3,25);
-//
-//        ConsultaDTO consulta = new ConsultaDTO();
-//            consulta.setPaciente(paciente);
-//            consulta.setDentista(dentista);
-//            consulta.setDataHoraConsulta(dataHoraConsulta);
-//    }
+    @BeforeEach
+    public void doBefore() {
+
+        int idConsulta;
+
+
+            int idEndereco;
+            String rua = "Rua Rio Negro";
+            String numero = "1234";
+            String complemento = "apto 1104";
+            String bairro = "Vera Cruz";
+
+            endereco.setRua(rua);
+            endereco.setNumero(numero);
+            endereco.setComplemento(complemento);
+            endereco.setBairro(bairro);
+
+
+            int idPaciente;
+            String nomePaciente = "Gabriela";
+            String sobreNomePaciente = "Carvalho";
+            String rg = "MG-15678";
+            String dataDeAlta = "25/10/2022";
+
+            paciente.setNome(nomePaciente);
+            paciente.setSobreNome(sobreNomePaciente);
+            paciente.setEndereco(endereco);
+            paciente.setRg(rg);
+            paciente.setDataDeAlta(dataDeAlta);
+
+
+            int idDentista;
+            String nomeDentista = "Raquel";
+            String sobreNomeDentista = "Fernandes";
+            String matriculaDentista = "CD-15498";
+
+            dentista.setNome(nomeDentista);
+            dentista.setSobreNome(sobreNomeDentista);
+            dentista.setMatricula(matriculaDentista);
+
+            consulta.setPaciente(paciente);
+            consulta.setDentista(dentista);
+            consulta.setDataHoraConsulta(dataHoraConsulta);
+    }
 
 
     @Test
     @Order(1)
     void create() {
-
-        EnderecoDTO endereco = new EnderecoDTO();
-        endereco.setRua(rua);
-        endereco.setNumero(numero);
-        endereco.setComplemento(complemento);
-        endereco.setBairro(bairro);
-
-        PacienteDTO paciente = new PacienteDTO();
-        paciente.setNome(nomePaciente);
-        paciente.setSobreNome(sobreNomePaciente);
-        paciente.setEndereco(endereco);
-        paciente.setRg(rg);
-        paciente.setDataDeAlta(dataDeAlta);
-
-        DentistaDTO dentista = new DentistaDTO();
-        dentista.setNome(nomeDentista);
-        dentista.setSobreNome(sobreNomeDentista);
-        dentista.setMatricula(matriculaDentista);
-
-        LocalDateTime dataHoraConsulta = LocalDateTime.of(2022,3,11,10, 25, 30);
-
-        ConsultaDTO consulta = new ConsultaDTO();
-        consulta.setPaciente(paciente);
-        consulta.setDentista(dentista);
-        consulta.setDataHoraConsulta(dataHoraConsulta);
 
         assertTrue(consulta.getPaciente().equals(paciente));
         assertTrue(consulta.getDentista().equals(dentista));
@@ -147,7 +100,8 @@ class ConsultaServiceImplTest {
 
     @Test
     @Order(2)
-    void getById() {
+    void getById() throws Exception{
+        assertTrue(consulta.getId() == consulta.getId());
     }
 
     @Test

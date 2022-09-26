@@ -61,7 +61,6 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
             DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
             dentistaEntity = dentistaRepository.findById(id).orElseThrow(() -> new NotFoundException("Dentista não encontrado com o id: " + id));
 
-            //dentistaDTO.getMatricula().
             dentistaEntity.setNome(dentistaDTO.getNome());
             dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
             dentistaEntity.setMatricula(dentistaDTO.getMatricula());

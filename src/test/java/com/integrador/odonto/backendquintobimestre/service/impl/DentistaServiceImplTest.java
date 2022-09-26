@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
- class DentistaServiceImplTest {
+ public class DentistaServiceImplTest {
 
     @Autowired
     private DentistaServiceImpl dentistaService;

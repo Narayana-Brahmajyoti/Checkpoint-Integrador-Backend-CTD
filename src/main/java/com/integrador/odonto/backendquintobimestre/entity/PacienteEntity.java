@@ -42,6 +42,9 @@ import javax.persistence.*;
 			this.dataDeAlta = pacienteDTO.getDataDeAlta();
 		}
 
+		public PacienteEntity(PacienteDTO pacienteDTO) {
+		}
+
 		public int getId() {
 			return id;
 		}

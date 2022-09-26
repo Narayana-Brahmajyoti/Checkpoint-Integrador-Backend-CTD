@@ -23,4 +23,11 @@ public class GlobalHandlerException {
                 exception.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(responseException, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UniqueIndexException.class)
+    public ResponseEntity<ResponseException> handlerUniqueIndexException(UniqueIndexException exception) {
+        ResponseException responseException = new ResponseException(HttpStatus.NOT_ACCEPTABLE.value(),
+                exception.getMessage(), LocalDateTime.now());
+        return new ResponseEntity<>(responseException, HttpStatus.NOT_ACCEPTABLE);
+    }
 }

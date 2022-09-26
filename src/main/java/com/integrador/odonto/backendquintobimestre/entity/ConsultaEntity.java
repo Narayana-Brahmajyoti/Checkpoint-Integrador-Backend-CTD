@@ -7,6 +7,9 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,18 +20,17 @@ public class ConsultaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //@OneToOne
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPaciente")
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idPaciente", referencedColumnName = "id")
     private PacienteEntity paciente;
 
-    //@OneToOne
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idDentista")
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idDentista", referencedColumnName = "id")
     private DentistaEntity dentista;
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column(nullable = false, unique = true)
-    private Calendar dataHoraConsulta;
+    private LocalDateTime dataHoraConsulta;
+    //private Calendar dataHoraConsulta;
 
     public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO) {
         this.id = consultaDTO.getId();
@@ -37,7 +39,17 @@ public class ConsultaEntity {
         this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
     }
 
+    public ConsultaEntity(ConsultaDTO consultaDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO) {
+        this.id = consultaDTO.getId();
+        this.paciente = new PacienteEntity(pacienteDTO);
+        this.dentista = new DentistaEntity(dentistaDTO);
+        this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
+    }
+
     public ConsultaEntity() {
+    }
+
+    public ConsultaEntity(ConsultaDTO consultaDTO) {
     }
 
     public Integer getId() {
@@ -61,11 +73,23 @@ public class ConsultaEntity {
         this.dentista = dentista;
     }
 
-    public Calendar getDataHoraConsulta() {
+    public LocalDateTime getDataHoraConsulta() {
         return dataHoraConsulta;
     }
 
-    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
+    public void setDataHoraConsulta(LocalDateTime dataHoraConsulta) {
         this.dataHoraConsulta = dataHoraConsulta;
+    }
+
+    //    public Calendar getDataHoraConsulta() {
+//        return dataHoraConsulta;
+//    }
+//
+//    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
+//        this.dataHoraConsulta = dataHoraConsulta;
+//    }
+
+    public ConsultaEntity orElseThrow(Object o) {
+        return null;
     }
 }

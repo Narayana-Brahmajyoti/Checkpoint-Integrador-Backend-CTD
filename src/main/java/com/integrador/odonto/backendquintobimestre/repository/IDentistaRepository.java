@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IDentistaRepository extends JpaRepository<DentistaEntity, Integer> {
 
-    @Query("From DentistaEntity d Where d.nome like :nome")
-    DentistaEntity findByNome(String nome);
+
+    @Query("FROM DentistaEntity d WHERE d.matricula = :matricula")
+    DentistaEntity findByMatricula(String matricula);
+
 
 }

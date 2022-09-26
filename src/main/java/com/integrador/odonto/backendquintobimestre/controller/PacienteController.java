@@ -22,7 +22,7 @@ public class PacienteController {
     ValidationPaciente validationPaciente = new ValidationPaciente();
 
     @PostMapping("/create")
-    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) throws VariableNullException {
+    public ResponseEntity<PacienteDTO> create(@RequestBody PacienteDTO pacienteDTO) throws VariableNullException, NotFoundException {
         ResponseEntity responseEntity = null;
 
         Boolean erro = validationPaciente.validationPacienteVariables(pacienteDTO);
@@ -46,32 +46,32 @@ public class PacienteController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return pacienteService.delete(id);
     }
 
     @PutMapping("/update/{id}")
-    public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) {
+    public PacienteDTO update(@RequestBody PacienteDTO pacienteDTO, @PathVariable int id) throws NotFoundException {
         return pacienteService.update(pacienteDTO, id);
     }
 
     @GetMapping("/getByName")
-    public PacienteDTO getByName(@RequestParam(value = "nome") String nome ) {
+    public List<PacienteDTO> getByName(@RequestParam(value = "nome") String nome ) {
         return pacienteService.getByName(nome);
     }
 
     @GetMapping("/getBySurname")
-    public PacienteDTO getBySurname(@RequestParam(value = "sobrenome") String sobrenome ) {
+    public List<PacienteDTO> getBySurname(@RequestParam(value = "sobrenome") String sobrenome ) {
         return pacienteService.getBySurname(sobrenome);
     }
 
     @GetMapping("/getByRg")
-    public PacienteDTO getByRg(@RequestParam(value = "rg") String rg ) {
+    public List<PacienteDTO> getByRg(@RequestParam(value = "rg") String rg ) {
         return pacienteService.getByRg(rg);
     }
 
     @GetMapping("/getByDataDeAlta")
-    public PacienteDTO getByDataDeAlta(@RequestParam(value = "dataDeAlta") String dataDeAlta ) {
+    public List<PacienteDTO> getByDataDeAlta(@RequestParam(value = "dataDeAlta") String dataDeAlta ) {
         return pacienteService.getByDataDeAlta(dataDeAlta);
     }
 

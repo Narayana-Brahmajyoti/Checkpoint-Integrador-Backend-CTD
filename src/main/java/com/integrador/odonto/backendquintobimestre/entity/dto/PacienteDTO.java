@@ -6,8 +6,8 @@ public class PacienteDTO {
 	private int id;
 	private String nome;
 	private String sobreNome;
-	//private EnderecoDTO endereco;
-	private int idEndereco;
+	private EnderecoDTO endereco;
+	//private int idEndereco;
 	private String rg;
 	private String dataDeAlta;
 	
@@ -18,8 +18,8 @@ public class PacienteDTO {
 		this.id = paciente.getId();
 		this.nome = paciente.getNome();
 		this.sobreNome = paciente.getSobreNome();
-		//this.endereco = new EnderecoDTO(paciente.getEnderecoEntity());
-		this.idEndereco = paciente.getEnderecoEntity().getId();
+		this.endereco = new EnderecoDTO(paciente.getEnderecoEntity());
+		//this.idEndereco = paciente.getEnderecoEntity().getId();
 		this.rg = paciente.getRg();
 		this.dataDeAlta = paciente.getDataDeAlta();
 	}
@@ -44,13 +44,13 @@ public class PacienteDTO {
 		this.sobreNome = sobreNome;
 	}
 
-	/*public EnderecoDTO getEndereco() {
+	public EnderecoDTO getEndereco() {
 		return endereco;
 	}
 
 	public void setEndereco(EnderecoDTO endereco) {
 		this.endereco = endereco;
-	}*/
+	}
 
 	public String getRg() {
 		return rg;
@@ -68,12 +68,11 @@ public class PacienteDTO {
 		this.dataDeAlta = dataDeAlta;
 	}
 
-	public int getIdEndereco() {
-		return idEndereco;
-	}
-
-	public void setIdEndereco(int idEndereco) {
-		this.idEndereco = idEndereco;
-	}
-	
+//	public int getIdEndereco() {
+//		return idEndereco;
+//	}
+//
+//	public void setIdEndereco(int idEndereco) {
+//		this.idEndereco = idEndereco;
+//	}
 }

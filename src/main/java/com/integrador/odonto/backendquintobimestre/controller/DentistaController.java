@@ -3,7 +3,6 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
-import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.service.impl.DentistaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,25 +21,26 @@ public class DentistaController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) throws NotFoundException {
+    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) {
         ResponseEntity responseEntity = null;
         if (dentistaDTO.getNome() != null) {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
             responseEntity = new ResponseEntity<>(dentistaDTO1, HttpStatus.OK);
         } else {
-            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dentista nao criado");
+            responseEntity = new ResponseEntity<>("Dentista nao criado", HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
 
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) throws NotFoundException {
+    public ResponseEntity<DentistaDTO> getById(@PathVariable int id) {
         ResponseEntity responseEntity = null;
         DentistaDTO dentistaDTO = dentistaService.getById(id);
         if(dentistaDTO != null){
-            responseEntity = ResponseEntity.status(HttpStatus.OK).body(dentistaDTO);
+            responseEntity = new ResponseEntity<>(dentistaDTO, HttpStatus.OK);
         }else{
+            //responseEntity = new ResponseEntity<>("Id nao localizado", HttpStatus.NOT_FOUND);
             responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dentista não encontrado");
         }
         return responseEntity;

@@ -29,7 +29,8 @@ public class ConsultaEntity {
     private DentistaEntity dentista;
 
     @Column(nullable = false, unique = true)
-    private Calendar dataHoraConsulta;
+    private LocalDateTime dataHoraConsulta;
+    //private Calendar dataHoraConsulta;
 
     public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO) {
         this.id = consultaDTO.getId();
@@ -72,13 +73,21 @@ public class ConsultaEntity {
         this.dentista = dentista;
     }
 
-    public Calendar getDataHoraConsulta() {
+    public LocalDateTime getDataHoraConsulta() {
         return dataHoraConsulta;
     }
 
-    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
+    public void setDataHoraConsulta(LocalDateTime dataHoraConsulta) {
         this.dataHoraConsulta = dataHoraConsulta;
     }
+
+    //    public Calendar getDataHoraConsulta() {
+//        return dataHoraConsulta;
+//    }
+//
+//    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
+//        this.dataHoraConsulta = dataHoraConsulta;
+//    }
 
     public ConsultaEntity orElseThrow(Object o) {
         return null;

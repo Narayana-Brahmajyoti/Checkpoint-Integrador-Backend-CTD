@@ -5,6 +5,7 @@ import com.integrador.odonto.backendquintobimestre.entity.ConsultaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,7 +16,8 @@ public class ConsultaDTO {
     private DentistaDTO dentista;
 //    private int idPaciente;
 //    private int idDentista;
-    private Calendar dataHoraConsulta;
+    private LocalDateTime dataHoraConsulta;
+    //private Calendar dataHoraConsulta;
 
 
 
@@ -51,13 +53,21 @@ public class ConsultaDTO {
         this.dentista = dentista;
     }
 
-    public Calendar getDataHoraConsulta() {
+    public LocalDateTime getDataHoraConsulta() {
         return dataHoraConsulta;
     }
 
-    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
+    public void setDataHoraConsulta(LocalDateTime dataHoraConsulta) {
         this.dataHoraConsulta = dataHoraConsulta;
     }
+
+    //    public Calendar getDataHoraConsulta() {
+//        return dataHoraConsulta;
+//    }
+//
+//    public void setDataHoraConsulta(Calendar dataHoraConsulta) {
+//        this.dataHoraConsulta = dataHoraConsulta;
+//    }
 
 //	public int getIdPaciente() {
 //		return idPaciente;

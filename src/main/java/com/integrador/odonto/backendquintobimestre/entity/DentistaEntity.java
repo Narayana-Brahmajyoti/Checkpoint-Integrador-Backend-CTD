@@ -60,7 +60,7 @@ public class DentistaEntity {
     }
 
     public void setSobreNome(String sobreNome) {
-        sobreNome = sobreNome;
+        this.sobreNome = sobreNome;
     }
 
     public String getMatricula() {

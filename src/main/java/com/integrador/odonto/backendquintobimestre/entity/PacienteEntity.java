@@ -19,7 +19,7 @@ import javax.persistence.*;
 		@Column(nullable = false)
 		private String sobreNome;
 
-		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 		@JoinColumn(name = "idEndereco", referencedColumnName = "id")
 		private EnderecoEntity enderecoEntity;
 		
@@ -40,6 +40,9 @@ import javax.persistence.*;
 			this.enderecoEntity = new EnderecoEntity(endereco);
 			this.rg = pacienteDTO.getRg();
 			this.dataDeAlta = pacienteDTO.getDataDeAlta();
+		}
+
+		public PacienteEntity(PacienteDTO pacienteDTO) {
 		}
 
 		public int getId() {

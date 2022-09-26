@@ -23,22 +23,23 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
     private EnderecoServiceImpl enderecoService;
 	
 	@Override
-	public PacienteDTO create(PacienteDTO pacienteDTO) {
-		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
+	public PacienteDTO create(PacienteDTO pacienteDTO) throws NotFoundException {
+		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
         PacienteEntity pacienteEntity = new PacienteEntity(pacienteDTO, enderecoDTO);
-        int idEndereco = pacienteDTO.getIdEndereco();
+        int idEndereco = pacienteDTO.getEndereco().getId();
 
-        /*if (enderecoService.ifEnderecoExists(idEndereco)) 
-            enderecoService.update(enderecoDTO, idEndereco);
-        else 
-        	enderecoService.create(enderecoDTO);*/
-        
-    	//pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
-    	
-        pacienteEntity = pacienteRepository.save(pacienteEntity);
+        if (enderecoService.ifEnderecoExists(idEndereco))
+			pacienteEntity = pacienteRepository.save(pacienteEntity);
+//            enderecoService.update(enderecoDTO, idEndereco);
+//        else
+//        	enderecoService.create(enderecoDTO);
 
-        pacienteDTO = new PacienteDTO(pacienteEntity);
-        
+			//pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));
+
+			//pacienteEntity = pacienteRepository.save(pacienteEntity);
+
+			pacienteDTO = new PacienteDTO(pacienteEntity);
+
         return pacienteDTO;
 	}
 
@@ -64,16 +65,20 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 	}
 
 	@Override
-	public String delete(int id) {
-		pacienteRepository.deleteById(id);
-		return "O paciente de id " + id + " foi deletado";
+	public String delete(int id) throws NotFoundException{
+		try{
+			pacienteRepository.deleteById(id);
+			return "Paciente de id " + id + " foi deletado";
+		} catch (Exception ex){
+			throw new NotFoundException("Não foi possível deletar paciente de id: " + id + ", id inexistente");
+		}
 	}
 
 	@Override
-	public PacienteDTO update(PacienteDTO pacienteDTO, int id) {
-		PacienteEntity pacienteEntity = pacienteRepository.findById(id).get();
-		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
-        int idEndereco = pacienteDTO.getIdEndereco();
+	public PacienteDTO update(PacienteDTO pacienteDTO, int id) throws NotFoundException {
+		PacienteEntity pacienteEntity = pacienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Paciente não encontrado com o id: " + id));
+		EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
+        int idEndereco = pacienteDTO.getEndereco().getId();
 		
 		if(enderecoService.ifEnderecoExists(idEndereco)) {
 			pacienteEntity.setNome(pacienteDTO.getNome());
@@ -84,35 +89,48 @@ public class PacienteServiceImpl implements IClinicaService<PacienteDTO>{
 			pacienteEntity.setEnderecoEntity(new EnderecoEntity(enderecoDTO));			
 			pacienteRepository.saveAndFlush(pacienteEntity);
 
+
         	//enderecoDTO = enderecoService.getById(idEndereco);
         	//enderecoService.update(enderecoDTO, idEndereco);
 		}
+		PacienteDTO pacienteDTO1 = new PacienteDTO(pacienteEntity);
+		return pacienteDTO1;
+	}
+
+	public List<PacienteDTO> getByName(String nome){
+		List<PacienteEntity> pacientes = pacienteRepository.findByNome(nome);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
 		
-		return pacienteDTO;
+		return pacientesDTO;
 	}
 
-	public PacienteDTO getByName(String nome){
-		PacienteEntity paciente = pacienteRepository.findByNome(nome);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getBySurname(String sobrenome){
+		List<PacienteEntity> pacientes = pacienteRepository.findBySobrenome(sobrenome);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
-	public PacienteDTO getBySurname(String sobrenome){
-		PacienteEntity paciente = pacienteRepository.findBySobrenome(sobrenome);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getByRg(String rg){
+		List<PacienteEntity> pacientes = pacienteRepository.findByRg(rg);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
-	public PacienteDTO getByRg(String rg){
-		PacienteEntity paciente = pacienteRepository.findByRg(rg);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
-	}
-
-	public PacienteDTO getByDataDeAlta(String dataDeAlta){
-		PacienteEntity paciente = pacienteRepository.findByDataDeAlta(dataDeAlta);
-		PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-		return pacienteDTO;
+	public List<PacienteDTO> getByDataDeAlta(String dataDeAlta){
+		List<PacienteEntity> pacientes = pacienteRepository.findByDataDeAlta(dataDeAlta);
+		List<PacienteDTO> pacientesDTO = new ArrayList<>();
+		for(PacienteEntity paciente : pacientes)
+			pacientesDTO.add(new PacienteDTO(paciente));
+		
+		return pacientesDTO;
 	}
 
 	public boolean ifPacienteExists(int id){

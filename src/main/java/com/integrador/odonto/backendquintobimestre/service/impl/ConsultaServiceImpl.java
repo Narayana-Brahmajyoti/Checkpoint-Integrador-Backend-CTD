@@ -33,20 +33,19 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
     @Override
     public ConsultaDTO create(ConsultaDTO consultaDTO) throws NotFoundException {
+        ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO);
         PacienteDTO pacienteDTO;
         EnderecoDTO enderecoDTO;
         DentistaDTO dentistaDTO;
-        ConsultaEntity consultaEntity;
 
-        int idPaciente = consultaDTO.getIdPaciente();
+        int idPaciente = consultaDTO.getPaciente().getId();
         pacienteDTO = pacienteService.getById(idPaciente);
-        int idEndereco = pacienteDTO.getIdEndereco();
+        int idEndereco = pacienteDTO.getEndereco().getId();
     	enderecoDTO = enderecoService.getById(idEndereco);
-        int idDentista = consultaDTO.getIdDentista();
+        int idDentista = consultaDTO.getDentista().getId();
         dentistaDTO = dentistaService.getById(idDentista);
 
-        if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista) 
-        		&& enderecoService.ifEnderecoExists(idEndereco)) {
+        if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista))
             consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
         	
             PacienteEntity paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
@@ -55,8 +54,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
             consultaEntity.setDentista(dentista);
             consultaEntity = consultaRepository.save(consultaEntity);
 
-            consultaDTO = new ConsultaDTO(consultaEntity);
-        }
+        consultaDTO = new ConsultaDTO(consultaEntity);
         return consultaDTO;
     }
 
@@ -78,28 +76,39 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
     }
 
     @Override
-    public String delete(int id) {
-        consultaRepository.deleteById(id);
-        return   "A consulta de id " + id + " foi deletada com sucesso";
+    public String delete(int id) throws NotFoundException {
+        try{
+            consultaRepository.deleteById(id);
+            return "Consulta de id " + id + " foi deletada";
+        } catch (Exception ex){
+            throw new NotFoundException("Não foi possível deletar consulta de id: " + id + ", id inexistente");
+        }
     }
 
     @Override
     public ConsultaDTO update(ConsultaDTO consultaDTO, int id) throws NotFoundException {
-    	PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getIdPaciente());
-    	EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getIdEndereco());
-    	DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getIdDentista());
+        PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getPaciente().getId());
+        EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
+        DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getDentista().getId());
         ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
-        consultaRepository.saveAndFlush(consultaEntity);
 
-        return consultaDTO;
+        consultaEntity.setPaciente(new PacienteEntity(pacienteDTO, enderecoDTO));
+        consultaEntity.setDentista(new DentistaEntity(dentistaDTO));
+        consultaEntity.setDataHoraConsulta(consultaDTO.getDataHoraConsulta());
+
+        consultaEntity = consultaRepository.saveAndFlush(consultaEntity);
+
+        ConsultaDTO consultaDTO1 = new ConsultaDTO(consultaEntity);
+
+        return consultaDTO1;
     }
 
     public boolean ifConsultaExists(int id) {
         return consultaRepository.existsById(id);
     }
 
-    public ConsultaDTO getByPaciente(String name){
-        ConsultaEntity consulta = consultaRepository.findByPaciente(name);
+    public ConsultaDTO getByPaciente(String nome){
+        ConsultaEntity consulta = consultaRepository.findByPaciente(nome);
         ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
         return consultaDTO;
     }

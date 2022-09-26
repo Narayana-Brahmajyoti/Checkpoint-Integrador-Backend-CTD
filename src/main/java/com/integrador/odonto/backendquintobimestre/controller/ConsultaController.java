@@ -23,7 +23,7 @@ public class ConsultaController {
         ResponseEntity responseEntity = null;
 
 
-        if (consultaDTO.getDataHoraConsulta() != null){
+        if (consultaDTO.getDataHoraConsulta() != null ){
             ConsultaDTO consultaDTO1 = consultaService.create(consultaDTO);
             responseEntity = new ResponseEntity<>(consultaDTO1, HttpStatus.OK);
         }
@@ -44,12 +44,12 @@ public class ConsultaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return consultaService.delete(id);
     }
 
     @PutMapping("/update/{id}")
-    public ConsultaDTO update(@RequestBody ConsultaDTO consultaDTO, @PathVariable Integer id) {
+    public ConsultaDTO update(@PathVariable int id, @RequestBody ConsultaDTO consultaDTO) throws NotFoundException {
         return consultaService.update(consultaDTO, id);
     }
 

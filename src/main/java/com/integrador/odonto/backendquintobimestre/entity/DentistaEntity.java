@@ -18,18 +18,11 @@ public class DentistaEntity {
     private String nome;
     @Column(nullable = false)
     private String sobreNome;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String matricula;
 
     public DentistaEntity() {
     }
-
-    /*public DentistaEntity(int id, String nome, String sobreNome, String matricula) {
-        this.id = id;
-        this.nome = nome;
-        this.sobreNome = sobreNome;
-        this.matricula = matricula;
-    }*/
 
     public DentistaEntity(DentistaDTO dentistaDTO) {
         this.id = dentistaDTO.getId();
@@ -43,9 +36,6 @@ public class DentistaEntity {
         return id;
     }
 
-    /*public void setId(int id) {
-        this.id = id;
-    }*/
 
     public String getNome() {
         return nome;

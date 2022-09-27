@@ -1,6 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
+import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 
 import org.json.JSONArray;

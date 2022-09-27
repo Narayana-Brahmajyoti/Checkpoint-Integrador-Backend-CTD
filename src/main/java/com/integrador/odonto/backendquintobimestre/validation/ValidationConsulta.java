@@ -1,5 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.validation;
 
+import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
+import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
 import com.integrador.odonto.backendquintobimestre.repository.IConsultaRepository;
 import com.integrador.odonto.backendquintobimestre.repository.IDentistaRepository;
 import com.integrador.odonto.backendquintobimestre.repository.IPacienteRepository;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -71,4 +75,21 @@ public class ValidationConsulta {
         return matcher.find();
     }
 
+    public Boolean validationConsultaVariables(ConsultaDTO consultaDTO) throws VariableNullException {
+        List<String> variables = new ArrayList<>();
+
+        if (consultaDTO.getPaciente().getId() <= 0 ) {
+            variables.add("Paciente");
+        }
+        if (consultaDTO.getDentista().getId() <= 0) {
+            variables.add("Dentista");
+        }
+        if (consultaDTO.getDataHoraConsulta() == null ) {
+            variables.add("Data/hora consulta");
+        }
+        if (!variables.isEmpty())
+            throw new VariableNullException("Verifique as variáveis listadas", variables);
+
+        return true;
+    }
 }

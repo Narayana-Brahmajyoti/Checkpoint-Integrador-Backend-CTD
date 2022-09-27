@@ -1,6 +1,7 @@
 package com.integrador.odonto.backendquintobimestre.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.integrador.odonto.backendquintobimestre.entity.ConsultaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.DentistaEntity;
 import com.integrador.odonto.backendquintobimestre.entity.PacienteEntity;
@@ -11,7 +12,7 @@ import java.util.Date;
 
 public class ConsultaDTO {
 
-    private Integer id;
+    private int id;
     private PacienteDTO paciente;
     private DentistaDTO dentista;
 //    private int idPaciente;
@@ -33,7 +34,7 @@ public class ConsultaDTO {
         this.dataHoraConsulta = consultaEntity.getDataHoraConsulta();
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

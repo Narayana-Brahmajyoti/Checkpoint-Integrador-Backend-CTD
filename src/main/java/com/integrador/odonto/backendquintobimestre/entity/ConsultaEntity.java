@@ -18,7 +18,7 @@ import java.util.Date;
 public class ConsultaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPaciente", referencedColumnName = "id")
@@ -59,7 +59,7 @@ public class ConsultaEntity {
     public ConsultaEntity(ConsultaDTO consultaDTO) {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

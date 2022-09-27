@@ -4,7 +4,10 @@ package com.integrador.odonto.backendquintobimestre.controller;
 import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+import com.integrador.odonto.backendquintobimestre.exception.UniqueIndexException;
+import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
 import com.integrador.odonto.backendquintobimestre.service.impl.DentistaServiceImpl;
+import com.integrador.odonto.backendquintobimestre.validation.ValidationDentista;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +23,18 @@ public class DentistaController {
     @Autowired
     private DentistaServiceImpl dentistaService;
 
+    ValidationDentista validationDentista = new ValidationDentista();
     @PostMapping("/create")
-    @Transactional
-    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) throws NotFoundException {
+    public ResponseEntity<DentistaDTO> create (@RequestBody DentistaDTO dentistaDTO) throws VariableNullException, UniqueIndexException {
         ResponseEntity responseEntity = null;
-        if (dentistaDTO.getNome() != null) {
+
+        Boolean erro = validationDentista.validationDentistaVariables(dentistaDTO);
+
+        if (erro) {
             DentistaDTO dentistaDTO1 = dentistaService.create(dentistaDTO);
             responseEntity = new ResponseEntity<>(dentistaDTO1, HttpStatus.OK);
-        } else {
-            responseEntity = new ResponseEntity<>("Dentista nao criado", HttpStatus.BAD_REQUEST);
         }
+
         return responseEntity;
     }
 
@@ -48,8 +53,7 @@ public class DentistaController {
     }
 
     @PutMapping("/update/{id}")
-    @Transactional
-    public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) {
+    public DentistaDTO update (@RequestBody DentistaDTO dentistaDTO, @PathVariable int id) throws NotFoundException {
         return dentistaService.update(dentistaDTO, id);
     }
 
@@ -59,7 +63,7 @@ public class DentistaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return dentistaService.delete(id);
     }
 }

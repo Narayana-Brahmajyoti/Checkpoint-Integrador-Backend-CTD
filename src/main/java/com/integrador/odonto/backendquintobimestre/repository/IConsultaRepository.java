@@ -7,13 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IConsultaRepository extends JpaRepository<ConsultaEntity, Integer> {
     //Hibernate
-    @Query("From ConsultaEntity c Where c.paciente.nome = :nome")
-    List<ConsultaEntity> findByPaciente(String nome);
+//    @Query("FROM ConsultaEntity c Where c.nome = :nome")
 
-    @Query("From ConsultaEntity c Where c.dataHoraConsulta = dataHoraConsulta")
-    ConsultaEntity findByDataHoraConsulta(LocalDateTime dataHoraConsulta);
+    @Query(value="SELECT * FROM consulta WHERE id_dentista LIKE ?1 AND (inicioConsulta <= ?3 AND inicioConsulta <= ?2 ) AND (fimConsulta <= ?2 AND fimConsulta <= ?3 ) ", nativeQuery=true)
+    Optional<List<ConsultaEntity>> getByConsultaData(Long id, LocalDateTime inicio, LocalDateTime fim);
+    ConsultaEntity findByPaciente(String nome);
+
 }

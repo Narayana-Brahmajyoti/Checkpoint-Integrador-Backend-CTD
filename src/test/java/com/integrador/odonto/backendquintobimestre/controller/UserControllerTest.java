@@ -40,6 +40,17 @@ class UserControllerTest {
     }
 
     @Test
-    void createAuthenticationToken() {
+    void createAuthenticationToken() throws Exception{
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername("brahmajyoti");
+        userDTO.setPassword("123456789");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/authenticate")
+                  .contentType(MediaType.APPLICATION_JSON)
+                  .accept(MediaType.APPLICATION_JSON)
+                  .content(asJsonString(userDTO)))
+                  .andDo(MockMvcResultHandlers.print())
+                  .andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 }

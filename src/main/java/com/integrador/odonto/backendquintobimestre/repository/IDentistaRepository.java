@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IDentistaRepository extends JpaRepository<DentistaEntity, Integer> {
 
-
     @Query("FROM DentistaEntity d WHERE d.matricula = :matricula")
     DentistaEntity findByMatricula(String matricula);
 

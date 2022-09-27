@@ -30,7 +30,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
     @Autowired
     private DentistaServiceImpl dentistaService;
-    
+
     @Autowired
     private EnderecoServiceImpl enderecoService;
 
@@ -44,7 +44,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         int idPaciente = consultaDTO.getPaciente().getId();
         pacienteDTO = pacienteService.getById(idPaciente);
         int idEndereco = pacienteDTO.getEndereco().getId();
-    	enderecoDTO = enderecoService.getById(idEndereco);
+        enderecoDTO = enderecoService.getById(idEndereco);
         int idDentista = consultaDTO.getDentista().getId();
         dentistaDTO = dentistaService.getById(idDentista);
 
@@ -52,15 +52,15 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         String dataHoraConsultaBD = String.valueOf(consultaRepository.findByDataHoraConsulta(dataHoraConsulta));
 
         if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista) && !dataHoraConsulta.equals(dataHoraConsultaBD))
-           try {
-               consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
+            try {
+                consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
 
-               PacienteEntity paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
-               DentistaEntity dentista = new DentistaEntity(dentistaDTO);
-               consultaEntity.setPaciente(paciente);
-               consultaEntity.setDentista(dentista);
-               consultaEntity = consultaRepository.save(consultaEntity);
-           } catch (Exception ex){
+                PacienteEntity paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
+                DentistaEntity dentista = new DentistaEntity(dentistaDTO);
+                consultaEntity.setPaciente(paciente);
+                consultaEntity.setDentista(dentista);
+                consultaEntity = consultaRepository.save(consultaEntity);
+            } catch (Exception ex){
                 throw new UniqueIndexException("Consulta com data e hora: " + dataHoraConsulta.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " já cadastrada no sistema");
 
             }

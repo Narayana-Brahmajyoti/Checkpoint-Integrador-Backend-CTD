@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -54,6 +55,7 @@ public class ConsultaController {
     }
 
     @PutMapping("/update/{id}")
+    @Transactional
     public ConsultaDTO update(@PathVariable int id, @RequestBody ConsultaDTO consultaDTO) throws NotFoundException, UniqueIndexException {
         return consultaService.update(consultaDTO, id);
     }
@@ -63,9 +65,5 @@ public class ConsultaController {
         return consultaService.getByPaciente(name);
     }
 
-
-
-
 }
-
 

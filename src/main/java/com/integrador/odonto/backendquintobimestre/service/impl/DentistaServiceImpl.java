@@ -70,12 +70,10 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         return dentistaDTOS;
 
     }
-<<<<<<<<< Temporary merge branch 1
-}
-=========
+
 
     public boolean ifDentistaExists(int id){
         return dentistaRepository.existsById(id);
     }
 }
->>>>>>>>> Temporary merge branch 2
+

@@ -2,6 +2,9 @@ package com.integrador.odonto.backendquintobimestre.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClinincaOdontologicaUtils {
 
     private static ObjectMapper mapper = new ObjectMapper();
@@ -21,4 +24,18 @@ public class ClinincaOdontologicaUtils {
             throw  new RuntimeException();
         }
     }
+
+    public <T> Object T (Class<T> aClass, String value){
+        try {
+            List<T> objectFromStringList = new ArrayList<>();
+            for(Object objectlist: objectFromStringList) {
+                objectFromStringList.add(mapper.readValue(value, aClass));
+            }
+            return objectFromStringList;
+        } catch(Exception ex){
+            throw  new RuntimeException();
+        }
+    }
+
+
 }

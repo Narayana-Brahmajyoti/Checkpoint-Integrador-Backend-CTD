@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 import static com.integrador.odonto.backendquintobimestre.utils.ClinincaOdontologicaUtils.asJsonString;
 import static com.integrador.odonto.backendquintobimestre.utils.ClinincaOdontologicaUtils.objectFromString;
 import static org.junit.jupiter.api.Assertions.*;
@@ -98,14 +100,48 @@ class EnderecoControllerTest {
     }
 
     @Test
-    void getAll() {
+    @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
+    void getAll() throws Exception{
+//        EnderecoDTO enderecoDTO = new EnderecoDTO();
+//        enderecoDTO.setRua("Rodolfo Dantas");
+//        enderecoDTO.setNumero("101");
+//        enderecoDTO.setComplemento("Apto 208");
+//        enderecoDTO.setBairro("Copacabana");
+//
+//        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/create")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .accept(MediaType.APPLICATION_JSON)
+//                        .content(asJsonString(enderecoDTO)))
+//                .andDo(MockMvcResultHandlers.print())
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andReturn();
+//
+//        String responseBody = mvcResult.getResponse().getContentAsString();
+//
+//        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
+//        //assertNotNull(enderecoDTO.getId());
+//
+//        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/endereco/getAll")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andDo(MockMvcResultHandlers.print())
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andReturn();
+//
+//        responseBody = mvcResult.getResponse().getContentAsString();
+//       EnderecoDTO enderecoDTO2 = Object(EnderecoDTO.class, responseBody);
+//
+//
+//        assertTrue(enderecoDTOList.size() > 0);
+//
     }
 
     @Test
-    void delete() {
+    @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
+    void delete() throws Exception{
     }
 
     @Test
-    void update() {
+    @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
+    void update() throws Exception{
     }
 }

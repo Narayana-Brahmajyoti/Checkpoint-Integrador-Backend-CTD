@@ -45,30 +45,33 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
     }
 
 
-	@Override
-	public String delete(int id) throws NotFoundException {
+    @Override
+    public String delete(int id) throws NotFoundException {
         try{
             dentistaRepository.deleteById(id);
             return "Dentista de id " + id + " foi deletado";
         } catch (Exception ex){
             throw new NotFoundException("Não foi possível deletar dentista de id: " + id + ", id inexistente");
         }
+
 	}
 
-	@Override
-	public DentistaDTO update(DentistaDTO dentistaDTO, int id) throws NotFoundException {
+    @Override
+    public DentistaDTO update(DentistaDTO dentistaDTO, int id) throws NotFoundException {
 
-            DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
-            dentistaEntity = dentistaRepository.findById(id).orElseThrow(() -> new NotFoundException("Dentista não encontrado com o id: " + id));
+        DentistaEntity dentistaEntity = new DentistaEntity(dentistaDTO);
+        dentistaEntity = dentistaRepository.findById(id).orElseThrow(() -> new NotFoundException("Dentista não encontrado com o id: " + id));
 
-            dentistaEntity.setNome(dentistaDTO.getNome());
-            dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
-            dentistaEntity.setMatricula(dentistaDTO.getMatricula());
-            dentistaEntity = dentistaRepository.saveAndFlush(dentistaEntity);
+        dentistaEntity.setNome(dentistaDTO.getNome());
+        dentistaEntity.setSobreNome(dentistaDTO.getSobreNome());
+        dentistaEntity.setMatricula(dentistaDTO.getMatricula());
+        dentistaEntity = dentistaRepository.saveAndFlush(dentistaEntity);
 
         DentistaDTO dentistaDTO1 = new DentistaDTO(dentistaEntity);
         return dentistaDTO1;
+
 	}
+
 
     @Override
     public List<DentistaDTO> getAll() {

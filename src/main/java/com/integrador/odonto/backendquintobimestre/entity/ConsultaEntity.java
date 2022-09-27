@@ -39,6 +39,13 @@ public class ConsultaEntity {
         this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
     }
 
+    public ConsultaEntity(ConsultaDTO consultaDTO, EnderecoDTO enderecoDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO, int id) {
+        this.id = id;
+        this.paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
+        this.dentista = new DentistaEntity(dentistaDTO);
+        this.dataHoraConsulta = consultaDTO.getDataHoraConsulta();
+    }
+
     public ConsultaEntity(ConsultaDTO consultaDTO, PacienteDTO pacienteDTO, DentistaDTO dentistaDTO) {
         this.id = consultaDTO.getId();
         this.paciente = new PacienteEntity(pacienteDTO);

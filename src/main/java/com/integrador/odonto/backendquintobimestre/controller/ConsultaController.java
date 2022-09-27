@@ -2,7 +2,10 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.ConsultaDTO;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+import com.integrador.odonto.backendquintobimestre.exception.UniqueIndexException;
+import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
 import com.integrador.odonto.backendquintobimestre.service.impl.ConsultaServiceImpl;
+import com.integrador.odonto.backendquintobimestre.validation.ValidationConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +20,15 @@ public class ConsultaController {
     @Autowired
     private ConsultaServiceImpl consultaService;
 
+    ValidationConsulta validationConsulta = new ValidationConsulta();
 
     @PostMapping("/create")
-    public ResponseEntity<ConsultaDTO> create (@RequestBody ConsultaDTO consultaDTO) throws NotFoundException{
+    public ResponseEntity<ConsultaDTO> create (@RequestBody ConsultaDTO consultaDTO) throws NotFoundException, VariableNullException, UniqueIndexException {
         ResponseEntity responseEntity = null;
 
+        Boolean erro = validationConsulta.validationConsultaVariables(consultaDTO);
 
-        if (consultaDTO.getDataHoraConsulta() != null ){
+        if (erro){
             ConsultaDTO consultaDTO1 = consultaService.create(consultaDTO);
             responseEntity = new ResponseEntity<>(consultaDTO1, HttpStatus.OK);
         }
@@ -49,12 +54,12 @@ public class ConsultaController {
     }
 
     @PutMapping("/update/{id}")
-    public ConsultaDTO update(@PathVariable int id, @RequestBody ConsultaDTO consultaDTO) throws NotFoundException {
+    public ConsultaDTO update(@PathVariable int id, @RequestBody ConsultaDTO consultaDTO) throws NotFoundException, UniqueIndexException {
         return consultaService.update(consultaDTO, id);
     }
 
     @GetMapping("/getByPaciente")
-    public ConsultaDTO getByPaciente(@RequestParam(value = "name") String name){
+    public List<ConsultaDTO> getByPaciente(@RequestParam(value = "name") String name){
         return consultaService.getByPaciente(name);
     }
 

@@ -88,4 +88,3 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         return dentistaRepository.existsById(id);
     }
 }
-

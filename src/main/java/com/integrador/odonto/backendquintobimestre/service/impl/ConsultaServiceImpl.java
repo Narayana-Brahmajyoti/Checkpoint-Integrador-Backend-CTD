@@ -90,7 +90,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getPaciente().getId());
         EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
         DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getDentista().getId());
-        ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO, id);
+        ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
 
         consultaEntity.setPaciente(new PacienteEntity(pacienteDTO, enderecoDTO));
         consultaEntity.setDentista(new DentistaEntity(dentistaDTO));

@@ -19,7 +19,7 @@ import javax.persistence.*;
 		@Column(nullable = false)
 		private String sobreNome;
 
-		@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+		@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 		@JoinColumn(name = "idEndereco", referencedColumnName = "id")
 		private EnderecoEntity enderecoEntity;
 		

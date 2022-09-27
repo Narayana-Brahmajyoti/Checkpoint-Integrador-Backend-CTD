@@ -31,12 +31,15 @@ class UserControllerTest {
         userDTO.setUserRoles(UserRoles.ROLE_ADMIN);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(asJsonString(userDTO)))
-                .andDo(MockMvcResultHandlers.print())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(userDTO)))
+                        .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated());
 
+        assertNotNull(userDTO.getUsername());
+        assertEquals("brahmajyoti",userDTO.getUsername());
+        assertNotEquals("Brahmajyoti", userDTO.getUsername());
     }
 
     @Test

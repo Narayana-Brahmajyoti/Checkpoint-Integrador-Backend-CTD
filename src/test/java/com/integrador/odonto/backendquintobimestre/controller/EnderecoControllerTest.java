@@ -2,6 +2,8 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.integrador.odonto.backendquintobimestre.utils.ClinincaOdontologicaUtils.asJsonString;
@@ -63,7 +66,6 @@ class EnderecoControllerTest {
         enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
         assertNotNull(enderecoDTO.getId());
         assertEquals("Rodolfo Dantas", enderecoDTO.getRua());
-        assertEquals(1,enderecoDTO.getId());
 
     }
 
@@ -105,82 +107,108 @@ class EnderecoControllerTest {
 
     @Test
     @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
-    void getByIdNotFound() throws Exception {
-//        EnderecoDTO enderecoDTO = new EnderecoDTO();
-////        enderecoDTO.setRua("Rodolfo Dantas");
-////        enderecoDTO.setNumero("101");
-////        enderecoDTO.setComplemento("Apto 208");
-////        enderecoDTO.setBairro("Copacabana");
-//
-//        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/create")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .accept(MediaType.APPLICATION_JSON)
-//                        .content(asJsonString(enderecoDTO)))
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andReturn();
-//
-//        String responseBody = mvcResult.getResponse().getContentAsString();
-//
-//        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
-//        //assertNotNull(enderecoDTO.getId());
-//
-//        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/endereco/getById/{id}", 3)
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isNotFound())
-//                .andReturn();
-//
-//        responseBody = mvcResult.getResponse().getContentAsString();
-//        EnderecoDTO enderecoDTO2 = objectFromString(EnderecoDTO.class, responseBody);
-//
-//
-//        assertEquals(enderecoDTO.getId(), enderecoDTO2.getId());
-
-    }
-
-    @Test
-    @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
     void getAll() throws Exception{
-//        EnderecoDTO enderecoDTO = new EnderecoDTO();
-//        enderecoDTO.setRua("Rodolfo Dantas");
-//        enderecoDTO.setNumero("101");
-//        enderecoDTO.setComplemento("Apto 208");
-//        enderecoDTO.setBairro("Copacabana");
-//
-//        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/getAll")
-//                        .accept(MediaType.APPLICATION_JSON)
-//                        .content(asJsonString(enderecoDTO)))
-//                        .andDo(MockMvcResultHandlers.print())
-//                        .andExpect(MockMvcResultMatchers.status().isOk())
-//                        .andReturn();
-//
-//        String responseBody = mvcResult.getResponse().getContentAsString();
-//
-//        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
-//        //assertNotNull(enderecoDTO.getId());
-//
-//        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/endereco/getAll")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andReturn();
-//
-//        responseBody = mvcResult.getResponse().getContentAsString();
-//       EnderecoDTO enderecoDTO2 = Object(EnderecoDTO.class, responseBody);
-//
-//
-//        assertTrue(enderecoDTOList.size() > 0);
-//
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        enderecoDTO.setRua("Rodolfo Dantas");
+        enderecoDTO.setNumero("101");
+        enderecoDTO.setComplemento("Apto 208");
+        enderecoDTO.setBairro("Copacabana");
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(enderecoDTO)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+
+        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
+
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/endereco/getAll")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        responseBody = mvcResult.getResponse().getContentAsString();
+        System.out.println(responseBody);
+        JSONArray jsonArray = new JSONArray(responseBody);
+        List<String> list = new ArrayList<String>();
+        for (int i=0; i<jsonArray.length(); i++)
+            list.add( jsonArray.getString(i) );
+        assertTrue(list.size() > 0);
     }
 
     @Test
     @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
     void delete() throws Exception{
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        enderecoDTO.setRua("Rodolfo Dantas");
+        enderecoDTO.setNumero("101");
+        enderecoDTO.setComplemento("Apto 208");
+        enderecoDTO.setBairro("Copacabana");
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(enderecoDTO)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+
+        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
+
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/endereco/delete/{id}", enderecoDTO.getId())
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+        
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/endereco/getById/{id}", enderecoDTO.getId())
+                .accept(MediaType.APPLICATION_JSON))
+        		.andDo(MockMvcResultHandlers.print())
+        		.andExpect(MockMvcResultMatchers.status().is4xxClientError())
+        		.andReturn();
     }
 
     @Test
     @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
     void update() throws Exception{
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        enderecoDTO.setRua("Rodolfo Dantas");
+        enderecoDTO.setNumero("101");
+        enderecoDTO.setComplemento("Apto 208");
+        enderecoDTO.setBairro("Copacabana");
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(enderecoDTO)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+
+        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
+        
+        enderecoDTO.setRua("Rodolfo Dantas updated");
+        
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/endereco/update/{id}", enderecoDTO.getId())
+                	.contentType(MediaType.APPLICATION_JSON)
+                	.accept(MediaType.APPLICATION_JSON)
+                	.content(asJsonString(enderecoDTO)))
+        			.andDo(MockMvcResultHandlers.print())
+        			.andExpect(MockMvcResultMatchers.status().isOk())
+        			.andReturn();
+        
+        responseBody = mvcResult.getResponse().getContentAsString();
+
+        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
+        assertEquals("Rodolfo Dantas updated", enderecoDTO.getRua());
     }
 }

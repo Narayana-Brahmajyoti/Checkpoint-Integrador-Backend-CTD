@@ -97,9 +97,9 @@ class PacienteControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(asJsonString(pacienteDTO)))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn();
+                        .andDo(MockMvcResultHandlers.print())
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andReturn();
 
         responseBody = mvcResult.getResponse().getContentAsString();
         responseBody = mvcResult.getResponse().getContentAsString();
@@ -118,6 +118,66 @@ class PacienteControllerTest {
     @Test
     @WithMockUser(username = "narayana", password = "123456789", roles = "ADMIN")
     void getById() throws Exception{
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        int idEndereco;
+        enderecoDTO.setRua("Rua Rio Negro");
+        enderecoDTO.setNumero("1234");
+        enderecoDTO.setComplemento("apto 1104");
+        enderecoDTO.setBairro("Vera Cruz");
+
+
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/endereco/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(enderecoDTO)))
+                        .andDo(MockMvcResultHandlers.print())
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        responseBody = mvcResult.getResponse().getContentAsString();
+
+        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
+
+        PacienteDTO pacienteDTO = new PacienteDTO();
+        pacienteDTO.setNome("Gabriela");
+        pacienteDTO.setSobreNome("Carvalho");
+        pacienteDTO.setEndereco(enderecoDTO);
+        pacienteDTO.setRg("MG-15678");
+        pacienteDTO.setDataDeAlta("25/10/2022");
+
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/paciente/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(pacienteDTO)))
+                        .andDo(MockMvcResultHandlers.print())
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andReturn();
+
+        responseBody = mvcResult.getResponse().getContentAsString();
+        responseBody = mvcResult.getResponse().getContentAsString();
+
+        pacienteDTO = objectFromString(PacienteDTO.class, responseBody);
+
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/paciente/getById/{id}", pacienteDTO.getId())
+                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(MockMvcResultHandlers.print())
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andReturn();
+
+        responseBody = mvcResult.getResponse().getContentAsString();
+        PacienteDTO pacienteDTO2 = objectFromString(PacienteDTO.class, responseBody);
+        pacienteDTO = objectFromString(PacienteDTO.class, responseBody);
+
+        assertNotNull(pacienteDTO.getId());
+        assertEquals(pacienteDTO.getId(), pacienteDTO2.getId());
+        assertEquals(1,pacienteDTO.getId());
+        assertNotEquals("Gabi", pacienteDTO.getNome());
+        assertEquals("Gabriela", pacienteDTO.getNome());
+        assertEquals("Carvalho", pacienteDTO.getSobreNome());
+        assertNotNull(enderecoDTO);
+        assertEquals("Rua Rio Negro", enderecoDTO.getRua());
     }
 
     @Test

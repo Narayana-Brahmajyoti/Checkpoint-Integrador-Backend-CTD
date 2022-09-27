@@ -2,6 +2,7 @@ package com.integrador.odonto.backendquintobimestre.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import javax.persistence.*;
 		@Column(nullable = false)
 		private String sobreNome;
 
-		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 		@JoinColumn(name = "idEndereco", referencedColumnName = "id")
 		private EnderecoEntity enderecoEntity;
 		
@@ -31,15 +32,19 @@ import javax.persistence.*;
 			
 		}
 		
-		public PacienteEntity(PacienteDTO paciente) {
-			this.id = paciente.getId();
-			this.nome = paciente.getNome();
-			this.sobreNome = paciente.getSobreNome();
-			this.enderecoEntity = new EnderecoEntity(paciente.getEndereco());
-			this.rg = paciente.getRg();
-			this.dataDeAlta = paciente.getDataDeAlta();
+		public PacienteEntity(PacienteDTO pacienteDTO, EnderecoDTO endereco) {
+			this.id = pacienteDTO.getId();
+			this.nome = pacienteDTO.getNome();
+			this.sobreNome = pacienteDTO.getSobreNome();
+			//this.enderecoEntity = new EnderecoEntity(pacienteDTO.getEndereco());
+			this.enderecoEntity = new EnderecoEntity(endereco);
+			this.rg = pacienteDTO.getRg();
+			this.dataDeAlta = pacienteDTO.getDataDeAlta();
 		}
-		
+
+		public PacienteEntity(PacienteDTO pacienteDTO) {
+		}
+
 		public int getId() {
 			return id;
 		}

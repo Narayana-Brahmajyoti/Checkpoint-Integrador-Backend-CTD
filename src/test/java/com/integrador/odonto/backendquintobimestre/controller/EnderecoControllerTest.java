@@ -207,9 +207,14 @@ class EnderecoControllerTest {
         			.andExpect(MockMvcResultMatchers.status().isOk())
         			.andReturn();
         
-        responseBody = mvcResult.getResponse().getContentAsString();
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/endereco/getById/{id}", enderecoDTO.getId())
+	                .accept(MediaType.APPLICATION_JSON))
+			        .andDo(MockMvcResultHandlers.print())
+			        .andExpect(MockMvcResultMatchers.status().isOk())
+			        .andReturn();
 
-        enderecoDTO = objectFromString(EnderecoDTO.class, responseBody);
-        assertEquals("Rodolfo Dantas updated", enderecoDTO.getRua());
+		responseBody = mvcResult.getResponse().getContentAsString();
+		EnderecoDTO enderecoDTO2 = objectFromString(EnderecoDTO.class, responseBody);
+        assertEquals("Rodolfo Dantas updated", enderecoDTO2.getRua());
     }
 }

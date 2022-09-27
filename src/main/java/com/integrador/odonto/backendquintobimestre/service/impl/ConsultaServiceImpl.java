@@ -8,11 +8,14 @@ import com.integrador.odonto.backendquintobimestre.entity.dto.DentistaDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.EnderecoDTO;
 import com.integrador.odonto.backendquintobimestre.entity.dto.PacienteDTO;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+import com.integrador.odonto.backendquintobimestre.exception.UniqueIndexException;
 import com.integrador.odonto.backendquintobimestre.repository.IConsultaRepository;
 import com.integrador.odonto.backendquintobimestre.service.IClinicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
     private EnderecoServiceImpl enderecoService;
 
     @Override
-    public ConsultaDTO create(ConsultaDTO consultaDTO) throws NotFoundException {
+    public ConsultaDTO create(ConsultaDTO consultaDTO) throws NotFoundException, UniqueIndexException {
         ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO);
         PacienteDTO pacienteDTO;
         EnderecoDTO enderecoDTO;
@@ -45,14 +48,22 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         int idDentista = consultaDTO.getDentista().getId();
         dentistaDTO = dentistaService.getById(idDentista);
 
-        if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista))
-            consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
-        	
-            PacienteEntity paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
-            DentistaEntity dentista = new DentistaEntity(dentistaDTO);
-            consultaEntity.setPaciente(paciente);
-            consultaEntity.setDentista(dentista);
-            consultaEntity = consultaRepository.save(consultaEntity);
+        LocalDateTime dataHoraConsulta = consultaDTO.getDataHoraConsulta();
+        String dataHoraConsultaBD = String.valueOf(consultaRepository.findByDataHoraConsulta(dataHoraConsulta));
+
+        if(pacienteService.ifPacienteExists(idPaciente) && dentistaService.ifDentistaExists(idDentista) && !dataHoraConsulta.equals(dataHoraConsultaBD))
+           try {
+               consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO);
+
+               PacienteEntity paciente = new PacienteEntity(pacienteDTO, enderecoDTO);
+               DentistaEntity dentista = new DentistaEntity(dentistaDTO);
+               consultaEntity.setPaciente(paciente);
+               consultaEntity.setDentista(dentista);
+               consultaEntity = consultaRepository.save(consultaEntity);
+           } catch (Exception ex){
+                throw new UniqueIndexException("Consulta com data e hora: " + dataHoraConsulta.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " já cadastrada no sistema");
+
+            }
 
         consultaDTO = new ConsultaDTO(consultaEntity);
         return consultaDTO;
@@ -87,10 +98,12 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
 
     @Override
     public ConsultaDTO update(ConsultaDTO consultaDTO, int id) throws NotFoundException {
+        ConsultaEntity consultaEntity = consultaRepository.findById(id).orElseThrow(() -> new NotFoundException("Consulta não encontrado com o id: " + id));
         PacienteDTO pacienteDTO = pacienteService.getById(consultaDTO.getPaciente().getId());
         EnderecoDTO enderecoDTO = enderecoService.getById(pacienteDTO.getEndereco().getId());
         DentistaDTO dentistaDTO = dentistaService.getById(consultaDTO.getDentista().getId());
-        ConsultaEntity consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO, id);
+
+        consultaEntity = new ConsultaEntity(consultaDTO, enderecoDTO, pacienteDTO, dentistaDTO, id);
 
         consultaEntity.setPaciente(new PacienteEntity(pacienteDTO, enderecoDTO));
         consultaEntity.setDentista(new DentistaEntity(dentistaDTO));
@@ -107,9 +120,12 @@ public class ConsultaServiceImpl implements IClinicaService<ConsultaDTO> {
         return consultaRepository.existsById(id);
     }
 
-    public ConsultaDTO getByPaciente(String nome){
-        ConsultaEntity consulta = consultaRepository.findByPaciente(nome);
-        ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
+    public List<ConsultaDTO> getByPaciente(String nome){
+        List<ConsultaEntity> consultas = consultaRepository.findByPaciente(nome);
+        List<ConsultaDTO> consultaDTO = new ArrayList<>();
+        for(ConsultaEntity consulta : consultas)
+            consultaDTO.add(new ConsultaDTO(consulta));
+
         return consultaDTO;
     }
 

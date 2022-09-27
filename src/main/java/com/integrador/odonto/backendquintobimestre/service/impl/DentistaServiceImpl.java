@@ -70,4 +70,12 @@ public class DentistaServiceImpl implements IClinicaService<DentistaDTO> {
         return dentistaDTOS;
 
     }
+<<<<<<< HEAD
 }
+=======
+
+    public boolean ifDentistaExists(int id){
+        return dentistaRepository.existsById(id);
+    }
+}
+>>>>>>> 1804d766a50930965cf5a585a7ca0cb5456a236f

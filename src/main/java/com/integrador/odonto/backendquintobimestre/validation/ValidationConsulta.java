@@ -70,4 +70,5 @@ public class ValidationConsulta {
         Matcher matcher = pattern.matcher(texto);
         return matcher.find();
     }
+
 }

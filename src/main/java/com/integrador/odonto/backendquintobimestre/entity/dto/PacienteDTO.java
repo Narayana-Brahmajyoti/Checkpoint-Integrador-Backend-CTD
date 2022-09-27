@@ -7,6 +7,7 @@ public class PacienteDTO {
 	private String nome;
 	private String sobreNome;
 	private EnderecoDTO endereco;
+	//private int idEndereco;
 	private String rg;
 	private String dataDeAlta;
 	
@@ -18,6 +19,7 @@ public class PacienteDTO {
 		this.nome = paciente.getNome();
 		this.sobreNome = paciente.getSobreNome();
 		this.endereco = new EnderecoDTO(paciente.getEnderecoEntity());
+		//this.idEndereco = paciente.getEnderecoEntity().getId();
 		this.rg = paciente.getRg();
 		this.dataDeAlta = paciente.getDataDeAlta();
 	}
@@ -65,4 +67,12 @@ public class PacienteDTO {
 	public void setDataDeAlta(String dataDeAlta) {
 		this.dataDeAlta = dataDeAlta;
 	}
+
+//	public int getIdEndereco() {
+//		return idEndereco;
+//	}
+//
+//	public void setIdEndereco(int idEndereco) {
+//		this.idEndereco = idEndereco;
+//	}
 }

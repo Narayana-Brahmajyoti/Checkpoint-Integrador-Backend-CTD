@@ -2,6 +2,9 @@ package com.integrador.odonto.backendquintobimestre.controller;
 
 import java.util.List;
 
+import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
+import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
+import com.integrador.odonto.backendquintobimestre.validation.ValidationEndereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,24 +26,23 @@ public class EnderecoController {
     @Autowired
     private EnderecoServiceImpl enderecoService;
 
+    ValidationEndereco validationEndereco = new ValidationEndereco();
     @PostMapping("/create")
-    public ResponseEntity<EnderecoDTO> create(@RequestBody EnderecoDTO enderecoDTO) {
+    public ResponseEntity<EnderecoDTO> create(@RequestBody EnderecoDTO enderecoDTO) throws VariableNullException {
         ResponseEntity responseEntity = null;
+
+        Boolean erro = validationEndereco.validationEnderecoVariables(enderecoDTO);
         
-    	if(enderecoDTO.getRua() != null){
+    	if(erro){
     		EnderecoDTO enderecoDTO2 = enderecoService.create(enderecoDTO);
             responseEntity = new ResponseEntity<>(enderecoDTO2, HttpStatus.OK);
-    	}
-    	else
-    	{
-            responseEntity = new ResponseEntity<>("Rua não preenchida", HttpStatus.BAD_REQUEST);
     	}
     	
     	return responseEntity;
     }
 
     @GetMapping("/getById/{id}")
-    public EnderecoDTO getById(@PathVariable int id) {
+    public EnderecoDTO getById(@PathVariable int id) throws NotFoundException {
         return enderecoService.getById(id);
     }
     
@@ -50,12 +52,12 @@ public class EnderecoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws NotFoundException {
         return enderecoService.delete(id);
     }
 
     @PutMapping("/update/{id}")
-    public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) {
+    public EnderecoDTO update(@RequestBody EnderecoDTO enderecoDTO, @PathVariable int id) throws NotFoundException {
         return enderecoService.update(enderecoDTO, id);
     }
 

@@ -63,7 +63,7 @@ class DentistaControllerTest {
         assertNotEquals("Gabi", dentistaDTO.getNome());
         assertEquals("Helena", dentistaDTO.getNome());
         assertEquals("Melo de Campos", dentistaDTO.getSobreNome());
-        assertEquals(1,dentistaDTO.getId());
+
 
     }
 

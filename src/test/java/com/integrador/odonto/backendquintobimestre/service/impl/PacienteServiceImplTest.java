@@ -206,8 +206,8 @@ class PacienteServiceImplTest {
 		
 		int id = pacienteDTO.getId();
 		pacienteService.delete(id);
-		assertTrue(!enderecoService.ifEnderecoExists(id));
-		
+		assertFalse(pacienteService.ifPacienteExists(id));
+
 	}
 
 }

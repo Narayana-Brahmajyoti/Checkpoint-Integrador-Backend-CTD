@@ -81,7 +81,7 @@ class ConsultaServiceImplTest {
             dentista.setMatricula(matriculaDentista);
 
         ConsultaDTO consulta = new ConsultaDTO();
-        LocalDateTime dataHoraConsulta = LocalDateTime.of(2022,3,11,10, 25, 30);
+        LocalDateTime dataHoraConsulta = LocalDateTime.of(2022,3,28,10, 25, 30);
             consulta.setPaciente(paciente);
             consulta.setDentista(dentista);
             consulta.setDataHoraConsulta(dataHoraConsulta);

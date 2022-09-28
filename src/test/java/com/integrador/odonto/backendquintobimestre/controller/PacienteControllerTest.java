@@ -106,7 +106,6 @@ class PacienteControllerTest {
         assertNotEquals("Gabi", pacienteDTO.getNome());
         assertEquals("Gabriela", pacienteDTO.getNome());
         assertEquals("Carvalho", pacienteDTO.getSobreNome());
-        assertEquals(1,pacienteDTO.getId());
         assertNotNull(enderecoDTO);
         assertEquals("Rua Rio Negro", enderecoDTO.getRua());
     }

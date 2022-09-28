@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
     int id;
     String nome = "Helena";
     String sobreNome = "Melo de Campos";
-    String matricula = "CD-12785";
+    String matricula = "CD-156453";
 
     @Test
     @Order(1)

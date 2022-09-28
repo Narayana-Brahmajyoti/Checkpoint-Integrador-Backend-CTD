@@ -132,6 +132,15 @@ A aplicação será desenvolvida em camadas:
   </tr>
 </table>
 
+## :heavy_check_mark: Guia para testar a API no Postman:
+
+- Importe a Collection com os requests no path src/test/postman/CollectionTestesAPI.json
+- Crie uma variável global chamada "JWT", onde será colocado o JWT obtido em cada autenticação
+- Antes de tudo é preciso criar um usuário Admin e depois autenticá-lo, para obter o JWT. Esses requests estão na pasta "User"
+- Crie também um usuário padrão e o autentique
+- Há 4 outras pastas: Endereço, Paciente, Dentista e Consulta. Dentro de cada pasta há os métodos CRUD e outros métodos adicionais
+- Agora é só se divertir =D
+
 <!-- LINKS & IMAGES -->
 [SpringBoot]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
 [Spring-url]: https://spring.io/projects/spring-boot

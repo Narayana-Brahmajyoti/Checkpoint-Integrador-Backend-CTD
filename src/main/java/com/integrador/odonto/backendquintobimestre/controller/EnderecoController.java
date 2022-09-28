@@ -5,6 +5,10 @@ import java.util.List;
 import com.integrador.odonto.backendquintobimestre.exception.NotFoundException;
 import com.integrador.odonto.backendquintobimestre.exception.VariableNullException;
 import com.integrador.odonto.backendquintobimestre.validation.ValidationEndereco;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +26,14 @@ import com.integrador.odonto.backendquintobimestre.service.impl.EnderecoServiceI
 
 @RestController
 @RequestMapping("/endereco")
+@SecurityRequirement(name = "Bearer Authentication")
 public class EnderecoController {
     @Autowired
     private EnderecoServiceImpl enderecoService;
 
     ValidationEndereco validationEndereco = new ValidationEndereco();
+    
+    @Operation(summary = "Salvar endereço", description = "Coloque os dados do endereço dentro de seus respectivos campos no body e envie a solicitação")
     @PostMapping("/create")
     public ResponseEntity<EnderecoDTO> create(@RequestBody EnderecoDTO enderecoDTO) throws VariableNullException {
         ResponseEntity responseEntity = null;
